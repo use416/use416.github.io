@@ -1139,8 +1139,13 @@
     updateStoreLinks();
 
     function normalizeImageUrl(url) {
-      return url.trim();
-    }
+  const trimmed = url.trim();
+  const match = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (match && match) {
+    return "https://lh3." + "googleusercontent.com" + "/d/" + match;
+  }
+  return trimmed;
+}
 
     function formatPrice(val) {
       if (!val) return "0,00";
