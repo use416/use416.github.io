@@ -109,6 +109,229 @@
       margin: 0 1px;
     }
 
+
+    /* Temas Sazonais / Datas Comemorativas (controlados pela coluna Tema_Site na planilha) */
+    body[data-theme="natal"] {
+      --bg-page: #FAF6F3;
+      --surface-warm: #F4ECE6;
+      --border-subtle: #E5D7CE;
+      --text-main: #18362B;
+      --accent-terracotta: #B8292F;
+      --accent-terracotta-hover: #961E23;
+      --kids-soft: #FCEAEA;
+    }
+    body[data-theme="natal"] .top-promo-bar {
+      background: linear-gradient(90deg, #9B1C22 0%, #B8292F 50%, #18362B 100%);
+    }
+
+    body[data-theme="pascoa"] {
+      --bg-page: #FAF7FC;
+      --surface-warm: #F3EDF8;
+      --border-subtle: #E4DAF0;
+      --text-main: #3B2854;
+      --accent-terracotta: #9B6BC9;
+      --accent-terracotta-hover: #8152B0;
+      --kids-soft: #F3EAFB;
+    }
+    body[data-theme="pascoa"] .top-promo-bar {
+      background: linear-gradient(90deg, #8657B5 0%, #A474D1 50%, #D49A6A 100%);
+    }
+
+    body[data-theme="dias-das-maes"] {
+      --bg-page: #FDF7F8;
+      --surface-warm: #F8ECEE;
+      --border-subtle: #EDD8DC;
+      --text-main: #4A2332;
+      --accent-terracotta: #C85A77;
+      --accent-terracotta-hover: #AD4460;
+      --kids-soft: #FCEBEF;
+    }
+    body[data-theme="dias-das-maes"] .top-promo-bar {
+      background: linear-gradient(90deg, #B54865 0%, #C85A77 50%, #D97A92 100%);
+    }
+
+    body[data-theme="sao-joao"] {
+      --bg-page: #FDF9F2;
+      --surface-warm: #F7EFE0;
+      --border-subtle: #EADCC4;
+      --text-main: #233354;
+      --accent-terracotta: #D96B27;
+      --accent-terracotta-hover: #B85518;
+      --kids-soft: #FDF0E4;
+    }
+    body[data-theme="sao-joao"] .top-promo-bar {
+      background: linear-gradient(90deg, #C75B1A 0%, #D96B27 50%, #2B6CB0 100%);
+    }
+
+    body[data-theme="dia-dos-pais"] {
+      --bg-page: #F5F7FA;
+      --surface-warm: #EBF0F5;
+      --border-subtle: #D6DFE8;
+      --text-main: #152842;
+      --accent-terracotta: #2E6F95;
+      --accent-terracotta-hover: #215575;
+      --kids-soft: #E6F1F7;
+    }
+    body[data-theme="dia-dos-pais"] .top-promo-bar {
+      background: linear-gradient(90deg, #152842 0%, #2E6F95 50%, #152842 100%);
+    }
+
+    body[data-theme="dia-das-criancas"] {
+      --bg-page: #FFFDF5;
+      --surface-warm: #F9F4E3;
+      --border-subtle: #ECE2C6;
+      --text-main: #1B2A4A;
+      --accent-terracotta: #E85D4A;
+      --accent-terracotta-hover: #CC4634;
+      --kids-soft: #FFEBE8;
+    }
+    body[data-theme="dia-das-criancas"] .top-promo-bar {
+      background: linear-gradient(90deg, #E85D4A 0%, #F29F05 50%, #2A9D8F 100%);
+    }
+
+    body[data-theme="black-friday"] {
+      --bg-page: #F4F4F5;
+      --surface: #FFFFFF;
+      --surface-warm: #EAEAEF;
+      --border-subtle: #D8D8E0;
+      --text-main: #12141A;
+      --accent-terracotta: #D97706;
+      --accent-terracotta-hover: #B45309;
+      --kids-soft: #FEF3C7;
+    }
+    body[data-theme="black-friday"] .top-promo-bar {
+      background: linear-gradient(90deg, #0F1115 0%, #232730 50%, #D97706 100%);
+    }
+
+    body[data-theme="volta-as-aulas"] {
+      --bg-page: #F6F9F8;
+      --surface-warm: #EBF2F0;
+      --border-subtle: #D5E3DF;
+      --text-main: #1B3644;
+      --accent-terracotta: #2B8A78;
+      --accent-terracotta-hover: #1F6E5F;
+      --kids-soft: #E5F5F1;
+    }
+    body[data-theme="volta-as-aulas"] .top-promo-bar {
+      background: linear-gradient(90deg, #1B3644 0%, #2B8A78 50%, #E07A3F 100%);
+    }
+
+
+    body[data-theme="ano-novo"] {
+      --bg-page: #F5F7FA;
+      --surface-warm: #EBF0F7;
+      --border-subtle: #D5DFEC;
+      --text-main: #152842;
+      --accent-terracotta: #C58A2E;
+      --accent-terracotta-hover: #A8721E;
+      --kids-soft: #FDF5E6;
+    }
+    body[data-theme="ano-novo"] .top-promo-bar {
+      background: linear-gradient(90deg, #152842 0%, #243E63 50%, #C58A2E 100%);
+    }
+
+    body[data-theme="carnaval"] {
+      --bg-page: #FDF6FA;
+      --surface-warm: #F8EAF3;
+      --border-subtle: #EBD2E2;
+      --text-main: #3D194D;
+      --accent-terracotta: #D9387A;
+      --accent-terracotta-hover: #B82662;
+      --kids-soft: #FCE8F1;
+    }
+    body[data-theme="carnaval"] .top-promo-bar {
+      background: linear-gradient(90deg, #6A1B9A 0%, #D9387A 50%, #F59E0B 100%);
+    }
+
+    body[data-theme="estacoes"] {
+      --bg-page: #F7FAF6;
+      --surface-warm: #ECF3EA;
+      --border-subtle: #D6E4D2;
+      --text-main: #233B2A;
+      --accent-terracotta: #4F8A63;
+      --accent-terracotta-hover: #3D704E;
+      --kids-soft: #E8F3EC;
+    }
+    body[data-theme="estacoes"] .top-promo-bar {
+      background: linear-gradient(90deg, #233B2A 0%, #4F8A63 50%, #D98A3C 100%);
+    }
+
+    body[data-theme="ferias-amizade"] {
+      --bg-page: #F5FAFC;
+      --surface-warm: #E8F3F8;
+      --border-subtle: #CFE3EE;
+      --text-main: #16374D;
+      --accent-terracotta: #1E88B5;
+      --accent-terracotta-hover: #156E94;
+      --kids-soft: #E5F4FA;
+    }
+    body[data-theme="ferias-amizade"] .top-promo-bar {
+      background: linear-gradient(90deg, #16374D 0%, #1E88B5 50%, #E06D53 100%);
+    }
+
+    body[data-theme="halloween"] {
+      --bg-page: #F7F5F9;
+      --surface-warm: #ECE7F2;
+      --border-subtle: #D8CFE3;
+      --text-main: #241833;
+      --accent-terracotta: #E05A1E;
+      --accent-terracotta-hover: #BE4612;
+      --kids-soft: #FDECE4;
+    }
+    body[data-theme="halloween"] .top-promo-bar {
+      background: linear-gradient(90deg, #241833 0%, #5B2C83 50%, #E05A1E 100%);
+    }
+
+    /* Faixa decorativa temática sutil abaixo do cabeçalho */
+    .seasonal-ribbon {
+      display: none;
+      background: var(--surface-warm);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 7px 16px;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seasonal-ribbon.active {
+      display: flex;
+    }
+
+    .seasonal-badge-pill {
+      background: var(--accent-terracotta);
+      color: #FFFFFF;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    /* Ornamentos SVG flutuantes discretos no cabeçalho */
+    .header-ornament {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      opacity: 0.88;
+      display: none;
+    }
+    .header-ornament.left { left: 24px; }
+    .header-ornament.right { right: 24px; }
+
+    @media (min-width: 640px) {
+      .header-ornament.visible { display: flex; align-items: center; gap: 6px; }
+    }
+
     /* Barra promocional superior */
     .top-promo-bar {
       background: linear-gradient(90deg, #D96248 0%, #E06D53 50%, #D96248 100%);
@@ -1289,6 +1512,8 @@
 
   <!-- Cabeçalho com blur e o logotipo exato escolhido -->
   <header class="site-header">
+    <div class="header-ornament left" id="headerOrnamentLeft" aria-hidden="true"></div>
+    <div class="header-ornament right" id="headerOrnamentRight" aria-hidden="true"></div>
     <div class="logo-lockup" aria-label="use4'16 — Moda Infantil e Juvenil">
       <div class="logo-main-row">
         <div class="logo-wordmark">
@@ -1309,6 +1534,12 @@
       </div>
     </div>
   </header>
+
+  <!-- Faixa comemorativa controlada pela planilha (coluna Tema_Site) -->
+  <div class="seasonal-ribbon" id="seasonalRibbon">
+    <span class="seasonal-badge-pill" id="seasonalTag">Especial</span>
+    <span id="seasonalMessage"></span>
+  </div>
 
   <main class="page-content">
     <!-- Banner VIP editorial -->
@@ -1573,7 +1804,167 @@
     let activeInstagramUser = CONFIG.defaultInstagramUser;
     let activeCupomPrimeiraCompra = CONFIG.defaultCupomPrimeiraCompra;
     let activeCupomVip = CONFIG.defaultCupomVip;
+    let activeSiteTheme = "padrao";
+    let activeThemeCustomMessage = "";
     let pendingAction = null;
+
+    const SEASONAL_THEMES = {
+      "padrao": {
+        slug: "padrao",
+        tag: "",
+        defaultMsg: "",
+        svg: ""
+      },
+      "natal": {
+        slug: "natal",
+        tag: "Especial de Natal",
+        defaultMsg: "Looks encantadores para celebrar a magia do Natal em família!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8292F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+      },
+      "pascoa": {
+        slug: "pascoa",
+        tag: "Especial de Páscoa",
+        defaultMsg: "Coleção leve e cheia de charme para comemorar a Páscoa!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9B6BC9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.4 0 7-3.6 7-8 0-5.2-3.5-11-7-11S5 8.8 5 14c0 4.4 2.6 8 7 8z"/><path d="M6.5 13.5c2 1.2 4 1.2 5.5 0s3.5-1.2 5.5 0"/></svg>`
+      },
+      "dia das maes": {
+        slug: "dias-das-maes",
+        tag: "Dia das Mães",
+        defaultMsg: "Celebrando o amor de mãe com looks especiais do 4 ao 16!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C85A77" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
+      },
+      "sao joao": {
+        slug: "sao-joao",
+        tag: "Arraiá use4'16",
+        defaultMsg: "Seleção especial de São João para curtir as festas juninas com muito estilo!",
+        svg: `<svg width="28" height="26" viewBox="0 0 28 24" fill="none" stroke="#D96B27" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5c8 3 16 3 24 0"/><polygon points="5,6 8,14 11,6"/><polygon points="11,7 14,15 17,7"/><polygon points="17,6 20,14 23,6"/></svg>`
+      },
+      "dia dos pais": {
+        slug: "dia-dos-pais",
+        tag: "Dia dos Pais",
+        defaultMsg: "Looks alinhados e confortáveis para comemorar o Dia dos Pais!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E6F95" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+      },
+      "dia das criancas": {
+        slug: "dia-das-criancas",
+        tag: "Semana da Criança",
+        defaultMsg: "Diversão, cor e conforto para celebrar o Dia das Crianças!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E85D4A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>`
+      },
+      "black friday": {
+        slug: "black-friday",
+        tag: "Black Friday use4'16",
+        defaultMsg: "Ofertas imperdíveis por tempo limitado — garanta os tamanhos antes que acabem!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+      },
+      "volta as aulas": {
+        slug: "volta-as-aulas",
+        tag: "Volta às Aulas",
+        defaultMsg: "Peças práticas e confortáveis para começar o semestre com tudo!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2B8A78" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`
+      },
+      "ano novo": {
+        slug: "ano-novo",
+        tag: "Ano Novo use4'16",
+        defaultMsg: "Comece o ano com looks leves, confortáveis e cheios de energia!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C58A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+      },
+      "confraternizacao": {
+        slug: "ano-novo",
+        tag: "Ano Novo use4'16",
+        defaultMsg: "Comece o ano com looks leves, confortáveis e cheios de energia!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C58A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+      },
+      "carnaval": {
+        slug: "carnaval",
+        tag: "Folia & Carnaval",
+        defaultMsg: "Cores vibrantes e peças fresquinhas para brincar com liberdade!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D9387A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`
+      },
+      "troca de estacao": {
+        slug: "estacoes",
+        tag: "Nova Estação",
+        defaultMsg: "Peças pensadas para acompanhar a mudança de clima com muito conforto!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+      },
+      "outono": {
+        slug: "estacoes",
+        tag: "Especial Outono",
+        defaultMsg: "Sobreposições e tecidos aconchegantes para os dias amenos do outono!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+      },
+      "inverno": {
+        slug: "estacoes",
+        tag: "Especial Inverno",
+        defaultMsg: "Conforto e estilo para aquecer as crianças e jovens em todos os momentos!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+      },
+      "primavera": {
+        slug: "estacoes",
+        tag: "Chegou a Primavera",
+        defaultMsg: "Cores floridas e looks leves para celebrar a estação mais alegre do ano!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+      },
+      "ferias": {
+        slug: "ferias-amizade",
+        tag: "Férias Escolares",
+        defaultMsg: "Looks práticos e cheios de estilo para passeios, viagens e diversão!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`
+      },
+      "dia do amigo": {
+        slug: "ferias-amizade",
+        tag: "Dia do Amigo",
+        defaultMsg: "Celebrando as melhores amizades com presentes especiais do 4 ao 16!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
+      },
+      "halloween": {
+        slug: "halloween",
+        tag: "Especial de Outubro",
+        defaultMsg: "Looks divertidos e criativos para aproveitar a temporada temática!",
+        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E05A1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.5 0-8 3.2-8 7.5 0 4.2 3.5 7.5 8 7.5s8-3.3 8-7.5C20 6.2 16.5 3 12 3Z"/><path d="M9 10h.01"/><path d="M15 10h.01"/><path d="M8.5 14c1.2 1 2.3 1.5 3.5 1.5s2.3-.5 3.5-1.5"/></svg>`
+      }
+    };
+
+    function normalizeThemeKey(raw) {
+      if (!raw) return "padrao";
+      return raw
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function applySeasonalTheme() {
+      const key = normalizeThemeKey(activeSiteTheme);
+      const themeObj = SEASONAL_THEMES[key] || SEASONAL_THEMES["padrao"];
+      const ribbon = document.getElementById("seasonalRibbon");
+      const tagEl = document.getElementById("seasonalTag");
+      const msgEl = document.getElementById("seasonalMessage");
+      const ornLeft = document.getElementById("headerOrnamentLeft");
+      const ornRight = document.getElementById("headerOrnamentRight");
+
+      if (themeObj.slug === "padrao") {
+        document.body.removeAttribute("data-theme");
+        ribbon.classList.remove("active");
+        ornLeft.classList.remove("visible");
+        ornRight.classList.remove("visible");
+        return;
+      }
+
+      document.body.setAttribute("data-theme", themeObj.slug);
+      tagEl.textContent = themeObj.tag;
+      msgEl.textContent = activeThemeCustomMessage || themeObj.defaultMsg;
+      ribbon.classList.add("active");
+
+      if (themeObj.svg) {
+        ornLeft.innerHTML = themeObj.svg;
+        ornRight.innerHTML = themeObj.svg;
+        ornLeft.classList.add("visible");
+        ornRight.classList.add("visible");
+      }
+    }
 
     // Máscara automática de telefone/WhatsApp (DD) 99999-9999
     function applyPhoneMask(inputEl) {
@@ -1766,6 +2157,12 @@
             activeWhatsappNumber = digits;
           }
         }
+        if (row.Tema_Site && row.Tema_Site.trim() !== "") {
+          activeSiteTheme = row.Tema_Site.trim();
+        }
+        if (row.Mensagem_Tema && row.Mensagem_Tema.trim() !== "") {
+          activeThemeCustomMessage = row.Mensagem_Tema.trim();
+        }
 
         const rawFotos = row.Foto_URL
           ? row.Foto_URL.split(",").map(u => normalizeImageUrl(u.trim())).filter(Boolean)
@@ -1807,6 +2204,7 @@
         const response = await fetch(urlWithCacheBust);
         const csvData = await response.text();
         allProducts = parseCSV(csvData);
+        applySeasonalTheme();
         updateStoreLinks();
         renderCatalog();
       } catch (error) {
