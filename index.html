@@ -214,6 +214,53 @@
       object-fit: cover;
     }
 
+    /* Setas e contador de múltiplas fotos */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-main);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background 0.15s ease;
+    }
+
+    .carousel-btn:hover {
+      background: #FFFFFF;
+    }
+
+    .carousel-btn.prev {
+      left: 8px;
+    }
+
+    .carousel-btn.next {
+      right: 8px;
+    }
+
+    .photo-counter {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(27, 42, 74, 0.75);
+      color: #FFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      z-index: 10;
+    }
+
     .mundo-badge {
       position: absolute;
       top: 12px;
@@ -224,6 +271,7 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      z-index: 10;
     }
 
     .mundo-Kids { background: var(--kids-soft); color: var(--kids-accent); }
@@ -384,12 +432,10 @@
     </div>
   </div>
 
-  <!-- Vitrine de Produtos -->
   <main class="catalog-grid" id="catalogGrid">
     <div class="status-msg">Carregando peças da use4'16...</div>
   </main>
 
-  <!-- Botão Flutuante Atendimento Geral -->
   <a href="#" id="floatingWhatsapp" class="floating-help" target="_blank">
     💬 Dúvidas sobre tamanhos?
   </a>
@@ -445,12 +491,15 @@
           row[header] = values[i] || "";
         });
 
+        const rawFotos = row.Foto_URL ? row.Foto_URL.split(",").map(u => u.trim()).filter(Boolean) : [];
+        const fotos = rawFotos.length > 0 ? rawFotos : ["https://via.placeholder.com/400x500?text=use4'16"];
+
         return {
           ID: row.ID || "",
           Nome: row.Nome || "Peça sem nome",
           Mundo: row.Mundo || "Kids",
           Preco: row.Preco || "0,00",
-          Foto_URL: row.Foto_URL || "https://via.placeholder.com/400x500?text=use4'16",
+          Fotos: fotos,
           estoque: {
             "4": parseInt(row.Tam_4) || 0,
             "6": parseInt(row.Tam_6) || 0,
@@ -515,10 +564,18 @@
           return `<button type="button" class="size-btn" data-size="${size}" ${disabledAttr}>${size}</button>`;
         }).join("");
 
+        let currentPhotoIndex = 0;
+        const hasMultiplePhotos = product.Fotos.length > 1;
+
         card.innerHTML = `
           <div class="product-image-wrap">
-            <img src="${product.Foto_URL}" alt="${product.Nome}" loading="lazy" />
+            <img src="${product.Fotos[0]}" alt="${product.Nome}" loading="lazy" />
             <span class="mundo-badge mundo-${product.Mundo}">${mundoLabel}</span>
+            ${hasMultiplePhotos ? `
+              <button type="button" class="carousel-btn prev" aria-label="Foto anterior">‹</button>
+              <button type="button" class="carousel-btn next" aria-label="Próxima foto">›</button>
+              <span class="photo-counter">1 / ${product.Fotos.length}</span>
+            ` : ''}
           </div>
           <div class="product-info">
             <h2 class="product-title">${product.Nome}</h2>
@@ -530,6 +587,25 @@
             </button>
           </div>
         `;
+
+        if (hasMultiplePhotos) {
+          const imgEl = card.querySelector("img");
+          const counterEl = card.querySelector(".photo-counter");
+
+          card.querySelector(".prev").addEventListener("click", (e) => {
+            e.stopPropagation();
+            currentPhotoIndex = (currentPhotoIndex - 1 + product.Fotos.length) % product.Fotos.length;
+            imgEl.src = product.Fotos[currentPhotoIndex];
+            counterEl.textContent = `${currentPhotoIndex + 1} / ${product.Fotos.length}`;
+          });
+
+          card.querySelector(".next").addEventListener("click", (e) => {
+            e.stopPropagation();
+            currentPhotoIndex = (currentPhotoIndex + 1) % product.Fotos.length;
+            imgEl.src = product.Fotos[currentPhotoIndex];
+            counterEl.textContent = `${currentPhotoIndex + 1} / ${product.Fotos.length}`;
+          });
+        }
 
         let selectedSize = null;
         const sizeButtons = card.querySelectorAll(".size-btn:not(:disabled)");
