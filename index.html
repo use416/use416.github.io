@@ -38,53 +38,56 @@
       background-color: var(--bg-page);
       color: var(--text-main);
       line-height: 1.5;
-      padding-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    /* Destaque da marca nas frases */
+    /* Assinatura da marca inline */
     .brand-pill-top {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
+      display: inline-block;
       background: rgba(27, 42, 74, 0.25);
       color: #FFFFFF;
-      padding: 2px 9px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      padding: 1px 9px;
       border-radius: 8px;
       letter-spacing: -0.3px;
-      display: inline-block;
     }
 
     .brand-pill-top .ap {
-      color: #FFE082;
+      color: #FFD166;
     }
 
-    .brand-vip-title {
+    .brand-inline-vip {
       font-family: 'Nunito', sans-serif;
       font-weight: 900;
       color: #FFFFFF;
       letter-spacing: -0.5px;
+      font-size: 1.35rem;
     }
 
-    .brand-vip-title .ap {
+    .brand-inline-vip .ap {
       color: #E06D53;
     }
 
-    /* Faixa Superior Cupom 1a Compra */
+    /* Barra Superior Cupom 1a Compra */
     .top-promo-bar {
       background-color: #E06D53;
       color: #FFFFFF;
-      padding: 10px 16px;
       text-align: center;
+      padding: 10px 16px;
       font-size: 0.88rem;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .top-promo-btn {
-      background-color: #FFFFFF;
+      background: #FFFFFF;
       color: #1B2A4A;
       border: none;
       padding: 5px 14px;
@@ -93,7 +96,6 @@
       font-weight: 800;
       font-size: 0.82rem;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
       transition: transform 0.15s ease;
     }
 
@@ -137,37 +139,28 @@
       margin-top: 2px;
     }
 
-    /* Banner Lista VIP */
+    /* Faixa Lista VIP */
     .vip-banner {
-      max-width: 1068px;
-      margin: 22px auto 10px;
-      padding: 22px 24px;
-      background: linear-gradient(135deg, #1B2A4A 0%, #273B66 100%);
+      max-width: 1100px;
+      width: calc(100% - 32px);
+      margin: 22px auto 12px;
+      background: linear-gradient(135deg, #1B2A4A 0%, #2C3E66 100%);
       color: #FFFFFF;
       border-radius: 16px;
+      padding: 22px 24px;
       box-shadow: 0 8px 20px rgba(27, 42, 74, 0.12);
-    }
-
-    @media (max-width: 1100px) {
-      .vip-banner {
-        margin: 20px 16px 10px;
-      }
     }
 
     .vip-banner h3 {
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
     }
 
     .vip-banner p {
-      font-size: 0.9rem;
-      color: #DCE3F0;
+      font-size: 0.88rem;
+      color: #E2E8F0;
       margin-bottom: 14px;
     }
 
@@ -179,60 +172,60 @@
 
     .vip-form input, .vip-form select {
       flex: 1;
-      min-width: 170px;
-      padding: 11px 14px;
+      min-width: 160px;
+      padding: 10px 14px;
       border-radius: 10px;
       border: none;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: inherit;
       font-size: 0.9rem;
-      color: #1B2A4A;
+      color: var(--text-main);
       background: #FFFFFF;
     }
 
-    .vip-submit-btn {
+    .vip-form button {
       background-color: #E06D53;
       color: #FFFFFF;
       border: none;
-      padding: 11px 22px;
+      padding: 10px 22px;
       border-radius: 10px;
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       cursor: pointer;
       transition: background 0.2s ease;
     }
 
-    .vip-submit-btn:hover {
+    .vip-form button:hover {
       background-color: #C95B42;
     }
 
     .vip-feedback {
       margin-top: 12px;
-      font-size: 0.9rem;
-      font-weight: 600;
       padding: 10px 14px;
       border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
       display: none;
     }
 
     .vip-feedback.success {
       display: block;
       background: rgba(37, 211, 102, 0.18);
-      color: #A7F3D0;
-      border: 1px solid rgba(37, 211, 102, 0.4);
+      border: 1px solid #25D366;
+      color: #FFFFFF;
     }
 
     .vip-feedback.warning {
       display: block;
-      background: rgba(251, 191, 36, 0.18);
-      color: #FDE68A;
-      border: 1px solid rgba(251, 191, 36, 0.4);
+      background: rgba(255, 209, 102, 0.2);
+      border: 1px solid #FFD166;
+      color: #FFFBEB;
     }
 
-    /* Filtros de Setor */
+    /* Filtros de Setor (Mundos) */
     .filters-container {
       max-width: 1100px;
-      margin: 20px auto 10px;
+      margin: 18px auto 10px;
       padding: 0 16px;
       display: flex;
       gap: 10px;
@@ -255,31 +248,12 @@
       white-space: nowrap;
     }
 
-    .filter-btn.active[data-filter="Todos"] {
-      background: var(--text-main);
-      color: #FFF;
-      border-color: var(--text-main);
-    }
+    .filter-btn.active[data-filter="Todos"] { background: var(--text-main); color: #FFF; border-color: var(--text-main); }
+    .filter-btn.active[data-filter="Kids"] { background: var(--kids-accent); color: #FFF; border-color: var(--kids-accent); }
+    .filter-btn.active[data-filter="Pre-Teen"] { background: var(--preteen-accent); color: #FFF; border-color: var(--preteen-accent); }
+    .filter-btn.active[data-filter="Teen"] { background: var(--teen-accent); color: #FFF; border-color: var(--teen-accent); }
 
-    .filter-btn.active[data-filter="Kids"] {
-      background: var(--kids-accent);
-      color: #FFF;
-      border-color: var(--kids-accent);
-    }
-
-    .filter-btn.active[data-filter="Pre-Teen"] {
-      background: var(--preteen-accent);
-      color: #FFF;
-      border-color: var(--preteen-accent);
-    }
-
-    .filter-btn.active[data-filter="Teen"] {
-      background: var(--teen-accent);
-      color: #FFF;
-      border-color: var(--teen-accent);
-    }
-
-    /* Filtro por Tamanho */
+    /* Barra de Busca por Tamanho */
     .size-filter-bar {
       max-width: 1100px;
       margin: 10px auto 24px;
@@ -322,11 +296,13 @@
     /* Grade de Produtos */
     .catalog-grid {
       max-width: 1100px;
-      margin: 0 auto;
+      width: 100%;
+      margin: 0 auto 50px;
       padding: 0 16px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 24px;
+      flex-grow: 1;
     }
 
     .product-card {
@@ -403,7 +379,7 @@
       left: 12px;
       padding: 4px 12px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -414,7 +390,7 @@
     .mundo-Pre-Teen { background: var(--preteen-soft); color: var(--preteen-accent); }
     .mundo-Teen { background: var(--teen-soft); color: var(--teen-accent); }
 
-    .promo-tag {
+    .tag-badge {
       position: absolute;
       top: 12px;
       right: 12px;
@@ -422,12 +398,12 @@
       color: #FFFFFF;
       padding: 4px 10px;
       border-radius: 20px;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       z-index: 10;
-      box-shadow: 0 2px 6px rgba(224, 109, 83, 0.35);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .product-info {
@@ -460,8 +436,8 @@
     }
 
     .product-price {
-      font-weight: 700;
-      font-size: 1.2rem;
+      font-weight: 800;
+      font-size: 1.22rem;
       color: #1B2A4A;
     }
 
@@ -470,7 +446,7 @@
     }
 
     .sizes-label {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
       color: var(--text-muted);
       margin-bottom: 8px;
@@ -498,25 +474,24 @@
       transition: all 0.15s ease;
     }
 
-    .size-btn.out-of-stock {
-      background: #F7F5F0;
-      color: #9C968D;
-      border-style: dashed;
-      text-decoration: line-through;
-    }
-
     .size-btn.selected {
       background: var(--text-main);
       color: #FFF;
       border-color: var(--text-main);
-      border-style: solid;
-      text-decoration: none;
+    }
+
+    .size-btn.out-of-stock {
+      background: #F7F5F0;
+      color: #9A948B;
+      border: 1.5px dashed #CFC9BE;
+      text-decoration: line-through;
     }
 
     .size-btn.out-of-stock.selected {
       background: #5C667A;
       color: #FFF;
-      border-color: #5C667A;
+      border: 1.5px solid #5C667A;
+      text-decoration: none;
     }
 
     .whatsapp-btn {
@@ -538,28 +513,120 @@
       transition: background 0.2s ease;
     }
 
-    .whatsapp-btn:hover {
-      background-color: #1EBE5D;
-    }
+    .whatsapp-btn:hover { background-color: #1EBE5D; }
+    .whatsapp-btn.waitlist-mode { background-color: #1B2A4A; }
+    .whatsapp-btn.waitlist-mode:hover { background-color: #2C3E66; }
 
-    .whatsapp-btn.waitlist-mode {
+    /* Rodapé */
+    footer {
       background-color: #1B2A4A;
+      color: #FAF8F5;
+      padding: 44px 16px 28px;
+      margin-top: auto;
     }
 
-    .whatsapp-btn.waitlist-mode:hover {
-      background-color: #283D6B;
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.9rem;
+      color: #FFFFFF;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .footer-logo .ap {
+      color: #E06D53;
+    }
+
+    .footer-desc {
+      font-size: 0.88rem;
+      color: #CBD5E1;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: background 0.2s ease;
+    }
+
+    .footer-social-btn:hover {
+      background: #E06D53;
+    }
+
+    .footer-col h4 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 0.88rem;
+      color: #CBD5E1;
+    }
+
+    .footer-list a {
+      color: #CBD5E1;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-list a:hover {
+      color: #E06D53;
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #94A3B8;
     }
 
     /* Modais */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(27, 42, 74, 0.55);
+      background: rgba(27, 42, 74, 0.6);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 16px;
-      z-index: 200;
+      z-index: 999;
     }
 
     .modal-overlay.open {
@@ -569,11 +636,11 @@
     .modal-box {
       background: #FFFFFF;
       border-radius: 16px;
-      padding: 24px;
       max-width: 400px;
       width: 100%;
+      padding: 24px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.22);
       position: relative;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.2);
     }
 
     .modal-close {
@@ -582,7 +649,7 @@
       right: 16px;
       background: none;
       border: none;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--text-muted);
       cursor: pointer;
     }
@@ -601,14 +668,14 @@
       margin-bottom: 16px;
     }
 
-    .modal-field {
+    .modal-box input {
       width: 100%;
       padding: 11px 14px;
       border: 1.5px solid #D5CFC5;
       border-radius: 10px;
-      margin-bottom: 12px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: inherit;
       font-size: 0.92rem;
+      margin-bottom: 10px;
     }
 
     .modal-submit {
@@ -620,36 +687,39 @@
       color: #FFFFFF;
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       cursor: pointer;
+      margin-top: 4px;
     }
 
-    .modal-submit.primary {
-      background: #E06D53;
-    }
+    .modal-submit.coral { background: #E06D53; }
+    .modal-submit.navy { background: #1B2A4A; }
 
-    .coupon-result-box {
+    .coupon-box-result {
       display: none;
       margin-top: 14px;
-      padding: 12px;
+      padding: 14px;
       border-radius: 10px;
-      background: #EAF2EC;
-      color: #1B2A4A;
-      font-size: 0.9rem;
+      background: #FDECE8;
+      border: 1.5px dashed #E06D53;
       text-align: center;
-      border: 1px dashed #769F81;
     }
 
-    .coupon-code-badge {
+    .coupon-box-result.warning {
+      background: #FEF3C7;
+      border-color: #D97706;
+    }
+
+    .coupon-code-tag {
       display: inline-block;
       margin-top: 6px;
       background: #1B2A4A;
       color: #FFFFFF;
-      padding: 4px 14px;
-      border-radius: 8px;
       font-family: 'Nunito', sans-serif;
       font-weight: 900;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
+      padding: 6px 18px;
+      border-radius: 8px;
       letter-spacing: 1px;
     }
 
@@ -657,7 +727,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: var(--text-main);
+      background: #25D366;
       color: #FFF;
       padding: 12px 18px;
       border-radius: 50px;
@@ -665,7 +735,7 @@
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
       font-size: 0.88rem;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
       z-index: 99;
     }
 
@@ -680,10 +750,10 @@
 </head>
 <body>
 
-  <!-- Barra Superior Cupom 1a Compra -->
+  <!-- Barra Superior Cupom 1ª Compra -->
   <div class="top-promo-bar">
     <span>🎁 Primeira vez na <span class="brand-pill-top">use4<span class="ap">'</span>16</span>? Cadastre-se e ganhe um cupom exclusivo para sua 1ª compra!</span>
-    <button type="button" class="top-promo-btn" id="openFirstPurchaseBtn">Resgatar Cupom 1ª Compra</button>
+    <button type="button" class="top-promo-btn" id="openFirstBuyModal">Resgatar Cupom 1ª Compra</button>
   </div>
 
   <header>
@@ -691,14 +761,14 @@
     <div class="subtitle">Moda do 4 ao 16</div>
   </header>
 
-  <!-- Faixa Lista VIP -->
+  <!-- Faixa Lista VIP (Sem cupom na hora, enviado depois pelo WhatsApp) -->
   <section class="vip-banner">
-    <h3>✨ Lista VIP <span class="brand-vip-title">use4<span class="ap">'</span>16</span></h3>
+    <h3>✨ Lista VIP <span class="brand-inline-vip">use4<span class="ap">'</span>16</span></h3>
     <p>Receba <strong>CUPONS</strong>, novidades e promoções exclusivas no tamanho ideal direto no seu WhatsApp!</p>
     <form class="vip-form" id="vipForm">
-      <input type="text" id="vipNome" placeholder="Seu nome" required />
-      <input type="tel" id="vipWhatsapp" placeholder="Seu WhatsApp (com DDD)" required />
-      <select id="vipTamanho" required>
+      <input type="text" id="vipName" placeholder="Seu nome" required />
+      <input type="tel" id="vipPhone" placeholder="Seu WhatsApp (com DDD)" required />
+      <select id="vipSize" required>
         <option value="">Tamanho...</option>
         <option value="4">Tam. 4</option>
         <option value="6">Tam. 6</option>
@@ -708,7 +778,7 @@
         <option value="14">Tam. 14</option>
         <option value="16">Tam. 16</option>
       </select>
-      <button type="submit" class="vip-submit-btn" id="vipSubmitBtn">Entrar na Lista VIP</button>
+      <button type="submit" id="vipSubmitBtn">Entrar na Lista VIP</button>
     </form>
     <div class="vip-feedback" id="vipFeedback"></div>
   </section>
@@ -741,36 +811,71 @@
     <div class="status-msg">Carregando peças da use4'16...</div>
   </main>
 
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-logo">use4<span class="ap">'</span>16</div>
+        <p class="footer-desc">Moda infantil e juvenil do tamanho 4 ao 16, pensada para acompanhar cada fase com estilo, conforto e praticidade.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/use4.16" id="footerInstaLink" target="_blank" rel="noopener" class="footer-social-btn">📸 <span id="footerInstaText">@use4.16</span></a>
+          <a href="#" id="footerWaBtn" target="_blank" rel="noopener" class="footer-social-btn">💬 WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Entregas e Pagamentos</h4>
+        <ul class="footer-list">
+          <li>📍 <strong>Entregas em Maceió/AL</strong></li>
+          <li>💳 Pix, Cartão de Crédito/Débito e Link de Pagamento</li>
+          <li>👗 Numeração do 4 ao 16 (Kids, Pré-Teen e Teen)</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Atendimento</h4>
+        <ul class="footer-list">
+          <li><a href="#" id="footerMedidasLink" target="_blank" rel="noopener">📏 Dúvidas sobre Tabela de Medidas</a></li>
+          <li><a href="#" id="footerTrocasLink" target="_blank" rel="noopener">🔄 Política de Trocas</a></li>
+          <li><a href="#" id="footerEncomendaLink" target="_blank" rel="noopener">✨ Encomendar tamanho específico</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 use4'16 — Moda Infantil e Juvenil. Todos os direitos reservados.
+    </div>
+  </footer>
+
   <!-- Botão Flutuante -->
-  <a href="#" id="floatingWhatsapp" class="floating-help" target="_blank">
+  <a href="#" id="floatingWhatsapp" class="floating-help" target="_blank" rel="noopener">
     💬 Dúvidas sobre tamanhos?
   </a>
 
-  <!-- Modal 1: Cupom Primeira Compra -->
-  <div class="modal-overlay" id="firstPurchaseModal">
+  <!-- Modal 1: Cupom de 1ª Compra -->
+  <div class="modal-overlay" id="firstBuyModal">
     <div class="modal-box">
-      <button type="button" class="modal-close" id="closeFirstPurchaseBtn">&times;</button>
+      <button type="button" class="modal-close" data-close="firstBuyModal">&times;</button>
       <h3>🎁 Cupom de 1ª Compra</h3>
       <p>Preencha seu nome e WhatsApp para liberar seu cupom de boas-vindas na <strong>use4'16</strong>!</p>
-      <form id="firstPurchaseForm">
-        <input type="text" class="modal-field" id="fpNome" placeholder="Seu nome" required />
-        <input type="tel" class="modal-field" id="fpWhatsapp" placeholder="Seu WhatsApp (com DDD)" required />
-        <button type="submit" class="modal-submit primary" id="fpSubmitBtn">Liberar Meu Cupom</button>
+      <form id="firstBuyForm">
+        <input type="text" id="fbName" placeholder="Seu nome" required />
+        <input type="tel" id="fbPhone" placeholder="Seu WhatsApp (com DDD)" required />
+        <button type="submit" class="modal-submit coral" id="fbSubmitBtn">Liberar Meu Cupom</button>
       </form>
-      <div class="coupon-result-box" id="fpResultBox"></div>
+      <div class="coupon-box-result" id="fbResultBox"></div>
     </div>
   </div>
 
-  <!-- Modal 2: Captura antes do WhatsApp ou Lista de Espera -->
+  <!-- Modal 2: Captura antes do WhatsApp / Lista de Espera -->
   <div class="modal-overlay" id="leadModal">
     <div class="modal-box">
-      <button type="button" class="modal-close" id="closeLeadModalBtn">&times;</button>
+      <button type="button" class="modal-close" data-close="leadModal">&times;</button>
       <h3 id="leadModalTitle">Quase lá!</h3>
       <p id="leadModalDesc">Informe seu nome e WhatsApp para continuar seu pedido.</p>
       <form id="leadForm">
-        <input type="text" class="modal-field" id="leadNome" placeholder="Seu nome" required />
-        <input type="tel" class="modal-field" id="leadWhatsapp" placeholder="Seu WhatsApp (com DDD)" required />
-        <input type="text" class="modal-field" id="leadCupom" placeholder="Cupom de desconto (opcional)" />
+        <input type="text" id="leadName" placeholder="Seu nome" required />
+        <input type="tel" id="leadPhone" placeholder="Seu WhatsApp (com DDD)" required />
+        <input type="text" id="leadCoupon" placeholder="Tem cupom de desconto? (Opcional)" />
         <button type="submit" class="modal-submit" id="leadSubmitBtn">Continuar para o WhatsApp</button>
       </form>
     </div>
@@ -778,13 +883,14 @@
 
   <script>
     // =========================================================================
-    // CONFIGURAÇÕES DA LOJA
+    // CONFIGURAÇÕES DA LOJA (PADRÕES CASO A PLANILHA ESTEJA VAZIA)
     // =========================================================================
     const CONFIG = {
       whatsappNumber: "5582996933636",
+      instagramUser: "use4.16",
       googleSheetsCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQPcYZvH8TbGD0Eto58Ckd5ubrVLeGFU_yra-EoQdNIAiC_vVLQ-7Q_0tIQzEMOf96Thj4Nlfq4P6io/pub?output=csv",
       googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbyFfidp6vRVMJSag3b3SpemlNU6yEnVoho9HOkvFyLfR61_n_4GVk6z4rGAsPjrPQqM/exec",
-      defaultFirstPurchaseCoupon: "BEMVINDA10"
+      defaultFirstBuyCoupon: "BEMVINDA10"
     };
     // =========================================================================
 
@@ -792,52 +898,246 @@
     let allProducts = [];
     let currentMundo = "Todos";
     let currentSize = "Todos";
-    let activeFirstPurchaseCoupon = CONFIG.defaultFirstPurchaseCoupon;
+    let activeFirstBuyCoupon = CONFIG.defaultFirstBuyCoupon;
+    let activeInstagram = CONFIG.instagramUser;
+    let activeWhatsapp = CONFIG.whatsappNumber;
     let pendingAction = null;
 
-    document.getElementById("floatingWhatsapp").href = 
-      `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16 e preciso de ajuda com os tamanhos.")}`;
+    function updateContactLinks() {
+      const cleanWa = String(activeWhatsapp).replace(/\D/g, "") || CONFIG.whatsappNumber;
+      const cleanInsta = String(activeInstagram).trim().replace(/^@+/, "") || CONFIG.instagramUser;
 
-    // Formata preços para sempre exibir 2 casas decimais (ex: 79,9 -> 79,90)
-    function formatPrice(val) {
-      if (!val) return "";
-      const clean = String(val).replace("R$", "").trim().replace(",", ".");
-      const num = parseFloat(clean);
-      if (isNaN(num)) return String(val).trim();
+      document.getElementById("footerInstaText").textContent = `@${cleanInsta}`;
+      document.getElementById("footerInstaLink").href = `https://instagram.com/${cleanInsta}`;
+
+      document.getElementById("floatingWhatsapp").href =
+        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16 e preciso de ajuda com os tamanhos.")}`;
+      document.getElementById("footerWaBtn").href =
+        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Vim pelo site da use4'16.")}`;
+      document.getElementById("footerMedidasLink").href =
+        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Gostaria de conferir a tabela de medidas da use4'16.")}`;
+      document.getElementById("footerTrocasLink").href =
+        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Gostaria de saber como funciona a política de trocas da use4'16.")}`;
+      document.getElementById("footerEncomendaLink").href =
+        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Gostaria de encomendar um tamanho específico da use4'16.")}`;
+    }
+
+    updateContactLinks();
+
+    // Formata preço sempre com 2 casas decimais (ex: 79,9 -> 79,90)
+    function formatPrice(rawVal) {
+      if (!rawVal) return "";
+      let clean = String(rawVal).replace(/R\$/gi, "").trim();
+      if (!clean) return "";
+      let num = parseFloat(clean.replace(/\./g, "").replace(",", "."));
+      if (isNaN(num)) return clean;
       return num.toFixed(2).replace(".", ",");
     }
 
-    // Converte links comuns do Google Drive em link direto de imagem
-    function normalizeDriveUrl(url) {
-      const clean = url.trim();
-      const driveMatch = clean.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/) || 
-                         clean.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
+    // Converte link comum do Google Drive para link direto exibível
+    function normalizeImageUrl(url) {
+      if (!url) return "";
+      const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/) ||
+                         url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
       if (driveMatch && driveMatch[1]) {
         return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`;
       }
-      return clean;
+      return url;
     }
 
-    // Envio de lead para o Google Apps Script
-    async function sendLeadToSheets(payload) {
+    async function saveLeadToSheet(payload) {
       if (!CONFIG.googleAppsScriptUrl) return { status: "ok" };
       try {
-        const res = await fetch(CONFIG.googleAppsScriptUrl, {
+        const response = await fetch(CONFIG.googleAppsScriptUrl, {
           method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload)
         });
-        return await res.json();
+        const result = await response.json();
+        return result;
       } catch (err) {
+        console.warn("Erro ao registrar lead:", err);
         return { status: "ok" };
       }
     }
 
-    // Conversor de CSV
+    document.querySelectorAll("[data-close]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById(btn.getAttribute("data-close")).classList.remove("open");
+      });
+    });
+
+    // Modal Cupom 1ª Compra
+    document.getElementById("openFirstBuyModal").addEventListener("click", () => {
+      document.getElementById("fbResultBox").style.display = "none";
+      document.getElementById("firstBuyModal").classList.add("open");
+    });
+
+    document.getElementById("firstBuyForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nome = document.getElementById("fbName").value.trim();
+      const whatsapp = document.getElementById("fbPhone").value.trim();
+      const btn = document.getElementById("fbSubmitBtn");
+      const resultBox = document.getElementById("fbResultBox");
+
+      btn.disabled = true;
+      btn.textContent = "Verificando...";
+
+      const res = await saveLeadToSheet({
+        tipo: "Primeira Compra",
+        nome,
+        whatsapp,
+        peca: `Cupom: ${activeFirstBuyCoupon}`,
+        tamanho: "-"
+      });
+
+      btn.disabled = false;
+      btn.textContent = "Liberar Meu Cupom";
+
+      localStorage.setItem("use416_lead_name", nome);
+      localStorage.setItem("use416_lead_phone", whatsapp);
+      localStorage.setItem("use416_saved_coupon", activeFirstBuyCoupon);
+
+      resultBox.style.display = "block";
+      if (res && res.status === "duplicado") {
+        resultBox.className = "coupon-box-result warning";
+        resultBox.innerHTML = `
+          <div>⚠️ Este WhatsApp já resgatou o cupom de 1ª compra!</div>
+          <div style="font-size:0.84rem; margin-top:4px;">Caso ainda não tenha usado, seu código é:</div>
+          <div class="coupon-code-tag">${activeFirstBuyCoupon}</div>
+        `;
+      } else {
+        resultBox.className = "coupon-box-result";
+        resultBox.innerHTML = `
+          <div>🎉 Cupom liberado! Informe no WhatsApp ao fechar seu pedido:</div>
+          <div class="coupon-code-tag">${activeFirstBuyCoupon}</div>
+        `;
+      }
+    });
+
+    // Lista VIP (Sem cupom automático na tela)
+    document.getElementById("vipForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nome = document.getElementById("vipName").value.trim();
+      const whatsapp = document.getElementById("vipPhone").value.trim();
+      const tamanho = document.getElementById("vipSize").value;
+      const btn = document.getElementById("vipSubmitBtn");
+      const feedback = document.getElementById("vipFeedback");
+
+      btn.disabled = true;
+      btn.textContent = "Verificando...";
+      feedback.className = "vip-feedback";
+
+      const res = await saveLeadToSheet({
+        tipo: "Lista VIP",
+        nome,
+        whatsapp,
+        peca: "Cadastro Lista VIP",
+        tamanho
+      });
+
+      btn.disabled = false;
+      btn.textContent = "Entrar na Lista VIP";
+
+      localStorage.setItem("use416_lead_name", nome);
+      localStorage.setItem("use416_lead_phone", whatsapp);
+
+      if (res && res.status === "duplicado") {
+        feedback.className = "vip-feedback warning";
+        feedback.innerHTML = `⚠️ Este WhatsApp já está cadastrado na nossa <strong>Lista VIP use4'16</strong>! Em breve enviaremos nossas novidades e cupons diretamente por lá.`;
+      } else {
+        feedback.className = "vip-feedback success";
+        feedback.innerHTML = `✨ Cadastro confirmado na <strong>Lista VIP use4'16</strong>! Em breve enviaremos novidades e cupons exclusivos no seu WhatsApp.`;
+        document.getElementById("vipForm").reset();
+      }
+    });
+
+    function openActionModal(actionData) {
+      pendingAction = actionData;
+      const modal = document.getElementById("leadModal");
+      const title = document.getElementById("leadModalTitle");
+      const desc = document.getElementById("leadModalDesc");
+      const submitBtn = document.getElementById("leadSubmitBtn");
+      const couponInput = document.getElementById("leadCoupon");
+
+      document.getElementById("leadName").value = localStorage.getItem("use416_lead_name") || "";
+      document.getElementById("leadPhone").value = localStorage.getItem("use416_lead_phone") || "";
+      couponInput.value = localStorage.getItem("use416_saved_coupon") || "";
+
+      if (actionData.mode === "waitlist") {
+        title.textContent = "🔔 Avise-me quando chegar";
+        desc.textContent = `Deixe seu contato para avisarmos assim que o tamanho ${actionData.size} de "${actionData.product.Nome}" voltar ao estoque.`;
+        submitBtn.textContent = "Entrar na Lista de Espera";
+        submitBtn.className = "modal-submit navy";
+        couponInput.style.display = "none";
+      } else {
+        title.textContent = "Quase lá!";
+        desc.textContent = `Informe seu nome e WhatsApp para reservar "${actionData.product.Nome}" (Tam. ${actionData.size}).`;
+        submitBtn.textContent = "Continuar para o WhatsApp";
+        submitBtn.className = "modal-submit";
+        couponInput.style.display = "block";
+      }
+
+      modal.classList.add("open");
+    }
+
+    document.getElementById("leadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!pendingAction) return;
+
+      const nome = document.getElementById("leadName").value.trim();
+      const whatsapp = document.getElementById("leadPhone").value.trim();
+      const cupom = document.getElementById("leadCoupon").value.trim().toUpperCase();
+
+      localStorage.setItem("use416_lead_name", nome);
+      localStorage.setItem("use416_lead_phone", whatsapp);
+
+      const { mode, product, size } = pendingAction;
+      const cleanWa = String(activeWhatsapp).replace(/\D/g, "") || CONFIG.whatsappNumber;
+
+      if (mode === "waitlist") {
+        await saveLeadToSheet({
+          tipo: "Lista de Espera",
+          nome,
+          whatsapp,
+          peca: `${product.Nome} (Cód: ${product.ID})`,
+          tamanho: size
+        });
+        document.getElementById("leadModal").classList.remove("open");
+        alert(`Pronto, ${nome}! Você entrou na lista de espera do tamanho ${size}. Avisaremos no seu WhatsApp assim que chegar!`);
+      } else {
+        await saveLeadToSheet({
+          tipo: cupom ? `Pedido WhatsApp (Cupom: ${cupom})` : "Pedido WhatsApp",
+          nome,
+          whatsapp,
+          peca: `${product.Nome} (Cód: ${product.ID})`,
+          tamanho: size
+        });
+
+        document.getElementById("leadModal").classList.remove("open");
+        let text = `Olá! Sou *${nome}*, vim pelo catálogo da *use4'16* e gostaria de encomendar:
+
+• *Peça:* ${product.Nome} (Cód: ${product.ID})
+• *Tamanho:* ${size}
+• *Valor:* R$ ${product.Preco}`;
+        if (cupom) text += `
+• *Cupom aplicado:* ${cupom}`;
+        text += `
+
+Ainda está disponível?`;
+
+        const waUrl = `https://wa.me/${cleanWa}?text=${encodeURIComponent(text)}`;
+        window.open(waUrl, "_blank");
+      }
+    });
+
     function parseCSV(csvText) {
-      const lines = csvText.trim().split(/\r?\n/);
+      const lines = csvText.trim().split(/
+?
+/);
       if (lines.length < 2) return [];
       const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""));
-      
+
       return lines.slice(1).map(line => {
         const values = [];
         let current = "";
@@ -862,11 +1162,17 @@
         });
 
         if (row.Cupom_Primeira_Compra && row.Cupom_Primeira_Compra.trim() !== "") {
-          activeFirstPurchaseCoupon = row.Cupom_Primeira_Compra.trim();
+          activeFirstBuyCoupon = row.Cupom_Primeira_Compra.trim().toUpperCase();
+        }
+        if (row.Instagram && row.Instagram.trim() !== "") {
+          activeInstagram = row.Instagram.trim();
+        }
+        if (row.WhatsApp && row.WhatsApp.trim() !== "") {
+          activeWhatsapp = row.WhatsApp.trim();
         }
 
-        const rawFotos = row.Foto_URL 
-          ? row.Foto_URL.split(",").map(u => normalizeDriveUrl(u)).filter(Boolean) 
+        const rawFotos = row.Foto_URL
+          ? row.Foto_URL.split(",").map(u => normalizeImageUrl(u.trim())).filter(Boolean)
           : [];
         const fotos = rawFotos.length > 0 ? rawFotos : ["https://via.placeholder.com/400x500?text=use4'16"];
 
@@ -874,8 +1180,8 @@
           ID: row.ID || "",
           Nome: row.Nome || "Peça sem nome",
           Mundo: row.Mundo || "Kids",
-          Preco: formatPrice(row.Preco || "0,00"),
-          Preco_Antigo: row.Preco_Antigo ? formatPrice(row.Preco_Antigo) : "",
+          Preco: formatPrice(row.Preco) || "0,00",
+          PrecoAntigo: formatPrice(row.Preco_Antigo),
           Tag: row.Tag ? row.Tag.trim() : "",
           Fotos: fotos,
           estoque: {
@@ -898,9 +1204,10 @@
         const response = await fetch(urlWithCacheBust);
         const csvData = await response.text();
         allProducts = parseCSV(csvData);
+        updateContactLinks();
         renderCatalog();
       } catch (error) {
-        document.getElementById("catalogGrid").innerHTML = 
+        document.getElementById("catalogGrid").innerHTML =
           `<div class="status-msg">Erro ao carregar o estoque. Verifique sua conexão ou o link da planilha.</div>`;
       }
     }
@@ -941,23 +1248,24 @@
 
         let currentPhotoIndex = 0;
         const hasMultiplePhotos = product.Fotos.length > 1;
+        const hasOldPrice = product.PrecoAntigo && product.PrecoAntigo !== "";
 
         card.innerHTML = `
           <div class="product-image-wrap">
             <img src="${product.Fotos[0]}" alt="${product.Nome}" loading="lazy" />
             <span class="mundo-badge mundo-${product.Mundo}">${mundoLabel}</span>
-            ${product.Tag ? `<span class="promo-tag">${product.Tag}</span>` : ''}
+            ${product.Tag ? `<span class="tag-badge">${product.Tag}</span>` : ''}
             ${hasMultiplePhotos ? `
-              <button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
-              <button type="button" class="carousel-btn next" aria-label="Próxima">›</button>
+              <button type="button" class="carousel-btn prev" aria-label="Foto anterior">‹</button>
+              <button type="button" class="carousel-btn next" aria-label="Próxima foto">›</button>
               <span class="photo-counter">1 / ${product.Fotos.length}</span>
             ` : ''}
           </div>
           <div class="product-info">
             <h2 class="product-title">${product.Nome}</h2>
             <div class="price-row">
-              ${product.Preco_Antigo ? `<span class="old-price">R$ ${product.Preco_Antigo}</span>` : ''}
-              <span class="product-price ${product.Preco_Antigo ? 'promo' : ''}">R$ ${product.Preco}</span>
+              ${hasOldPrice ? `<span class="old-price">R$ ${product.PrecoAntigo}</span>` : ''}
+              <div class="product-price ${hasOldPrice ? 'promo' : ''}">R$ ${product.Preco}</div>
             </div>
             <span class="sizes-label">Selecione o tamanho (riscados = lista de espera):</span>
             <div class="sizes-grid">${sizesHtml}</div>
@@ -968,12 +1276,14 @@
         if (hasMultiplePhotos) {
           const imgEl = card.querySelector("img");
           const counterEl = card.querySelector(".photo-counter");
+
           card.querySelector(".prev").addEventListener("click", (e) => {
             e.stopPropagation();
             currentPhotoIndex = (currentPhotoIndex - 1 + product.Fotos.length) % product.Fotos.length;
             imgEl.src = product.Fotos[currentPhotoIndex];
             counterEl.textContent = `${currentPhotoIndex + 1} / ${product.Fotos.length}`;
           });
+
           card.querySelector(".next").addEventListener("click", (e) => {
             e.stopPropagation();
             currentPhotoIndex = (currentPhotoIndex + 1) % product.Fotos.length;
@@ -983,20 +1293,19 @@
         }
 
         let selectedSize = null;
-        let isWaitlist = false;
+        let selectedIsOutOfStock = false;
         const sizeButtons = card.querySelectorAll(".size-btn");
         const orderBtn = card.querySelector(".whatsapp-btn");
-        
+
         sizeButtons.forEach(btn => {
           btn.addEventListener("click", () => {
             sizeButtons.forEach(b => b.classList.remove("selected"));
             btn.classList.add("selected");
             selectedSize = btn.getAttribute("data-size");
-            const qty = parseInt(btn.getAttribute("data-qty")) || 0;
-            isWaitlist = qty <= 0;
+            selectedIsOutOfStock = parseInt(btn.getAttribute("data-qty")) <= 0;
 
-            if (isWaitlist) {
-              orderBtn.textContent = `Avise-me quando chegar (Tam. ${selectedSize})`;
+            if (selectedIsOutOfStock) {
+              orderBtn.textContent = `🔔 Avise-me quando chegar (Tam. ${selectedSize})`;
               orderBtn.classList.add("waitlist-mode");
             } else {
               orderBtn.textContent = "Pedir no WhatsApp";
@@ -1010,166 +1319,17 @@
             alert("Por favor, selecione um tamanho antes de continuar!");
             return;
           }
-          openLeadModal(product, selectedSize, isWaitlist);
+          openActionModal({
+            mode: selectedIsOutOfStock ? "waitlist" : "order",
+            product,
+            size: selectedSize
+          });
         });
 
         grid.appendChild(card);
       });
     }
 
-    // Eventos da Lista VIP (sem cupom na tela; enviado depois pelo WhatsApp)
-    document.getElementById("vipForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById("vipSubmitBtn");
-      const feedback = document.getElementById("vipFeedback");
-      const nome = document.getElementById("vipNome").value.trim();
-      const whatsapp = document.getElementById("vipWhatsapp").value.trim();
-      const tamanho = document.getElementById("vipTamanho").value;
-
-      btn.disabled = true;
-      btn.textContent = "Cadastrando...";
-
-      const result = await sendLeadToSheets({
-        tipo: "Lista VIP",
-        nome,
-        whatsapp,
-        peca: "Cadastro Lista VIP",
-        tamanho
-      });
-
-      btn.disabled = false;
-      btn.textContent = "Entrar na Lista VIP";
-
-      if (result.status === "duplicado") {
-        feedback.className = "vip-feedback warning";
-        feedback.innerHTML = "⚠️ Este número de WhatsApp já está cadastrado na nossa Lista VIP! Você continuará recebendo nossas novidades e cupons por lá.";
-      } else {
-        feedback.className = "vip-feedback success";
-        feedback.innerHTML = "✨ Você entrou na Lista VIP use4'16! Em breve enviaremos novidades e cupons exclusivos direto no seu WhatsApp.";
-        document.getElementById("vipForm").reset();
-      }
-    });
-
-    // Eventos do Modal Cupom 1a Compra
-    const fpModal = document.getElementById("firstPurchaseModal");
-    document.getElementById("openFirstPurchaseBtn").addEventListener("click", () => {
-      fpModal.classList.add("open");
-    });
-    document.getElementById("closeFirstPurchaseBtn").addEventListener("click", () => {
-      fpModal.classList.remove("open");
-    });
-
-    document.getElementById("firstPurchaseForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById("fpSubmitBtn");
-      const resultBox = document.getElementById("fpResultBox");
-      const nome = document.getElementById("fpNome").value.trim();
-      const whatsapp = document.getElementById("fpWhatsapp").value.trim();
-
-      btn.disabled = true;
-      btn.textContent = "Verificando...";
-
-      const result = await sendLeadToSheets({
-        tipo: "Primeira Compra",
-        nome,
-        whatsapp,
-        peca: `Resgate Cupom (${activeFirstPurchaseCoupon})`,
-        tamanho: "-"
-      });
-
-      btn.disabled = false;
-      btn.textContent = "Liberar Meu Cupom";
-      resultBox.style.display = "block";
-
-      if (result.status === "duplicado") {
-        resultBox.innerHTML = `⚠️ Este WhatsApp já resgatou o cupom de 1ª compra anteriormente!`;
-      } else {
-        localStorage.setItem("use416_nome", nome);
-        localStorage.setItem("use416_whats", whatsapp);
-        localStorage.setItem("use416_cupom", activeFirstPurchaseCoupon);
-        resultBox.innerHTML = `🎉 Cadastro realizado com sucesso!<br>Use o código abaixo no seu pedido:<br><span class="coupon-code-badge">${activeFirstPurchaseCoupon}</span>`;
-      }
-    });
-
-    // Eventos do Modal Pedido / Lista de Espera
-    const leadModal = document.getElementById("leadModal");
-    function openLeadModal(product, size, isWaitlist) {
-      pendingAction = { product, size, isWaitlist };
-      document.getElementById("leadNome").value = localStorage.getItem("use416_nome") || "";
-      document.getElementById("leadWhatsapp").value = localStorage.getItem("use416_whats") || "";
-      
-      const cupomInput = document.getElementById("leadCupom");
-      if (isWaitlist) {
-        document.getElementById("leadModalTitle").textContent = "🔔 Avise-me quando chegar";
-        document.getElementById("leadModalDesc").textContent = `Deixe seu contato para avisarmos assim que o tamanho ${size} de "${product.Nome}" voltar ao estoque.`;
-        cupomInput.style.display = "none";
-        document.getElementById("leadSubmitBtn").textContent = "Entrar na Lista de Espera";
-      } else {
-        document.getElementById("leadModalTitle").textContent = "Quase lá!";
-        document.getElementById("leadModalDesc").textContent = "Informe seu nome e WhatsApp para continuar seu pedido.";
-        cupomInput.style.display = "block";
-        cupomInput.value = localStorage.getItem("use416_cupom") || "";
-        document.getElementById("leadSubmitBtn").textContent = "Continuar para o WhatsApp";
-      }
-      leadModal.classList.add("open");
-    }
-
-    document.getElementById("closeLeadModalBtn").addEventListener("click", () => {
-      leadModal.classList.remove("open");
-    });
-
-    document.getElementById("leadForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (!pendingAction) return;
-
-      const btn = document.getElementById("leadSubmitBtn");
-      const nome = document.getElementById("leadNome").value.trim();
-      const whatsapp = document.getElementById("leadWhatsapp").value.trim();
-      const cupom = document.getElementById("leadCupom").value.trim();
-      const { product, size, isWaitlist } = pendingAction;
-
-      localStorage.setItem("use416_nome", nome);
-      localStorage.setItem("use416_whats", whatsapp);
-
-      btn.disabled = true;
-      btn.textContent = "Registrando...";
-
-      const tipoLead = isWaitlist 
-        ? "Lista de Espera" 
-        : (cupom ? `Pedido WhatsApp (Cupom: ${cupom})` : "Pedido WhatsApp");
-
-      await sendLeadToSheets({
-        tipo: tipoLead,
-        nome,
-        whatsapp,
-        peca: `${product.Nome} (Cód: ${product.ID})`,
-        tamanho: size
-      });
-
-      btn.disabled = false;
-      leadModal.classList.remove("open");
-
-      if (isWaitlist) {
-        alert(`Pronto, ${nome}! Você entrou na lista de espera para o tamanho ${size} de "${product.Nome}".`);
-      } else {
-        let text = `Olá! Sou *${nome}*, vim pelo catálogo da *use4'16* e gostaria de encomendar:
-
-• *Peça:* ${product.Nome} (Cód: ${product.ID})
-• *Tamanho:* ${size}
-• *Valor:* R$ ${product.Preco}`;
-        if (cupom) {
-          text += `
-• *Cupom aplicado:* ${cupom}`;
-        }
-        text += `
-
-Ainda está disponível?`;
-        const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
-        window.open(waUrl, "_blank");
-      }
-    });
-
-    // Filtros
     document.querySelectorAll(".filter-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
