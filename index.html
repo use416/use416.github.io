@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>use4'16 | Moda Infantil e Juvenil (4 ao 16)</title>
-  <!-- Favicon SVG minimalista com monograma 4'16 -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231B2A4A'/%3E%3Crect x='5' y='5' width='54' height='54' rx='12' fill='none' stroke='%23E06D53' stroke-opacity='0.45' stroke-width='1.5' stroke-dasharray='3 2'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='system-ui,-apple-system,sans-serif' font-weight='900' font-size='21' letter-spacing='-0.8' fill='%23FFFFFF'%3E4%3Ctspan fill='%23E06D53'%3E'%3C/tspan%3E16%3C/text%3E%3C/svg%3E">
+  <!-- Favicon SVG com o emblema de etiqueta da use4'16 -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FAF8F5'/%3E%3Cpath d='M21 12H43L49 20V48C49 50.76 46.76 53 44 53H20C17.24 53 15 50.76 15 48V20L21 12Z' fill='%231B2A4A'/%3E%3Crect x='18.5' y='15.5' width='27' height='34' rx='3.5' fill='none' stroke='%23E06D53' stroke-width='1.5' stroke-dasharray='3 2.5'/%3E%3Ccircle cx='32' cy='18.5' r='3.5' fill='%23FAF8F5'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -151,32 +151,32 @@
       background: #FFFDF9;
     }
 
-    /* Cabeçalho editorial com blur (glassmorphism) */
+    /* Cabeçalho editorial com blur e logotipo escolhido */
     header.site-header {
-      background-color: rgba(255, 255, 255, 0.86);
+      background-color: rgba(250, 248, 245, 0.88);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(230, 224, 214, 0.85);
+      border-bottom: 1px solid rgba(230, 224, 214, 0.9);
       padding: 16px 20px 14px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      transition: box-shadow 0.2s ease, background-color 0.2s ease;
     }
 
     .logo-lockup {
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       user-select: none;
     }
 
-    .logo-mark-row {
+    .logo-main-row {
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      line-height: 1;
     }
 
     .logo-wordmark {
@@ -187,10 +187,10 @@
 
     .logo-use {
       font-family: 'Fraunces', Georgia, serif;
-      font-weight: 700;
-      font-size: 1.95rem;
+      font-weight: 600;
+      font-size: 2.05rem;
       color: var(--text-main);
-      letter-spacing: -0.8px;
+      letter-spacing: -0.9px;
     }
 
     .logo-nums {
@@ -198,50 +198,65 @@
       font-weight: 900;
       font-size: 2.05rem;
       color: var(--text-main);
-      letter-spacing: -1.2px;
+      letter-spacing: -1.1px;
       position: relative;
       display: inline-flex;
       align-items: baseline;
     }
 
-    .logo-nums .tag-apostrophe {
+    .logo-apos-pin {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      width: 0.42em;
+      margin: 0 0.02em;
       color: var(--accent-terracotta);
-      margin: 0 1px;
     }
 
-    .logo-nums::after {
-      content: "";
+    .logo-apos-ring {
       position: absolute;
-      left: 1px;
-      right: 0;
-      bottom: -3px;
-      height: 2px;
-      border-radius: 2px;
-      background: linear-gradient(90deg, var(--accent-terracotta) 0%, rgba(224, 109, 83, 0.18) 100%);
+      top: -0.34em;
+      width: 0.24em;
+      height: 0.24em;
+      border: 0.055em solid var(--accent-terracotta);
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    .logo-apos-glyph {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      color: var(--accent-terracotta);
+      line-height: 0.85;
     }
 
     .logo-hangtag-svg {
-      width: 34px;
-      height: 38px;
+      width: 24px;
+      height: 36px;
       flex-shrink: 0;
+      margin-left: 2px;
     }
 
-    .subtitle-row {
+    .logo-sub-row {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
+      gap: 7px;
+      font-size: 0.68rem;
       font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 1.8px;
+      color: var(--text-main);
+      letter-spacing: 2.1px;
       text-transform: uppercase;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
-    .subtitle-hairline {
-      width: 18px;
-      height: 1px;
-      background-color: var(--border-strong);
+    .logo-sub-dot {
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 50%;
+      background-color: var(--accent-terracotta);
+      display: inline-block;
+      flex-shrink: 0;
     }
 
     /* Banner VIP editorial */
@@ -1122,7 +1137,7 @@
       grid-column: 1 / -1;
     }
 
-    /* Rodapé com monograma */
+    /* Rodapé com emblema de etiqueta e assinatura escolhida */
     footer.site-footer {
       background-color: var(--text-main);
       color: #FAF8F5;
@@ -1143,39 +1158,19 @@
     .footer-brand-row {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
       margin-bottom: 12px;
-    }
-
-    .footer-monogram {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 0.92rem;
-      letter-spacing: -0.5px;
-      color: #FFFFFF;
-      flex-shrink: 0;
-    }
-
-    .footer-monogram .apos {
-      color: var(--accent-terracotta);
-      margin: 0 0.5px;
     }
 
     .footer-logo {
       font-family: 'Fraunces', Georgia, serif;
-      font-weight: 700;
-      font-size: 1.65rem;
+      font-weight: 600;
+      font-size: 1.7rem;
       color: #FFFFFF;
-      letter-spacing: -0.6px;
+      letter-spacing: -0.7px;
       line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
     }
 
     .footer-logo .num-part {
@@ -1188,6 +1183,12 @@
       font-family: 'Nunito', sans-serif;
       font-weight: 900;
       margin: 0 1px;
+    }
+
+    .footer-tag-svg {
+      width: 22px;
+      height: 32px;
+      flex-shrink: 0;
     }
 
     .footer-desc {
@@ -1286,26 +1287,25 @@
     <button type="button" class="top-promo-btn" id="openCouponModalBtn">Resgatar Cupom 1ª Compra</button>
   </div>
 
-  <!-- Cabeçalho com blur e logotipo vetorial refinado -->
+  <!-- Cabeçalho com blur e o logotipo exato escolhido -->
   <header class="site-header">
-    <div class="logo-lockup" aria-label="use4'16 — Moda Infantil e Juvenil do 4 ao 16">
-      <div class="logo-mark-row">
-        <!-- Ícone vetorial de etiqueta de boutique (hangtag) -->
-        <svg class="logo-hangtag-svg" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M18 3V8" stroke="#E06D53" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M11 8H25L29 14V34C29 35.6569 27.6569 37 26 37H10C8.34315 37 7 35.6569 7 34V14L11 8Z" fill="#1B2A4A"/>
-          <circle cx="18" cy="12.5" r="1.8" fill="#FAF8F5"/>
-          <path d="M13.5 25.5L17.2 20.5H19.6V25.5H21.2V27.2H19.6V29.5H17.6V27.2H13.5V25.5ZM17.6 25.5V22.5L15.4 25.5H17.6Z" fill="#FFFFFF"/>
-        </svg>
+    <div class="logo-lockup" aria-label="use4'16 — Moda Infantil e Juvenil">
+      <div class="logo-main-row">
         <div class="logo-wordmark">
           <span class="logo-use">use</span>
-          <span class="logo-nums">4<span class="tag-apostrophe">'</span>16</span>
+          <span class="logo-nums">4<span class="logo-apos-pin" aria-hidden="true"><span class="logo-apos-ring"></span><span class="logo-apos-glyph">’</span></span>16</span>
         </div>
+        <!-- Etiqueta azul-marinho com costura pontilhada em terracota -->
+        <svg class="logo-hangtag-svg" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#1B2A4A"/>
+          <path d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.35" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
+          <circle cx="14" cy="11.5" r="2.3" fill="#FAF8F5"/>
+        </svg>
       </div>
-      <div class="subtitle-row">
-        <span class="subtitle-hairline"></span>
-        <span>Moda do 4 ao 16</span>
-        <span class="subtitle-hairline"></span>
+      <div class="logo-sub-row">
+        <span class="logo-sub-dot"></span>
+        <span>Moda Infantil &amp; Juvenil</span>
+        <span class="logo-sub-dot"></span>
       </div>
     </div>
   </header>
@@ -1396,13 +1396,17 @@
     </div>
   </main>
 
-  <!-- Rodapé com monograma 4'16 e ícones SVG -->
+  <!-- Rodapé com etiqueta da marca e ícones SVG -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-col">
         <div class="footer-brand-row">
-          <div class="footer-monogram" aria-hidden="true">4<span class="apos">'</span>16</div>
           <div class="footer-logo">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></div>
+          <svg class="footer-tag-svg" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#FAF8F5"/>
+            <path d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.4" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
+            <circle cx="14" cy="11.5" r="2.3" fill="#1B2A4A"/>
+          </svg>
         </div>
         <p class="footer-desc">
           Moda infantil e juvenil do tamanho 4 ao 16, pensada para acompanhar cada fase com estilo, conforto e praticidade.
