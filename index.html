@@ -110,226 +110,396 @@
     }
 
 
-    /* Temas Sazonais / Datas Comemorativas (controlados pela coluna Tema_Site na planilha) */
+
+    /* ==========================================================================
+       SISTEMA DELICADO E ELEGANTE DE TEMAS SAZONAIS (Tema_Site na planilha)
+       ========================================================================== */
+    body {
+      position: relative;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    body[data-theme]::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.32;
+      background-repeat: repeat;
+      background-size: 180px 180px;
+    }
+
+    body[data-theme] > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* --- NATAL (Elegante: off-white quente, pinho profundo, bordô suave e dourado champanhe) --- */
     body[data-theme="natal"] {
-      --bg-page: #FAF6F3;
-      --surface-warm: #F4ECE6;
-      --border-subtle: #E5D7CE;
-      --text-main: #18362B;
-      --accent-terracotta: #B8292F;
-      --accent-terracotta-hover: #961E23;
-      --kids-soft: #FCEAEA;
+      --bg-page: #FBF8F5;
+      --surface: #FFFFFF;
+      --surface-warm: #F5EEE9;
+      --border-subtle: #E7D9D0;
+      --border-strong: #D6C1B4;
+      --text-main: #1A382C;
+      --text-muted: #5A6F66;
+      --accent-terracotta: #A8282E;
+      --accent-terracotta-hover: #8C1E23;
+      --kids-soft: #FBECEC;
+      --theme-header-bg: rgba(251, 248, 245, 0.92);
+    }
+    body[data-theme="natal"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23B88B3A' stroke-width='0.95' opacity='0.24'%3E%3Cpath d='M36 22v10M31 27h10M33 24l6 6M39 24l-6 6'/%3E%3Ccircle cx='132' cy='54' r='2.5' stroke='%23A8282E'/%3E%3Cpath d='M84 128l4-7 4 7h-8z' stroke='%231A382C'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="natal"] .top-promo-bar {
-      background: linear-gradient(90deg, #9B1C22 0%, #B8292F 50%, #18362B 100%);
+      background: linear-gradient(90deg, #8F1E23 0%, #A8282E 50%, #1A382C 100%);
     }
 
+    /* --- PÁSCOA (Delicada: lavanda suave, ameixa elegante, lilás e caramelo claro) --- */
     body[data-theme="pascoa"] {
-      --bg-page: #FAF7FC;
-      --surface-warm: #F3EDF8;
-      --border-subtle: #E4DAF0;
+      --bg-page: #FBF8FD;
+      --surface: #FFFFFF;
+      --surface-warm: #F4EEF9;
+      --border-subtle: #E5D9F1;
+      --border-strong: #D2C0E4;
       --text-main: #3B2854;
-      --accent-terracotta: #9B6BC9;
-      --accent-terracotta-hover: #8152B0;
-      --kids-soft: #F3EAFB;
+      --text-muted: #6A5980;
+      --accent-terracotta: #8C5EC0;
+      --accent-terracotta-hover: #7448A6;
+      --kids-soft: #F3EBFC;
+      --theme-header-bg: rgba(251, 248, 253, 0.92);
+    }
+    body[data-theme="pascoa"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238C5EC0' stroke-width='0.95' opacity='0.22'%3E%3Cellipse cx='40' cy='40' rx='5.5' ry='8'/%3E%3Cpath d='M126 52c2-3 5-2 5 1 0 3-5 6-5 6s-5-3-5-6c0-3 3-4 5-1z' stroke='%23C89268'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="pascoa"] .top-promo-bar {
-      background: linear-gradient(90deg, #8657B5 0%, #A474D1 50%, #D49A6A 100%);
+      background: linear-gradient(90deg, #7448A6 0%, #8C5EC0 55%, #C89268 100%);
     }
 
+    /* --- DIA DAS MÃES (Delicada: rosé suave, vinho-ameixa e rosa antigo) --- */
     body[data-theme="dias-das-maes"] {
-      --bg-page: #FDF7F8;
-      --surface-warm: #F8ECEE;
-      --border-subtle: #EDD8DC;
+      --bg-page: #FDF8F9;
+      --surface: #FFFFFF;
+      --surface-warm: #F9ECEF;
+      --border-subtle: #EDD6DC;
+      --border-strong: #DFBAC4;
       --text-main: #4A2332;
-      --accent-terracotta: #C85A77;
-      --accent-terracotta-hover: #AD4460;
+      --text-muted: #785362;
+      --accent-terracotta: #BE526E;
+      --accent-terracotta-hover: #A3405A;
       --kids-soft: #FCEBEF;
+      --theme-header-bg: rgba(253, 248, 249, 0.92);
+    }
+    body[data-theme="dias-das-maes"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23BE526E' stroke-width='0.95' opacity='0.21'%3E%3Cpath d='M42 36c-2.5-3.2-7.5-2.5-7.5 1.8 0 4.2 7.5 8.5 7.5 8.5s7.5-4.3 7.5-8.5c0-4.3-5-5-7.5-1.8z'/%3E%3Ccircle cx='128' cy='116' r='4'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="dias-das-maes"] .top-promo-bar {
-      background: linear-gradient(90deg, #B54865 0%, #C85A77 50%, #D97A92 100%);
+      background: linear-gradient(90deg, #A3405A 0%, #BE526E 50%, #D47A91 100%);
     }
 
+    /* --- SÃO JOÃO (Elegante: creme linho, marinho suave e âmbar/terracota quente) --- */
     body[data-theme="sao-joao"] {
-      --bg-page: #FDF9F2;
-      --surface-warm: #F7EFE0;
-      --border-subtle: #EADCC4;
-      --text-main: #233354;
-      --accent-terracotta: #D96B27;
-      --accent-terracotta-hover: #B85518;
-      --kids-soft: #FDF0E4;
+      --bg-page: #FCF9F3;
+      --surface: #FFFFFF;
+      --surface-warm: #F6EFE2;
+      --border-subtle: #E8D9C1;
+      --border-strong: #D6C1A0;
+      --text-main: #223454;
+      --text-muted: #5D697E;
+      --accent-terracotta: #C96424;
+      --accent-terracotta-hover: #AD5118;
+      --kids-soft: #FCEFE4;
+      --theme-header-bg: rgba(252, 249, 243, 0.92);
+    }
+    body[data-theme="sao-joao"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C96424' stroke-width='0.95' opacity='0.22'%3E%3Cpath d='M24 28c12 4 24 4 36 0'/%3E%3Cpolygon points='30,30 33,37 36,30'/%3E%3Cpolygon points='42,31 45,38 48,31' stroke='%23223454'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="sao-joao"] .top-promo-bar {
-      background: linear-gradient(90deg, #C75B1A 0%, #D96B27 50%, #2B6CB0 100%);
+      background: linear-gradient(90deg, #AD5118 0%, #C96424 50%, #223454 100%);
     }
 
+    /* --- DIA DOS PAIS (Clássico e elegante: azul-gelo suave, marinho profundo e azul-ardósia) --- */
     body[data-theme="dia-dos-pais"] {
-      --bg-page: #F5F7FA;
+      --bg-page: #F6F8FA;
+      --surface: #FFFFFF;
       --surface-warm: #EBF0F5;
-      --border-subtle: #D6DFE8;
-      --text-main: #152842;
-      --accent-terracotta: #2E6F95;
-      --accent-terracotta-hover: #215575;
-      --kids-soft: #E6F1F7;
+      --border-subtle: #D5E0EA;
+      --border-strong: #BACAD8;
+      --text-main: #162942;
+      --text-muted: #52667E;
+      --accent-terracotta: #2B6A91;
+      --accent-terracotta-hover: #205272;
+      --kids-soft: #E6F0F7;
+      --theme-header-bg: rgba(246, 248, 250, 0.92);
+    }
+    body[data-theme="dia-dos-pais"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%232B6A91' stroke-width='0.95' opacity='0.2'%3E%3Cpolygon points='40,26 42,31 48,31 43,34 45,40 40,36 35,40 37,34 32,31 38,31'/%3E%3Ccircle cx='126' cy='118' r='3'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="dia-dos-pais"] .top-promo-bar {
-      background: linear-gradient(90deg, #152842 0%, #2E6F95 50%, #152842 100%);
+      background: linear-gradient(90deg, #162942 0%, #2B6A91 50%, #162942 100%);
     }
 
+    /* --- DIA DAS CRIANÇAS (Alegre porém suave: baunilha claro, marinho, coral suave e mostarda delicada) --- */
     body[data-theme="dia-das-criancas"] {
-      --bg-page: #FFFDF5;
-      --surface-warm: #F9F4E3;
-      --border-subtle: #ECE2C6;
+      --bg-page: #FFFDF7;
+      --surface: #FFFFFF;
+      --surface-warm: #F9F3E3;
+      --border-subtle: #ECE1C4;
+      --border-strong: #DCCBA2;
       --text-main: #1B2A4A;
-      --accent-terracotta: #E85D4A;
-      --accent-terracotta-hover: #CC4634;
-      --kids-soft: #FFEBE8;
+      --text-muted: #5C677D;
+      --accent-terracotta: #DF5E4A;
+      --accent-terracotta-hover: #C24936;
+      --kids-soft: #FDECE8;
+      --theme-header-bg: rgba(255, 253, 247, 0.92);
+    }
+    body[data-theme="dia-das-criancas"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke-width='1' opacity='0.24'%3E%3Ccircle cx='40' cy='38' r='4.5' stroke='%23E3A018'/%3E%3Cpolygon points='128,36 133,45 123,45' stroke='%233A9688'/%3E%3Ccircle cx='86' cy='124' r='2.5' stroke='%23DF5E4A'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="dia-das-criancas"] .top-promo-bar {
-      background: linear-gradient(90deg, #E85D4A 0%, #F29F05 50%, #2A9D8F 100%);
+      background: linear-gradient(90deg, #DF5E4A 0%, #E3A018 50%, #3A9688 100%);
     }
 
+    /* --- BLACK FRIDAY (Editorial e sóbria: cinza pérola, grafite elegante e dourado discreto) --- */
     body[data-theme="black-friday"] {
-      --bg-page: #F4F4F5;
+      --bg-page: #F5F5F7;
       --surface: #FFFFFF;
-      --surface-warm: #EAEAEF;
+      --surface-warm: #EBEBEF;
       --border-subtle: #D8D8E0;
-      --text-main: #12141A;
-      --accent-terracotta: #D97706;
-      --accent-terracotta-hover: #B45309;
-      --kids-soft: #FEF3C7;
+      --border-strong: #C0C0CC;
+      --text-main: #181A20;
+      --text-muted: #575C6B;
+      --accent-terracotta: #C47A16;
+      --accent-terracotta-hover: #A3630E;
+      --kids-soft: #FEF4E2;
+      --theme-header-bg: rgba(245, 245, 247, 0.94);
+    }
+    body[data-theme="black-friday"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C47A16' stroke-width='0.95' opacity='0.18'%3E%3Cpolygon points='40,26 34,36 39,36 38,44 45,34 40,34'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="black-friday"] .top-promo-bar {
-      background: linear-gradient(90deg, #0F1115 0%, #232730 50%, #D97706 100%);
+      background: linear-gradient(90deg, #181A20 0%, #2B2F3A 55%, #C47A16 100%);
     }
 
+    /* --- VOLTA ÀS AULAS (Serena e limpa: verde-água suave, azul-petróleo e sálvia) --- */
     body[data-theme="volta-as-aulas"] {
-      --bg-page: #F6F9F8;
-      --surface-warm: #EBF2F0;
-      --border-subtle: #D5E3DF;
-      --text-main: #1B3644;
-      --accent-terracotta: #2B8A78;
-      --accent-terracotta-hover: #1F6E5F;
-      --kids-soft: #E5F5F1;
+      --bg-page: #F7FAF9;
+      --surface: #FFFFFF;
+      --surface-warm: #EBF3F0;
+      --border-subtle: #D3E3DD;
+      --border-strong: #B8CFC6;
+      --text-main: #1C3744;
+      --text-muted: #546E78;
+      --accent-terracotta: #2E8575;
+      --accent-terracotta-hover: #226B5E;
+      --kids-soft: #E5F4F0;
+      --theme-header-bg: rgba(247, 250, 249, 0.92);
+    }
+    body[data-theme="volta-as-aulas"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%232E8575' stroke-width='0.95' opacity='0.2'%3E%3Crect x='34' y='28' width='11' height='14' rx='2'/%3E%3Ccircle cx='126' cy='116' r='3' stroke='%23D67B47'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="volta-as-aulas"] .top-promo-bar {
-      background: linear-gradient(90deg, #1B3644 0%, #2B8A78 50%, #E07A3F 100%);
+      background: linear-gradient(90deg, #1C3744 0%, #2E8575 55%, #D67B47 100%);
     }
 
-
+    /* --- ANO NOVO (Sofisticado: azul-gelo claro, marinho e dourado suave) --- */
     body[data-theme="ano-novo"] {
-      --bg-page: #F5F7FA;
-      --surface-warm: #EBF0F7;
+      --bg-page: #F6F8FB;
+      --surface: #FFFFFF;
+      --surface-warm: #ECF0F7;
       --border-subtle: #D5DFEC;
-      --text-main: #152842;
-      --accent-terracotta: #C58A2E;
-      --accent-terracotta-hover: #A8721E;
+      --border-strong: #BAC9DC;
+      --text-main: #172A45;
+      --text-muted: #546680;
+      --accent-terracotta: #B9822A;
+      --accent-terracotta-hover: #9B6B1E;
       --kids-soft: #FDF5E6;
+      --theme-header-bg: rgba(246, 248, 251, 0.92);
+    }
+    body[data-theme="ano-novo"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23B9822A' stroke-width='0.95' opacity='0.23'%3E%3Cpath d='M40 24v12M34 30h12M36 26l8 8M44 26l-8 8'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="ano-novo"] .top-promo-bar {
-      background: linear-gradient(90deg, #152842 0%, #243E63 50%, #C58A2E 100%);
+      background: linear-gradient(90deg, #172A45 0%, #263F63 55%, #B9822A 100%);
     }
 
+    /* --- CARNAVAL (Leve e charmosa: rosado-lilás suave, ameixa e framboesa delicada) --- */
     body[data-theme="carnaval"] {
-      --bg-page: #FDF6FA;
-      --surface-warm: #F8EAF3;
-      --border-subtle: #EBD2E2;
-      --text-main: #3D194D;
-      --accent-terracotta: #D9387A;
-      --accent-terracotta-hover: #B82662;
-      --kids-soft: #FCE8F1;
+      --bg-page: #FDF7FB;
+      --surface: #FFFFFF;
+      --surface-warm: #F9EBF4;
+      --border-subtle: #EAD2E2;
+      --border-strong: #D9B7CE;
+      --text-main: #3E1C4D;
+      --text-muted: #6F507D;
+      --accent-terracotta: #C93E78;
+      --accent-terracotta-hover: #AB2E62;
+      --kids-soft: #FCEAF2;
+      --theme-header-bg: rgba(253, 247, 251, 0.92);
+    }
+    body[data-theme="carnaval"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C93E78' stroke-width='0.95' opacity='0.2'%3E%3Cpath d='M30 34c5-5 10-5 15 0s10 5 15 0'/%3E%3Ccircle cx='128' cy='112' r='3' stroke='%23E09A28'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="carnaval"] .top-promo-bar {
-      background: linear-gradient(90deg, #6A1B9A 0%, #D9387A 50%, #F59E0B 100%);
+      background: linear-gradient(90deg, #5C2278 0%, #C93E78 55%, #E09A28 100%);
     }
 
+    /* --- ESTAÇÕES (Orgânica e leve: verde-claro suave, floresta delicada e mel/âmbar suave) --- */
     body[data-theme="estacoes"] {
       --bg-page: #F7FAF6;
+      --surface: #FFFFFF;
       --surface-warm: #ECF3EA;
-      --border-subtle: #D6E4D2;
+      --border-subtle: #D5E4D2;
+      --border-strong: #B9CEB4;
       --text-main: #233B2A;
-      --accent-terracotta: #4F8A63;
-      --accent-terracotta-hover: #3D704E;
+      --text-muted: #566E5D;
+      --accent-terracotta: #4F8762;
+      --accent-terracotta-hover: #3D6C4D;
       --kids-soft: #E8F3EC;
+      --theme-header-bg: rgba(247, 250, 246, 0.92);
+    }
+    body[data-theme="estacoes"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234F8762' stroke-width='0.95' opacity='0.22'%3E%3Cpath d='M34 40c0-9 7-13 12-13 0 5-3 13-12 13z'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="estacoes"] .top-promo-bar {
-      background: linear-gradient(90deg, #233B2A 0%, #4F8A63 50%, #D98A3C 100%);
+      background: linear-gradient(90deg, #233B2A 0%, #4F8762 55%, #C98442 100%);
     }
 
+    /* --- FÉRIAS / DIA DO AMIGO (Fresca e serena: azul-céu suave, azul-marinho e coral suave) --- */
     body[data-theme="ferias-amizade"] {
-      --bg-page: #F5FAFC;
-      --surface-warm: #E8F3F8;
-      --border-subtle: #CFE3EE;
-      --text-main: #16374D;
-      --accent-terracotta: #1E88B5;
-      --accent-terracotta-hover: #156E94;
-      --kids-soft: #E5F4FA;
+      --bg-page: #F6FAFC;
+      --surface: #FFFFFF;
+      --surface-warm: #E9F3F7;
+      --border-subtle: #CFE2EC;
+      --border-strong: #B2CDD9;
+      --text-main: #18384E;
+      --text-muted: #527084;
+      --accent-terracotta: #2482AA;
+      --accent-terracotta-hover: #1A6889;
+      --kids-soft: #E5F3F9;
+      --theme-header-bg: rgba(246, 250, 252, 0.92);
+    }
+    body[data-theme="ferias-amizade"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%232482AA' stroke-width='0.95' opacity='0.21'%3E%3Ccircle cx='40' cy='36' r='4.5'/%3E%3Cpath d='M116 118c5-3 10-3 15 0s10 3 15 0' stroke='%23DF6D53'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="ferias-amizade"] .top-promo-bar {
-      background: linear-gradient(90deg, #16374D 0%, #1E88B5 50%, #E06D53 100%);
+      background: linear-gradient(90deg, #18384E 0%, #2482AA 55%, #DF6D53 100%);
     }
 
+    /* --- HALLOWEEN (Ameno e elegante: lavanda-cinza suave, berinjela e abóbora suave) --- */
     body[data-theme="halloween"] {
-      --bg-page: #F7F5F9;
-      --surface-warm: #ECE7F2;
-      --border-subtle: #D8CFE3;
-      --text-main: #241833;
-      --accent-terracotta: #E05A1E;
-      --accent-terracotta-hover: #BE4612;
-      --kids-soft: #FDECE4;
+      --bg-page: #F8F6FA;
+      --surface: #FFFFFF;
+      --surface-warm: #EEE9F4;
+      --border-subtle: #DBD1E6;
+      --border-strong: #C5B6D6;
+      --text-main: #271B36;
+      --text-muted: #605370;
+      --accent-terracotta: #CE5B26;
+      --accent-terracotta-hover: #AE481A;
+      --kids-soft: #FDEEE6;
+      --theme-header-bg: rgba(248, 246, 250, 0.92);
+    }
+    body[data-theme="halloween"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23CE5B26' stroke-width='0.95' opacity='0.2'%3E%3Cpath d='M40 26a8 8 0 1 0 8 11 6.5 6.5 0 1 1-8-11z' stroke='%236B3F94'/%3E%3C/g%3E%3C/svg%3E");
     }
     body[data-theme="halloween"] .top-promo-bar {
-      background: linear-gradient(90deg, #241833 0%, #5B2C83 50%, #E05A1E 100%);
+      background: linear-gradient(90deg, #271B36 0%, #5B347D 55%, #CE5B26 100%);
     }
 
-    /* Faixa decorativa temática sutil abaixo do cabeçalho */
+    /* Acabamentos delicados aplicados quando há tema ativo */
+    body[data-theme] header.site-header {
+      background-color: var(--theme-header-bg, rgba(250, 248, 245, 0.92));
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    body[data-theme] .logo-hangtag-body {
+      fill: var(--text-main);
+      transition: fill 0.3s ease;
+    }
+
+    body[data-theme] .logo-hangtag-stitch {
+      stroke: var(--accent-terracotta);
+      transition: stroke 0.3s ease;
+    }
+
+    body[data-theme] .logo-hangtag-hole {
+      fill: var(--bg-page);
+    }
+
+    .header-ornament {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      display: none;
+      align-items: center;
+      opacity: 0.78;
+    }
+    .header-ornament.left { left: 26px; }
+    .header-ornament.right { right: 26px; transform: translateY(-50%) scaleX(-1); }
+
+    @media (min-width: 640px) {
+      .header-ornament.visible { display: flex; }
+    }
+
     .seasonal-ribbon {
       display: none;
       background: var(--surface-warm);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 7px 16px;
+      padding: 8px 18px;
       text-align: center;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 700;
       color: var(--text-main);
       align-items: center;
       justify-content: center;
       gap: 10px;
-      position: relative;
-      overflow: hidden;
+      flex-wrap: wrap;
     }
 
     .seasonal-ribbon.active {
       display: flex;
     }
 
+    .seasonal-ribbon-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.9;
+    }
+
     .seasonal-badge-pill {
       background: var(--accent-terracotta);
       color: #FFFFFF;
       font-family: 'Nunito', sans-serif;
-      font-weight: 900;
+      font-weight: 800;
       font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.7px;
-      padding: 2px 10px;
+      letter-spacing: 0.75px;
+      padding: 2px 11px;
       border-radius: 999px;
       flex-shrink: 0;
     }
 
-    /* Ornamentos SVG flutuantes discretos no cabeçalho */
-    .header-ornament {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      opacity: 0.88;
-      display: none;
+    body[data-theme] .vip-card {
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--surface-warm) 100%);
+      border-color: var(--border-subtle);
+      border-left: 4px solid var(--accent-terracotta);
     }
-    .header-ornament.left { left: 24px; }
-    .header-ornament.right { right: 24px; }
 
-    @media (min-width: 640px) {
-      .header-ornament.visible { display: flex; align-items: center; gap: 6px; }
+    body[data-theme] .product-card {
+      border-color: var(--border-subtle);
+    }
+
+    body[data-theme] .product-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.06);
+    }
+
+    body[data-theme] footer.site-footer {
+      border-top: 3px solid var(--accent-terracotta);
     }
 
     /* Barra promocional superior */
@@ -1522,9 +1692,9 @@
         </div>
         <!-- Etiqueta azul-marinho com costura pontilhada em terracota -->
         <svg class="logo-hangtag-svg" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#1B2A4A"/>
-          <path d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.35" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
-          <circle cx="14" cy="11.5" r="2.3" fill="#FAF8F5"/>
+          <path class="logo-hangtag-body" d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#1B2A4A"/>
+          <path class="logo-hangtag-stitch" d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.35" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
+          <circle class="logo-hangtag-hole" cx="14" cy="11.5" r="2.3" fill="#FAF8F5"/>
         </svg>
       </div>
       <div class="logo-sub-row">
@@ -1537,8 +1707,10 @@
 
   <!-- Faixa comemorativa controlada pela planilha (coluna Tema_Site) -->
   <div class="seasonal-ribbon" id="seasonalRibbon">
+    <span class="seasonal-ribbon-icon" id="seasonalIconLeft" aria-hidden="true"></span>
     <span class="seasonal-badge-pill" id="seasonalTag">Especial</span>
     <span id="seasonalMessage"></span>
+    <span class="seasonal-ribbon-icon" id="seasonalIconRight" aria-hidden="true"></span>
   </div>
 
   <main class="page-content">
@@ -1813,115 +1985,134 @@
         slug: "padrao",
         tag: "",
         defaultMsg: "",
-        svg: ""
+        headerSvg: "",
+        badgeSvg: ""
       },
       "natal": {
         slug: "natal",
         tag: "Especial de Natal",
         defaultMsg: "Looks encantadores para celebrar a magia do Natal em família!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8292F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#B88B3A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10c14 7 32 7 50 0" stroke="#1A382C"/><circle cx="18" cy="15" r="2.5" fill="#A8282E" stroke="none"/><polygon points="44,12 45.5,15.5 49,15.5 46.2,17.6 47.2,21 44,19 40.8,21 41.8,17.6 39,15.5 42.5,15.5" fill="#B88B3A" stroke="none"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8282E" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
       },
       "pascoa": {
         slug: "pascoa",
         tag: "Especial de Páscoa",
         defaultMsg: "Coleção leve e cheia de charme para comemorar a Páscoa!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9B6BC9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.4 0 7-3.6 7-8 0-5.2-3.5-11-7-11S5 8.8 5 14c0 4.4 2.6 8 7 8z"/><path d="M6.5 13.5c2 1.2 4 1.2 5.5 0s3.5-1.2 5.5 0"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#8C5EC0" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="22" cy="17" rx="5.5" ry="8"/><path d="M17.5 17c3 1.5 6 1.5 9 0" stroke="#C89268"/><circle cx="42" cy="15" r="2.5" fill="#C89268" stroke="none"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8C5EC0" stroke-width="1.8"><ellipse cx="12" cy="13" rx="5.5" ry="7.5"/><path d="M7.5 13c2.8 1.4 6.2 1.4 9 0"/></svg>`
       },
       "dia das maes": {
         slug: "dias-das-maes",
         tag: "Dia das Mães",
         defaultMsg: "Celebrando o amor de mãe com looks especiais do 4 ao 16!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C85A77" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#BE526E" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M26 13c-2.5-3-7.5-2.3-7.5 1.6 0 3.8 7.5 7.9 7.5 7.9s7.5-4.1 7.5-7.9c0-3.9-5-4.6-7.5-1.6z"/><circle cx="46" cy="16" r="2.5" stroke="#D47A91"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BE526E" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
       },
       "sao joao": {
         slug: "sao-joao",
         tag: "Arraiá use4'16",
         defaultMsg: "Seleção especial de São João para curtir as festas juninas com muito estilo!",
-        svg: `<svg width="28" height="26" viewBox="0 0 28 24" fill="none" stroke="#D96B27" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5c8 3 16 3 24 0"/><polygon points="5,6 8,14 11,6"/><polygon points="11,7 14,15 17,7"/><polygon points="17,6 20,14 23,6"/></svg>`
+        headerSvg: `<svg width="68" height="32" viewBox="0 0 68 32" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10c18 6 38 6 56 0" stroke="#223454"/><polygon points="16,12 20,20 24,13" stroke="#C96424"/><polygon points="32,14 36,22 40,14" stroke="#223454"/><polygon points="48,12 52,20 56,12" stroke="#D68B28"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C96424" stroke-width="1.8"><polygon points="5,5 12,19 19,5"/></svg>`
       },
       "dia dos pais": {
         slug: "dia-dos-pais",
         tag: "Dia dos Pais",
         defaultMsg: "Looks alinhados e confortáveis para comemorar o Dia dos Pais!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E6F95" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#2B6A91" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><polygon points="24,10 26,15 31.5,15 27,18 28.5,23 24,20 19.5,23 21,18 16.5,15 22,15"/><circle cx="44" cy="16" r="2.5" stroke="#162942"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2B6A91" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
       },
       "dia das criancas": {
         slug: "dia-das-criancas",
         tag: "Semana da Criança",
         defaultMsg: "Diversão, cor e conforto para celebrar o Dia das Crianças!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E85D4A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke-width="1.35" stroke-linecap="round"><circle cx="22" cy="16" r="4.5" stroke="#E3A018"/><path d="M22 8v2M22 22v2M14 16h2M28 16h2" stroke="#DF5E4A"/><circle cx="42" cy="17" r="3" stroke="#3A9688"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E3A018" stroke-width="1.8"><circle cx="12" cy="12" r="5"/></svg>`
       },
       "black friday": {
         slug: "black-friday",
         tag: "Black Friday use4'16",
         defaultMsg: "Ofertas imperdíveis por tempo limitado — garanta os tamanhos antes que acabem!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#C47A16" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="26,8 19,18 25,18 23.5,26 31,15 25,15"/><circle cx="44" cy="16" r="2.5" stroke="#181A20"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C47A16" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
       },
       "volta as aulas": {
         slug: "volta-as-aulas",
         tag: "Volta às Aulas",
         defaultMsg: "Peças práticas e confortáveis para começar o semestre com tudo!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2B8A78" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#2E8575" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="9" width="11" height="14" rx="1.8"/><line x1="21" y1="9" x2="21" y2="23"/><circle cx="42" cy="16" r="2.5" stroke="#D67B47"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E8575" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`
       },
       "ano novo": {
         slug: "ano-novo",
         tag: "Ano Novo use4'16",
         defaultMsg: "Comece o ano com looks leves, confortáveis e cheios de energia!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C58A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#B9822A" stroke-width="1.35" stroke-linecap="round"><path d="M24 9v14M17 16h14M19 11l10 10M29 11L19 21"/><circle cx="44" cy="16" r="2.5" stroke="#172A45"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B9822A" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
       },
       "confraternizacao": {
         slug: "ano-novo",
         tag: "Ano Novo use4'16",
         defaultMsg: "Comece o ano com looks leves, confortáveis e cheios de energia!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C58A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#B9822A" stroke-width="1.35" stroke-linecap="round"><path d="M24 9v14M17 16h14M19 11l10 10M29 11L19 21"/><circle cx="44" cy="16" r="2.5" stroke="#172A45"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B9822A" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
       },
       "carnaval": {
         slug: "carnaval",
         tag: "Folia & Carnaval",
         defaultMsg: "Cores vibrantes e peças fresquinhas para brincar com liberdade!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D9387A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#C93E78" stroke-width="1.35" stroke-linecap="round"><path d="M14 17c4-4 8-4 12 0s8 4 12 0"/><circle cx="46" cy="15" r="2.5" stroke="#E09A28"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C93E78" stroke-width="1.8"><circle cx="12" cy="12" r="6"/></svg>`
       },
       "troca de estacao": {
         slug: "estacoes",
         tag: "Nova Estação",
         defaultMsg: "Peças pensadas para acompanhar a mudança de clima com muito conforto!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#4F8762" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22c0-7.5 6-11 11-11 0 5-3.5 11-11 11z"/><circle cx="42" cy="16" r="2.5" stroke="#C98442"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4F8762" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>`
       },
       "outono": {
         slug: "estacoes",
         tag: "Especial Outono",
         defaultMsg: "Sobreposições e tecidos aconchegantes para os dias amenos do outono!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#4F8762" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22c0-7.5 6-11 11-11 0 5-3.5 11-11 11z"/><circle cx="42" cy="16" r="2.5" stroke="#C98442"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4F8762" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>`
       },
       "inverno": {
         slug: "estacoes",
         tag: "Especial Inverno",
         defaultMsg: "Conforto e estilo para aquecer as crianças e jovens em todos os momentos!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#4F8762" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22c0-7.5 6-11 11-11 0 5-3.5 11-11 11z"/><circle cx="42" cy="16" r="2.5" stroke="#C98442"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4F8762" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>`
       },
       "primavera": {
         slug: "estacoes",
         tag: "Chegou a Primavera",
         defaultMsg: "Cores floridas e looks leves para celebrar a estação mais alegre do ano!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F8A63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#4F8762" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22c0-7.5 6-11 11-11 0 5-3.5 11-11 11z"/><circle cx="42" cy="16" r="2.5" stroke="#C98442"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4F8762" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>`
       },
       "ferias": {
         slug: "ferias-amizade",
         tag: "Férias Escolares",
         defaultMsg: "Looks práticos e cheios de estilo para passeios, viagens e diversão!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#2482AA" stroke-width="1.35" stroke-linecap="round"><circle cx="22" cy="16" r="4.5"/><path d="M36 18c4-3 8-3 12 0s8 3 12 0" stroke="#DF6D53"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2482AA" stroke-width="1.8"><circle cx="12" cy="12" r="5"/></svg>`
       },
       "dia do amigo": {
         slug: "ferias-amizade",
         tag: "Dia do Amigo",
         defaultMsg: "Celebrando as melhores amizades com presentes especiais do 4 ao 16!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#2482AA" stroke-width="1.35" stroke-linecap="round"><circle cx="22" cy="16" r="4.5"/><path d="M36 18c4-3 8-3 12 0s8 3 12 0" stroke="#DF6D53"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2482AA" stroke-width="1.8"><circle cx="12" cy="12" r="5"/></svg>`
       },
       "halloween": {
         slug: "halloween",
         tag: "Especial de Outubro",
         defaultMsg: "Looks divertidos e criativos para aproveitar a temporada temática!",
-        svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E05A1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.5 0-8 3.2-8 7.5 0 4.2 3.5 7.5 8 7.5s8-3.3 8-7.5C20 6.2 16.5 3 12 3Z"/><path d="M9 10h.01"/><path d="M15 10h.01"/><path d="M8.5 14c1.2 1 2.3 1.5 3.5 1.5s2.3-.5 3.5-1.5"/></svg>`
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#6B3F94" stroke-width="1.35" stroke-linecap="round"><path d="M24 10a7.5 7.5 0 1 0 7.5 10.5A6 6 0 1 1 24 10z"/><circle cx="44" cy="16" r="2.5" stroke="#CE5B26"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#CE5B26" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>`
       }
     };
 
@@ -1930,7 +2121,7 @@
       return raw
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[̀-ͯ]/g, "")
+        .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9\s]/g, " ")
         .replace(/\s+/g, " ")
         .trim();
@@ -1942,6 +2133,8 @@
       const ribbon = document.getElementById("seasonalRibbon");
       const tagEl = document.getElementById("seasonalTag");
       const msgEl = document.getElementById("seasonalMessage");
+      const iconL = document.getElementById("seasonalIconLeft");
+      const iconR = document.getElementById("seasonalIconRight");
       const ornLeft = document.getElementById("headerOrnamentLeft");
       const ornRight = document.getElementById("headerOrnamentRight");
 
@@ -1958,9 +2151,14 @@
       msgEl.textContent = activeThemeCustomMessage || themeObj.defaultMsg;
       ribbon.classList.add("active");
 
-      if (themeObj.svg) {
-        ornLeft.innerHTML = themeObj.svg;
-        ornRight.innerHTML = themeObj.svg;
+      if (iconL && iconR) {
+        iconL.innerHTML = themeObj.badgeSvg || "";
+        iconR.innerHTML = themeObj.badgeSvg || "";
+      }
+
+      if (themeObj.headerSvg) {
+        ornLeft.innerHTML = themeObj.headerSvg;
+        ornRight.innerHTML = themeObj.headerSvg;
         ornLeft.classList.add("visible");
         ornRight.classList.add("visible");
       }
