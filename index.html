@@ -1140,12 +1140,12 @@
 
     function normalizeImageUrl(url) {
       const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
-      if (driveMatch && driveMatch) {
-        return `https://lh3.googleusercontent.com/d/${driveMatch}`;
+      if (driveMatch && driveMatch[1]) {
+        return `https://googleusercontent.com{driveMatch[1]}`;
       }
       const openMatch = url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
-      if (openMatch && openMatch) {
-        return `https://lh3.googleusercontent.com/d/${openMatch}`;
+      if (openMatch && openMatch[1]) {
+        return `https://googleusercontent.com{openMatch[1]}`;
       }
       return url;
     }
@@ -1174,7 +1174,7 @@
     }
 
     function parseCSV(csvText) {
-      const lineBreakRegex = new RegExp("\r?\n");
+      const lineBreakRegex = new RegExp("\\r?\\n");
       const lines = csvText.trim().split(lineBreakRegex);
       if (lines.length < 2) return [];
       const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""));
@@ -1297,7 +1297,7 @@
 
         card.innerHTML = `
           <div class="product-image-wrap" title="Clique para ampliar a foto">
-            <img src="${product.Fotos}" alt="${product.Nome}" loading="lazy" />
+            <img src="${product.Fotos[0]}" alt="${product.Nome}" loading="lazy" />
             <span class="mundo-badge mundo-${product.Mundo}">${mundoLabel}</span>
             ${product.Tag ? `<span class="promo-tag ${tagClass}">${product.Tag}</span>` : ''}
             <span class="zoom-hint">🔍 Ampliar</span>
