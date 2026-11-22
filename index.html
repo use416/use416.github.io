@@ -1138,14 +1138,14 @@
 
     updateStoreLinks();
 
-    function normalizeImageUrl(url) {
-  const trimmed = url.trim();
-  const match = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
-  if (match && match) {
-    return "https://lh3." + "googleusercontent.com" + "/d/" + match;
-  }
-  return trimmed;
-}
+        function normalizeImageUrl(url) {
+      const trimmed = url.trim();
+      const match = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (match && match.at(1)) {
+        return "https://lh3." + "googleusercontent.com" + "/d/" + match.at(1);
+      }
+      return trimmed;
+    }
 
     function formatPrice(val) {
       if (!val) return "0,00";
@@ -1293,8 +1293,9 @@
         const tagClass = product.Tag.toLowerCase().includes("novidade") ? "novidade" : "";
 
         card.innerHTML = `
-          <div class="product-image-wrap" title="Clique para ampliar a foto">
-            <img src="${product.Fotos}" alt="${product.Nome}" loading="lazy" />
+                    <div class="product-image-wrap" title="Clique para ampliar a foto">
+            <img src="${product.Fotos.at(0)}" alt="${product.Nome}" loading="lazy" />
+
             <span class="mundo-badge mundo-${product.Mundo}">${mundoLabel}</span>
             ${product.Tag ? `<span class="promo-tag ${tagClass}">${product.Tag}</span>` : ''}
             <span class="zoom-hint">🔍 Ampliar</span>
