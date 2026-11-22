@@ -1250,9 +1250,10 @@
         allProducts = parseCSV(csvData);
         updateStoreLinks();
         renderCatalog();
-      } catch (error) {
+            } catch (error) {
+        console.error("Erro detalhado:", error);
         document.getElementById("catalogGrid").innerHTML =
-          `<div class="status-msg">Erro ao carregar o estoque. Verifique sua conexão ou o link da planilha.</div>`;
+          `<div class="status-msg">Erro técnico: ${error.message}</div>`;
       }
     }
 
