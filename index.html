@@ -44,7 +44,39 @@
       min-height: 100vh;
     }
 
-    /* Faixa Superior Cupom 1ª Compra */
+    main.page-content {
+      flex: 1;
+      padding-bottom: 50px;
+    }
+
+    .brand-inline {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      display: inline-block;
+    }
+
+    .brand-inline .apos {
+      color: #E06D53;
+      margin: 0 1px;
+    }
+
+    .brand-pill-light {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      background-color: rgba(27, 42, 74, 0.25);
+      color: #FFFFFF;
+      padding: 2px 8px;
+      border-radius: 6px;
+      letter-spacing: -0.5px;
+      display: inline-block;
+    }
+
+    .brand-pill-light .apos {
+      color: #FFE082;
+      margin: 0 1px;
+    }
+
     .top-promo-bar {
       background-color: #E06D53;
       color: #FFFFFF;
@@ -59,21 +91,8 @@
       flex-wrap: wrap;
     }
 
-    .brand-pill-top {
-      background-color: rgba(27, 42, 74, 0.25);
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      letter-spacing: -0.3px;
-    }
-
-    .brand-pill-top span {
-      color: #FFD166;
-    }
-
     .top-promo-btn {
-      background-color: #FFFFFF;
+      background: #FFFFFF;
       color: #1B2A4A;
       border: none;
       padding: 5px 14px;
@@ -86,14 +105,13 @@
     }
 
     .top-promo-btn:hover {
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
-    /* Cabeçalho */
     header {
       background-color: #FFFFFF;
       border-bottom: 1px solid #EAE6DF;
-      padding: 24px 16px 20px;
+      padding: 22px 16px 18px;
       text-align: center;
       position: sticky;
       top: 0;
@@ -125,64 +143,51 @@
       margin-top: 2px;
     }
 
-    /* Caixa Lista VIP */
-    .vip-box-container {
+    .vip-banner {
       max-width: 1100px;
-      width: 100%;
-      margin: 22px auto 10px;
+      margin: 20px auto 10px;
       padding: 0 16px;
     }
 
-    .vip-box {
-      background-color: #1B2A4A;
+    .vip-card {
+      background: linear-gradient(135deg, #1B2A4A 0%, #2C3E50 100%);
       color: #FFFFFF;
       border-radius: 16px;
       padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
       box-shadow: 0 8px 20px rgba(27, 42, 74, 0.12);
     }
 
-    .vip-box h3 {
+    .vip-text h3 {
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
       font-size: 1.25rem;
       margin-bottom: 4px;
     }
 
-    .brand-inline-vip {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-    }
-
-    .brand-inline-vip span {
-      color: #E06D53;
-    }
-
-    .vip-box p {
+    .vip-text p {
       font-size: 0.9rem;
-      color: #DCE2EE;
-      margin-bottom: 16px;
+      color: #DCE2EC;
     }
 
     .vip-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr 180px auto;
+      display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 768px) {
-      .vip-form {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .vip-input, .vip-select {
+    .vip-form input,
+    .vip-form select {
+      flex: 1;
+      min-width: 160px;
       padding: 11px 14px;
       border-radius: 10px;
       border: none;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.9rem;
-      color: #1B2A4A;
+      color: var(--text-main);
       background: #FFFFFF;
     }
 
@@ -194,7 +199,7 @@
       border-radius: 10px;
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       cursor: pointer;
       white-space: nowrap;
       transition: background 0.2s ease;
@@ -205,29 +210,19 @@
     }
 
     .vip-feedback {
-      margin-top: 12px;
-      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.14);
+      padding: 12px 16px;
       border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.92rem;
       display: none;
-    }
-
-    .vip-feedback.success {
-      display: block;
-      background-color: rgba(118, 159, 129, 0.25);
-      border: 1px solid #769F81;
-      color: #EAF2EC;
+      line-height: 1.5;
     }
 
     .vip-feedback.warning {
-      display: block;
-      background-color: rgba(212, 154, 59, 0.25);
-      border: 1px solid #D49A3B;
-      color: #FDF5E6;
+      background: rgba(212, 154, 59, 0.28);
+      border: 1px solid rgba(255, 224, 130, 0.5);
     }
 
-    /* Filtros de Setor (Mundos) */
     .filters-container {
       max-width: 1100px;
       margin: 20px auto 10px;
@@ -281,7 +276,6 @@
       border-color: var(--teen-accent);
     }
 
-    /* Barra de Busca por Tamanho */
     .size-filter-bar {
       max-width: 1100px;
       margin: 10px auto 24px;
@@ -321,16 +315,13 @@
       color: #FFF;
     }
 
-    /* Grade de Produtos */
     .catalog-grid {
       max-width: 1100px;
-      width: 100%;
-      margin: 0 auto 50px;
+      margin: 0 auto;
       padding: 0 16px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 24px;
-      flex-grow: 1;
     }
 
     .product-card {
@@ -354,6 +345,7 @@
       padding-top: 115%;
       background-color: #F2EFE9;
       overflow: hidden;
+      cursor: zoom-in;
     }
 
     .product-image-wrap img {
@@ -363,9 +355,28 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.25s ease;
     }
 
-    /* Carrossel */
+    .product-image-wrap:hover img {
+      transform: scale(1.03);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--text-main);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 12px;
+      z-index: 10;
+      pointer-events: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -379,17 +390,15 @@
       font-weight: 900;
       font-size: 1.1rem;
       cursor: pointer;
-      z-index: 10;
+      z-index: 11;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background 0.15s ease;
     }
 
-    .carousel-btn:hover {
-      background: #FFFFFF;
-    }
-
+    .carousel-btn:hover { background: #FFFFFF; }
     .carousel-btn.prev { left: 8px; }
     .carousel-btn.next { right: 8px; }
 
@@ -397,13 +406,14 @@
       position: absolute;
       bottom: 10px;
       right: 10px;
-      background: rgba(27, 42, 74, 0.75);
+      background: rgba(27, 42, 74, 0.78);
       color: #FFF;
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 3px 9px;
       border-radius: 12px;
       z-index: 10;
+      pointer-events: none;
     }
 
     .mundo-badge {
@@ -417,25 +427,32 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       z-index: 10;
+      pointer-events: none;
     }
 
     .mundo-Kids { background: var(--kids-soft); color: var(--kids-accent); }
     .mundo-Pre-Teen { background: var(--preteen-soft); color: var(--preteen-accent); }
     .mundo-Teen { background: var(--teen-soft); color: var(--teen-accent); }
 
-    .tag-badge {
+    .promo-tag {
       position: absolute;
       top: 12px;
       right: 12px;
       padding: 4px 10px;
-      border-radius: 20px;
+      border-radius: 8px;
       font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
       background-color: #E06D53;
       color: #FFFFFF;
       z-index: 10;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      pointer-events: none;
+    }
+
+    .promo-tag.novidade {
+      background-color: #1B2A4A;
     }
 
     .product-info {
@@ -453,28 +470,29 @@
       margin-bottom: 4px;
     }
 
-    .price-row {
+    .price-box {
+      margin-bottom: 14px;
       display: flex;
       align-items: baseline;
       gap: 8px;
-      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
 
     .old-price {
       font-size: 0.9rem;
-      color: #9A958E;
+      color: #8C95A6;
       text-decoration: line-through;
       font-weight: 600;
     }
 
     .product-price {
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: #1B2A4A;
     }
 
     .product-price.promo {
-      color: #E06D53;
+      color: #D94E34;
     }
 
     .sizes-label {
@@ -516,17 +534,18 @@
       border-color: var(--text-main);
     }
 
-    .size-btn.waitlist-size {
+    .size-btn.out-of-stock {
       background: #F9F8F6;
-      color: #9E988F;
-      border: 1.5px dashed #CFC9BE;
+      color: #A6A096;
+      border: 1.5px dashed #D5CFC5;
       text-decoration: line-through;
     }
 
-    .size-btn.waitlist-size.selected {
-      background: #D49A3B;
+    .size-btn.out-of-stock.selected {
+      background: #5C667A;
       color: #FFF;
-      border: 1.5px solid #D49A3B;
+      border-style: solid;
+      border-color: #5C667A;
       text-decoration: none;
     }
 
@@ -553,42 +572,129 @@
       background-color: #1EBE5D;
     }
 
-    .whatsapp-btn.waitlist-mode {
-      background-color: #D49A3B;
+    .whatsapp-btn.notify-mode {
+      background-color: #1B2A4A;
+    }
+
+    .whatsapp-btn.notify-mode:hover {
+      background-color: #2C3E50;
+    }
+
+    /* Lightbox (Ampliador de Imagem em Tela Cheia) */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      padding: 20px;
+    }
+
+    .lightbox-overlay.open {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 92vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-content img {
+      max-width: 90vw;
+      max-height: 78vh;
+      border-radius: 12px;
+      object-fit: contain;
+      background: #FFFFFF;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-caption {
       color: #FFFFFF;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 12px;
+      text-align: center;
     }
 
-    .whatsapp-btn.waitlist-mode:hover {
-      background-color: #BC852D;
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      background: rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 310;
     }
 
-    /* Modais */
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      border: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 310;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.38);
+    }
+
+    .lightbox-nav.prev { left: 16px; }
+    .lightbox-nav.next { right: 16px; }
+
+    /* Modal de Captura de Lead */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background: rgba(27, 42, 74, 0.65);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 200;
       padding: 16px;
+      z-index: 200;
     }
 
     .modal-overlay.open {
       display: flex;
     }
 
-    .modal-card {
+    .modal-box {
       background: #FFFFFF;
       border-radius: 18px;
-      max-width: 420px;
+      max-width: 400px;
       width: 100%;
-      padding: 24px;
+      padding: 26px 24px;
       position: relative;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
     }
 
     .modal-close {
@@ -597,62 +703,50 @@
       right: 16px;
       background: none;
       border: none;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--text-muted);
       cursor: pointer;
     }
 
-    .modal-card h3 {
+    .modal-box h3 {
       font-family: 'Nunito', sans-serif;
       font-weight: 900;
       font-size: 1.3rem;
-      color: var(--text-main);
       margin-bottom: 6px;
+      color: var(--text-main);
     }
 
-    .modal-card p {
+    .modal-box p {
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 16px;
     }
 
     .modal-field {
-      margin-bottom: 12px;
-    }
-
-    .modal-field label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .modal-field input {
       width: 100%;
-      padding: 11px 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
       border-radius: 10px;
       border: 1.5px solid #D5CFC5;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.95rem;
     }
 
-    .modal-submit {
+    .modal-action-btn {
       width: 100%;
       padding: 13px;
       border: none;
       border-radius: 10px;
-      background-color: #25D366;
+      background: #25D366;
       color: #FFFFFF;
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
       font-size: 1rem;
       cursor: pointer;
-      margin-top: 6px;
     }
 
-    .modal-submit.coral {
-      background-color: #E06D53;
+    .modal-action-btn.vip-color {
+      background: #E06D53;
     }
 
     .coupon-result-box {
@@ -661,116 +755,20 @@
       border-radius: 12px;
       padding: 14px;
       text-align: center;
-      margin-top: 12px;
+      margin-top: 10px;
       display: none;
     }
 
-    .coupon-code-display {
+    .coupon-code-highlight {
       font-family: 'Nunito', sans-serif;
       font-weight: 900;
       font-size: 1.4rem;
       color: #E06D53;
       letter-spacing: 1px;
-      margin: 4px 0;
+      display: block;
+      margin: 6px 0;
     }
 
-    /* Rodapé */
-    footer {
-      background-color: #1B2A4A;
-      color: #FAF8F5;
-      padding: 40px 16px 28px;
-      margin-top: auto;
-    }
-
-    .footer-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 28px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .footer-logo {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      color: #FFFFFF;
-      margin-bottom: 8px;
-    }
-
-    .footer-logo span {
-      color: #E06D53;
-    }
-
-    .footer-desc {
-      font-size: 0.88rem;
-      color: #CBD5E1;
-      margin-bottom: 16px;
-    }
-
-    .footer-socials {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .social-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.1);
-      color: #FFFFFF;
-      text-decoration: none;
-      padding: 7px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      transition: background 0.2s ease;
-    }
-
-    .social-pill:hover {
-      background: #E06D53;
-    }
-
-    .footer-col h4 {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #FFFFFF;
-      margin-bottom: 12px;
-    }
-
-    .footer-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 0.88rem;
-      color: #CBD5E1;
-    }
-
-    .footer-list a {
-      color: #CBD5E1;
-      text-decoration: none;
-    }
-
-    .footer-list a:hover {
-      color: #E06D53;
-    }
-
-    .footer-bottom {
-      max-width: 1100px;
-      margin: 20px auto 0;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #94A3B8;
-    }
-
-    /* Botão Flutuante */
     .floating-help {
       position: fixed;
       bottom: 20px;
@@ -794,14 +792,113 @@
       font-weight: 600;
       grid-column: 1 / -1;
     }
+
+    footer.site-footer {
+      background-color: #1B2A4A;
+      color: #FAF8F5;
+      padding: 42px 16px 28px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .footer-logo .apos {
+      color: #E06D53;
+      margin: 0 1px;
+    }
+
+    .footer-desc {
+      font-size: 0.88rem;
+      color: #DCE2EC;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .footer-social-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: background 0.2s ease;
+    }
+
+    .footer-social-btn:hover {
+      background: #E06D53;
+    }
+
+    .footer-col h4 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 0.88rem;
+      color: #DCE2EC;
+    }
+
+    .footer-list a {
+      color: #DCE2EC;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-list a:hover {
+      color: #E06D53;
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #9AA5B8;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Faixa Superior Cupom 1ª Compra -->
   <div class="top-promo-bar">
-    <span>🎁 Primeira vez na <span class="brand-pill-top">use4<span>'</span>16</span>? Cadastre-se e ganhe um cupom exclusivo para sua 1ª compra!</span>
-    <button type="button" class="top-promo-btn" id="openFirstPurchaseBtn">Resgatar Cupom 1ª Compra</button>
+    <span>🎁 Primeira vez na <span class="brand-pill-light">use4<span class="apos">'</span>16</span>? Cadastre-se e ganhe um cupom exclusivo para sua 1ª compra!</span>
+    <button type="button" class="top-promo-btn" id="openCouponModalBtn">Resgatar Cupom 1ª Compra</button>
   </div>
 
   <header>
@@ -809,67 +906,72 @@
     <div class="subtitle">Moda do 4 ao 16</div>
   </header>
 
-  <!-- Caixa Lista VIP -->
-  <section class="vip-box-container">
-    <div class="vip-box">
-      <h3>✨ Lista VIP <span class="brand-inline-vip">use4<span>'</span>16</span></h3>
-      <p>Receba <strong>CUPONS</strong>, novidades e promoções exclusivas no tamanho ideal direto no seu WhatsApp!</p>
-      <form class="vip-form" id="vipForm">
-        <input type="text" class="vip-input" id="vipName" placeholder="Seu nome" required />
-        <input type="tel" class="vip-input" id="vipPhone" placeholder="Seu WhatsApp (com DDD)" required />
-        <select class="vip-select" id="vipSize" required>
-          <option value="">Tamanho...</option>
-          <option value="4">Tam. 4</option>
-          <option value="6">Tam. 6</option>
-          <option value="8">Tam. 8</option>
-          <option value="10">Tam. 10</option>
-          <option value="12">Tam. 12</option>
-          <option value="14">Tam. 14</option>
-          <option value="16">Tam. 16</option>
-        </select>
-        <button type="submit" class="vip-submit-btn" id="vipSubmitBtn">Entrar na Lista VIP</button>
-      </form>
-      <div class="vip-feedback" id="vipFeedback"></div>
+  <main class="page-content">
+    <section class="vip-banner">
+      <div class="vip-card">
+        <div class="vip-text">
+          <h3>✨ Lista VIP <span class="brand-inline">use4<span class="apos">'</span>16</span></h3>
+          <p>Receba <strong>CUPONS</strong>, novidades e promoções exclusivas no tamanho ideal direto no seu WhatsApp!</p>
+        </div>
+        <form class="vip-form" id="vipForm">
+          <input type="text" id="vipName" placeholder="Seu nome" required />
+          <input type="tel" id="vipWhatsapp" placeholder="Seu WhatsApp (com DDD)" required />
+          <select id="vipSize" required>
+            <option value="">Tamanho...</option>
+            <option value="4">Tam. 4</option>
+            <option value="6">Tam. 6</option>
+            <option value="8">Tam. 8</option>
+            <option value="10">Tam. 10</option>
+            <option value="12">Tam. 12</option>
+            <option value="14">Tam. 14</option>
+            <option value="16">Tam. 16</option>
+          </select>
+          <button type="submit" class="vip-submit-btn" id="vipSubmitBtn">Entrar na Lista VIP</button>
+        </form>
+        <div class="vip-feedback" id="vipFeedback"></div>
+      </div>
+    </section>
+
+    <div class="filters-container">
+      <button class="filter-btn active" data-filter="Todos">Todos os Mundos</button>
+      <button class="filter-btn" data-filter="Kids">Mundo Kids (4-8)</button>
+      <button class="filter-btn" data-filter="Pre-Teen">Pré-Teen (9-12)</button>
+      <button class="filter-btn" data-filter="Teen">Mundo Teen (13-16)</button>
     </div>
-  </section>
 
-  <!-- Filtro por Setor / Mundo -->
-  <div class="filters-container">
-    <button class="filter-btn active" data-filter="Todos">Todos os Mundos</button>
-    <button class="filter-btn" data-filter="Kids">Mundo Kids (4-8)</button>
-    <button class="filter-btn" data-filter="Pre-Teen">Pré-Teen (9-12)</button>
-    <button class="filter-btn" data-filter="Teen">Mundo Teen (13-16)</button>
-  </div>
-
-  <!-- Filtro Rápido por Tamanho -->
-  <div class="size-filter-bar">
-    <span class="size-filter-label">Filtrar por tamanho disponível:</span>
-    <div class="size-pills" id="sizePills">
-      <button class="size-pill active" data-size="Todos">Todos</button>
-      <button class="size-pill" data-size="4">4</button>
-      <button class="size-pill" data-size="6">6</button>
-      <button class="size-pill" data-size="8">8</button>
-      <button class="size-pill" data-size="10">10</button>
-      <button class="size-pill" data-size="12">12</button>
-      <button class="size-pill" data-size="14">14</button>
-      <button class="size-pill" data-size="16">16</button>
+    <div class="size-filter-bar">
+      <span class="size-filter-label">Filtrar por tamanho disponível:</span>
+      <div class="size-pills" id="sizePills">
+        <button class="size-pill active" data-size="Todos">Todos</button>
+        <button class="size-pill" data-size="4">4</button>
+        <button class="size-pill" data-size="6">6</button>
+        <button class="size-pill" data-size="8">8</button>
+        <button class="size-pill" data-size="10">10</button>
+        <button class="size-pill" data-size="12">12</button>
+        <button class="size-pill" data-size="14">14</button>
+        <button class="size-pill" data-size="16">16</button>
+      </div>
     </div>
-  </div>
 
-  <!-- Vitrine de Produtos -->
-  <main class="catalog-grid" id="catalogGrid">
-    <div class="status-msg">Carregando peças da use4'16...</div>
+    <div class="catalog-grid" id="catalogGrid">
+      <div class="status-msg">Carregando peças da use4'16...</div>
+    </div>
   </main>
 
-  <!-- Rodapé -->
-  <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">use4<span>'</span>16</div>
-        <p class="footer-desc">Moda infantil e juvenil do tamanho 4 ao 16, pensada para acompanhar cada fase com estilo, conforto e praticidade.</p>
-        <div class="footer-socials">
-          <a href="https://instagram.com/use4.16" id="footerInstagramLink" class="social-pill" target="_blank">📸 @use4.16</a>
-          <a href="#" id="footerWhatsappLink" class="social-pill" target="_blank">💬 WhatsApp</a>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-logo">use4<span class="apos">'</span>16</div>
+        <p class="footer-desc">
+          Moda infantil e juvenil do tamanho 4 ao 16, pensada para acompanhar cada fase com estilo, conforto e praticidade.
+        </p>
+        <div class="footer-social-links">
+          <a href="https://instagram.com/use4.16" id="footerInstaLink" target="_blank" rel="noopener" class="footer-social-btn">
+            📸 <span id="footerInstaText">@use4.16</span>
+          </a>
+          <a href="#" id="footerWhatsappBtn" target="_blank" rel="noopener" class="footer-social-btn">
+            💬 WhatsApp
+          </a>
         </div>
       </div>
 
@@ -878,16 +980,16 @@
         <ul class="footer-list">
           <li>📍 Entregas em Maceió/AL</li>
           <li>💳 Pix, Cartão de Crédito/Débito e Link de Pagamento</li>
-          <li>👕 Numeração do 4 ao 16 (Kids, Pré-Teen e Teen)</li>
+          <li>📏 Numeração do 4 ao 16 (Kids, Pré-Teen e Teen)</li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Atendimento</h4>
         <ul class="footer-list">
-          <li><a href="#" id="footerMedidasLink" target="_blank">📏 Dúvidas sobre Tabela de Medidas</a></li>
-          <li><a href="#" id="footerTrocasLink" target="_blank">🔄 Política de Trocas</a></li>
-          <li><a href="#" id="footerEncomendaLink" target="_blank">✨ Encomendar tamanho específico</a></li>
+          <li><a href="#" id="footerMedidasLink" target="_blank" rel="noopener">📐 Dúvidas sobre Tabela de Medidas</a></li>
+          <li><a href="#" id="footerTrocasLink" target="_blank" rel="noopener">🔄 Política de Trocas</a></li>
+          <li><a href="#" id="footerEncomendaLink" target="_blank" rel="noopener">✨ Encomendar tamanho específico</a></li>
         </ul>
       </div>
     </div>
@@ -896,135 +998,177 @@
     </div>
   </footer>
 
-  <!-- Botão Flutuante -->
-  <a href="#" id="floatingWhatsapp" class="floating-help" target="_blank">
+  <a href="#" id="floatingWhatsapp" class="floating-help" target="_blank" rel="noopener">
     💬 Dúvidas sobre tamanhos?
   </a>
 
-  <!-- Modal 1: Cupom de Primeira Compra -->
-  <div class="modal-overlay" id="firstPurchaseModal">
-    <div class="modal-card">
-      <button type="button" class="modal-close" id="closeFirstPurchaseModal">×</button>
+  <!-- Lightbox (Ampliador de Fotos em Tela Cheia) -->
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Fechar zoom">×</button>
+    <button type="button" class="lightbox-nav prev" id="lightboxPrev" aria-label="Foto anterior">‹</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Foto ampliada" />
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+    <button type="button" class="lightbox-nav next" id="lightboxNext" aria-label="Próxima foto">›</button>
+  </div>
+
+  <!-- Modal 1: Cupom de 1ª Compra -->
+  <div class="modal-overlay" id="couponModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="closeCouponModal">×</button>
       <h3>🎁 Cupom de 1ª Compra</h3>
-      <p>Preencha seu nome e WhatsApp para liberar seu cupom de boas-vindas na <strong>use4'16</strong>!</p>
+      <p>Preencha seu nome e WhatsApp para liberar seu cupom de boas-vindas na <span class="brand-inline">use4<span class="apos">'</span>16</span>!</p>
       <form id="firstPurchaseForm">
-        <div class="modal-field">
-          <label>Seu nome</label>
-          <input type="text" id="fpName" placeholder="Digite seu nome" required />
-        </div>
-        <div class="modal-field">
-          <label>Seu WhatsApp (com DDD)</label>
-          <input type="tel" id="fpPhone" placeholder="(82) 99999-9999" required />
-        </div>
-        <button type="submit" class="modal-submit coral" id="fpSubmitBtn">Liberar Meu Cupom</button>
+        <input type="text" id="fpName" class="modal-field" placeholder="Seu nome" required />
+        <input type="tel" id="fpWhatsapp" class="modal-field" placeholder="Seu WhatsApp (com DDD)" required />
+        <button type="submit" class="modal-action-btn vip-color" id="fpSubmitBtn">Liberar Meu Cupom</button>
       </form>
-      <div class="coupon-result-box" id="fpCouponResult">
-        <div id="fpCouponMsg" style="font-size:0.85rem; color:#1B2A4A; font-weight:600;"></div>
-        <div class="coupon-code-display" id="fpCouponCodeText">BEMVINDA10</div>
-        <div style="font-size:0.78rem; color:#5C667A;">O código já foi salvo e será aplicado automaticamente no seu pedido!</div>
-      </div>
+      <div class="coupon-result-box" id="fpResultBox"></div>
     </div>
   </div>
 
-  <!-- Modal 2: Captura Antes do WhatsApp / Lista de Espera -->
-  <div class="modal-overlay" id="orderLeadModal">
-    <div class="modal-card">
-      <button type="button" class="modal-close" id="closeOrderLeadModal">×</button>
-      <h3 id="orderModalTitle">Quase lá!</h3>
-      <p id="orderModalDesc">Informe seu nome e WhatsApp para continuar seu pedido.</p>
-      <form id="orderLeadForm">
-        <div class="modal-field">
-          <label>Seu nome</label>
-          <input type="text" id="leadName" placeholder="Digite seu nome" required />
-        </div>
-        <div class="modal-field">
-          <label>Seu WhatsApp (com DDD)</label>
-          <input type="tel" id="leadPhone" placeholder="(82) 99999-9999" required />
-        </div>
-        <div class="modal-field" id="couponInputField">
-          <label>Tem cupom de desconto? (Opcional)</label>
-          <input type="text" id="leadCoupon" placeholder="Ex: BEMVINDA10" />
-        </div>
-        <button type="submit" class="modal-submit" id="orderModalSubmitBtn">Continuar para o WhatsApp</button>
+  <!-- Modal 2: Captura antes do WhatsApp / Lista de Espera -->
+  <div class="modal-overlay" id="leadModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="closeLeadModal">×</button>
+      <h3 id="modalTitle">Quase lá!</h3>
+      <p id="modalDesc">Informe seu nome e WhatsApp para continuar seu pedido.</p>
+      <form id="leadModalForm">
+        <input type="text" id="modalName" class="modal-field" placeholder="Seu nome" required />
+        <input type="tel" id="modalWhatsapp" class="modal-field" placeholder="Seu WhatsApp (com DDD)" required />
+        <input type="text" id="modalCoupon" class="modal-field" placeholder="Tem cupom de desconto? (Opcional)" />
+        <button type="submit" class="modal-action-btn" id="modalSubmitBtn">Continuar para o WhatsApp</button>
       </form>
     </div>
   </div>
 
   <script>
-    // =========================================================================
-    // CONFIGURAÇÕES PADRÃO (PODEM SER SOBRESCRITAS PELA PLANILHA GOOGLE SHEETS)
-    // =========================================================================
     const CONFIG = {
-      whatsappNumber: "5582996933636",
-      instagramUser: "use4.16",
-      defaultFirstPurchaseCoupon: "BEMVINDA10",
+      defaultWhatsappNumber: "5582996933636",
+      defaultInstagramUser: "use4.16",
+      defaultCupomPrimeiraCompra: "BEMVINDA10",
       googleSheetsCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQPcYZvH8TbGD0Eto58Ckd5ubrVLeGFU_yra-EoQdNIAiC_vVLQ-7Q_0tIQzEMOf96Thj4Nlfq4P6io/pub?output=csv",
       googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbyFfidp6vRVMJSag3b3SpemlNU6yEnVoho9HOkvFyLfR61_n_4GVk6z4rGAsPjrPQqM/exec"
     };
-    // =========================================================================
 
     const SIZES = ["4", "6", "8", "10", "12", "14", "16"];
     let allProducts = [];
     let currentMundo = "Todos";
     let currentSize = "Todos";
-    let activeFirstPurchaseCoupon = CONFIG.defaultFirstPurchaseCoupon;
-    let activeWhatsapp = CONFIG.whatsappNumber;
-    let activeInstagram = CONFIG.instagramUser;
+    let activeWhatsappNumber = CONFIG.defaultWhatsappNumber;
+    let activeInstagramUser = CONFIG.defaultInstagramUser;
+    let activeCupomPrimeiraCompra = CONFIG.defaultCupomPrimeiraCompra;
     let pendingAction = null;
 
-    function updateDynamicLinks() {
-      const cleanWa = String(activeWhatsapp).replace(/\D/g, "") || CONFIG.whatsappNumber;
-      const cleanIg = String(activeInstagram).replace(/^@/, "").trim() || CONFIG.instagramUser;
+    // Estado do Lightbox (Zoom)
+    let lightboxPhotos = [];
+    let lightboxIndex = 0;
+    let lightboxTitle = "";
 
-      document.getElementById("floatingWhatsapp").href =
-        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16 e preciso de ajuda com os tamanhos.")}`;
-
-      document.getElementById("footerWhatsappLink").href =
-        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Vim pelo site da use4'16.")}`;
-
-      document.getElementById("footerMedidasLink").href =
-        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Gostaria de conferir a tabela de medidas da use4'16.")}`;
-
-      document.getElementById("footerTrocasLink").href =
-        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Gostaria de saber como funciona a política de trocas.")}`;
-
-      document.getElementById("footerEncomendaLink").href =
-        `https://wa.me/${cleanWa}?text=${encodeURIComponent("Olá! Gostaria de encomendar uma peça/tamanho específico.")}`;
-
-      const igLink = document.getElementById("footerInstagramLink");
-      igLink.href = `https://instagram.com/${cleanIg}`;
-      igLink.textContent = `📸 @${cleanIg}`;
+    function openLightbox(photos, startIndex, title) {
+      lightboxPhotos = photos;
+      lightboxIndex = startIndex;
+      lightboxTitle = title;
+      updateLightboxUI();
+      document.getElementById("lightboxOverlay").classList.add("open");
     }
 
-    updateDynamicLinks();
+    function updateLightboxUI() {
+      document.getElementById("lightboxImg").src = lightboxPhotos[lightboxIndex];
+      const counter = lightboxPhotos.length > 1 ? ` (${lightboxIndex + 1} de ${lightboxPhotos.length})` : "";
+      document.getElementById("lightboxCaption").textContent = `${lightboxTitle}${counter}`;
+      document.getElementById("lightboxPrev").style.display = lightboxPhotos.length > 1 ? "flex" : "none";
+      document.getElementById("lightboxNext").style.display = lightboxPhotos.length > 1 ? "flex" : "none";
+    }
+
+    document.getElementById("lightboxClose").addEventListener("click", () => {
+      document.getElementById("lightboxOverlay").classList.remove("open");
+    });
+
+    document.getElementById("lightboxOverlay").addEventListener("click", (e) => {
+      if (e.target.id === "lightboxOverlay") {
+        document.getElementById("lightboxOverlay").classList.remove("open");
+      }
+    });
+
+    document.getElementById("lightboxPrev").addEventListener("click", (e) => {
+      e.stopPropagation();
+      lightboxIndex = (lightboxIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length;
+      updateLightboxUI();
+    });
+
+    document.getElementById("lightboxNext").addEventListener("click", (e) => {
+      e.stopPropagation();
+      lightboxIndex = (lightboxIndex + 1) % lightboxPhotos.length;
+      updateLightboxUI();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const lb = document.getElementById("lightboxOverlay");
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") lb.classList.remove("open");
+      if (e.key === "ArrowLeft" && lightboxPhotos.length > 1) {
+        lightboxIndex = (lightboxIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length;
+        updateLightboxUI();
+      }
+      if (e.key === "ArrowRight" && lightboxPhotos.length > 1) {
+        lightboxIndex = (lightboxIndex + 1) % lightboxPhotos.length;
+        updateLightboxUI();
+      }
+    });
+
+    function updateStoreLinks() {
+      const wa = activeWhatsappNumber;
+      document.getElementById("floatingWhatsapp").href =
+        `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16 e preciso de ajuda com os tamanhos.")}`;
+      document.getElementById("footerWhatsappBtn").href =
+        `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16.")}`;
+      document.getElementById("footerMedidasLink").href =
+        `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de conferir a tabela de medidas da use4'16.")}`;
+      document.getElementById("footerTrocasLink").href =
+        `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de saber como funciona a política de trocas da use4'16.")}`;
+      document.getElementById("footerEncomendaLink").href =
+        `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de encomendar um tamanho específico na use4'16.")}`;
+
+      const cleanInsta = activeInstagramUser.replace(/^@/, "").trim();
+      document.getElementById("footerInstaLink").href = `https://instagram.com/${cleanInsta}`;
+      document.getElementById("footerInstaText").textContent = `@${cleanInsta}`;
+    }
+
+    updateStoreLinks();
+
+    function normalizeImageUrl(url) {
+      const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (driveMatch && driveMatch) {
+        return `https://lh3.googleusercontent.com/d/${driveMatch}`;
+      }
+      const openMatch = url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
+      if (openMatch && openMatch) {
+        return `https://lh3.googleusercontent.com/d/${openMatch}`;
+      }
+      return url;
+    }
 
     function formatPrice(val) {
-      if (!val) return "";
-      const num = parseFloat(String(val).replace(/\./g, "").replace(",", "."));
+      if (!val) return "0,00";
+      const clean = String(val).replace("R$", "").trim().replace(",", ".");
+      const num = parseFloat(clean);
       if (isNaN(num)) return val;
       return num.toFixed(2).replace(".", ",");
     }
 
-    function convertDriveUrl(url) {
-      if (!url) return "";
-      const trimmed = url.trim();
-      const match = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
-      if (match && match[1]) {
-        return `https://lh3.googleusercontent.com/d/${match[1]}`;
-      }
-      return trimmed;
-    }
-
-    async function sendLeadToSheet(payload) {
+    async function saveLeadToSheet(leadData) {
       if (!CONFIG.googleAppsScriptUrl) return { status: "ok" };
       try {
-        const res = await fetch(CONFIG.googleAppsScriptUrl, {
+        const response = await fetch(CONFIG.googleAppsScriptUrl, {
           method: "POST",
-          body: JSON.stringify(payload)
+          body: JSON.stringify(leadData)
         });
-        const data = await res.json();
-        return data;
+        const result = await response.json();
+        return result;
       } catch (err) {
+        console.error("Erro ao registrar lead:", err);
         return { status: "ok" };
       }
     }
@@ -1033,7 +1177,7 @@
       const lineBreakRegex = new RegExp("\r?\n");
       const lines = csvText.trim().split(lineBreakRegex);
       if (lines.length < 2) return [];
-      const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""));
+      const headers = lines.split(",").map(h => h.trim().replace(/^"|"$/g, ""));
 
       return lines.slice(1).map(line => {
         const values = [];
@@ -1058,28 +1202,29 @@
           row[header] = values[i] || "";
         });
 
-        if (row.Cupom_Primeira_Compra && row.Cupom_Primeira_Compra.trim()) {
-          activeFirstPurchaseCoupon = row.Cupom_Primeira_Compra.trim();
+        if (row.Cupom_Primeira_Compra && row.Cupom_Primeira_Compra.trim() !== "") {
+          activeCupomPrimeiraCompra = row.Cupom_Primeira_Compra.trim().toUpperCase();
         }
-        if (row.WhatsApp && row.WhatsApp.trim()) {
-          activeWhatsapp = row.WhatsApp.trim();
+        if (row.Instagram && row.Instagram.trim() !== "") {
+          activeInstagramUser = row.Instagram.trim();
         }
-        if (row.Instagram && row.Instagram.trim()) {
-          activeInstagram = row.Instagram.trim();
+        if (row.WhatsApp && row.WhatsApp.trim() !== "") {
+          const digits = row.WhatsApp.replace(/\D/g, "");
+          if (digits.length >= 10) {
+            activeWhatsappNumber = digits;
+          }
         }
 
         const rawFotos = row.Foto_URL
-          ? row.Foto_URL.split(",").map(u => convertDriveUrl(u)).filter(Boolean)
+          ? row.Foto_URL.split(",").map(u => normalizeImageUrl(u.trim())).filter(Boolean)
           : [];
-        const fotos = rawFotos.length > 0
-          ? rawFotos
-          : ["https://via.placeholder.com/400x500?text=use4'16"];
+        const fotos = rawFotos.length > 0 ? rawFotos : ["https://via.placeholder.com/400x500?text=use4'16"];
 
         return {
           ID: row.ID || "",
           Nome: row.Nome || "Peça sem nome",
           Mundo: row.Mundo || "Kids",
-          Preco: formatPrice(row.Preco || "0,00"),
+          Preco: formatPrice(row.Preco),
           Preco_Antigo: row.Preco_Antigo ? formatPrice(row.Preco_Antigo) : "",
           Tag: row.Tag ? row.Tag.trim() : "",
           Fotos: fotos,
@@ -1103,7 +1248,7 @@
         const response = await fetch(urlWithCacheBust);
         const csvData = await response.text();
         allProducts = parseCSV(csvData);
-        updateDynamicLinks();
+        updateStoreLinks();
         renderCatalog();
       } catch (error) {
         document.getElementById("catalogGrid").innerHTML =
@@ -1141,48 +1286,57 @@
 
         const sizesHtml = SIZES.map(size => {
           const qty = product.estoque[size] || 0;
-          const waitlistClass = qty <= 0 ? "waitlist-size" : "";
-          return `<button type="button" class="size-btn ${waitlistClass}" data-size="${size}" data-qty="${qty}">${size}</button>`;
+          const isOut = qty <= 0;
+          return `<button type="button" class="size-btn ${isOut ? 'out-of-stock' : ''}" data-size="${size}" data-out="${isOut}">${size}</button>`;
         }).join("");
 
         let currentPhotoIndex = 0;
         const hasMultiplePhotos = product.Fotos.length > 1;
-
-        const priceHtml = product.Preco_Antigo
-          ? `<div class="price-row"><span class="old-price">R$ ${product.Preco_Antigo}</span><span class="product-price promo">R$ ${product.Preco}</span></div>`
-          : `<div class="price-row"><span class="product-price">R$ ${product.Preco}</span></div>`;
+        const tagClass = product.Tag.toLowerCase().includes("novidade") ? "novidade" : "";
 
         card.innerHTML = `
-          <div class="product-image-wrap">
-            <img src="${product.Fotos[0]}" alt="${product.Nome}" loading="lazy" />
+          <div class="product-image-wrap" title="Clique para ampliar a foto">
+            <img src="${product.Fotos}" alt="${product.Nome}" loading="lazy" />
             <span class="mundo-badge mundo-${product.Mundo}">${mundoLabel}</span>
-            ${product.Tag ? `<span class="tag-badge">${product.Tag}</span>` : ''}
+            ${product.Tag ? `<span class="promo-tag ${tagClass}">${product.Tag}</span>` : ''}
+            <span class="zoom-hint">🔍 Ampliar</span>
             ${hasMultiplePhotos ? `
-              <button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
-              <button type="button" class="carousel-btn next" aria-label="Próxima">›</button>
+              <button type="button" class="carousel-btn prev" aria-label="Foto anterior">‹</button>
+              <button type="button" class="carousel-btn next" aria-label="Próxima foto">›</button>
               <span class="photo-counter">1 / ${product.Fotos.length}</span>
             ` : ''}
           </div>
           <div class="product-info">
             <h2 class="product-title">${product.Nome}</h2>
-            ${priceHtml}
-            <span class="sizes-label">Selecione o tamanho (riscados = lista de espera):</span>
+            <div class="price-box">
+              ${product.Preco_Antigo ? `<span class="old-price">De R$ ${product.Preco_Antigo}</span>` : ''}
+              <span class="product-price ${product.Preco_Antigo ? 'promo' : ''}">
+                ${product.Preco_Antigo ? 'Por ' : ''}R$ ${product.Preco}
+              </span>
+            </div>
+            <span class="sizes-label">Selecione o tamanho (ou clique no esgotado para aviso):</span>
             <div class="sizes-grid">${sizesHtml}</div>
-            <button type="button" class="whatsapp-btn">Pedir no WhatsApp</button>
+            <button type="button" class="whatsapp-btn">
+              Pedir no WhatsApp
+            </button>
           </div>
         `;
+
+        // Clique na imagem abre o Lightbox ampliado
+        const imgWrap = card.querySelector(".product-image-wrap");
+        imgWrap.addEventListener("click", () => {
+          openLightbox(product.Fotos, currentPhotoIndex, product.Nome);
+        });
 
         if (hasMultiplePhotos) {
           const imgEl = card.querySelector("img");
           const counterEl = card.querySelector(".photo-counter");
-
           card.querySelector(".prev").addEventListener("click", (e) => {
             e.stopPropagation();
             currentPhotoIndex = (currentPhotoIndex - 1 + product.Fotos.length) % product.Fotos.length;
             imgEl.src = product.Fotos[currentPhotoIndex];
             counterEl.textContent = `${currentPhotoIndex + 1} / ${product.Fotos.length}`;
           });
-
           card.querySelector(".next").addEventListener("click", (e) => {
             e.stopPropagation();
             currentPhotoIndex = (currentPhotoIndex + 1) % product.Fotos.length;
@@ -1192,7 +1346,7 @@
         }
 
         let selectedSize = null;
-        let isWaitlistSelected = false;
+        let isSelectedOut = false;
         const sizeButtons = card.querySelectorAll(".size-btn");
         const orderBtn = card.querySelector(".whatsapp-btn");
 
@@ -1201,15 +1355,14 @@
             sizeButtons.forEach(b => b.classList.remove("selected"));
             btn.classList.add("selected");
             selectedSize = btn.getAttribute("data-size");
-            const qty = parseInt(btn.getAttribute("data-qty")) || 0;
-            isWaitlistSelected = qty <= 0;
+            isSelectedOut = btn.getAttribute("data-out") === "true";
 
-            if (isWaitlistSelected) {
-              orderBtn.classList.add("waitlist-mode");
+            if (isSelectedOut) {
               orderBtn.textContent = `Avise-me quando chegar (Tam. ${selectedSize})`;
+              orderBtn.classList.add("notify-mode");
             } else {
-              orderBtn.classList.remove("waitlist-mode");
               orderBtn.textContent = "Pedir no WhatsApp";
+              orderBtn.classList.remove("notify-mode");
             }
           });
         });
@@ -1219,189 +1372,172 @@
             alert("Por favor, selecione um tamanho antes de continuar!");
             return;
           }
-
-          pendingAction = {
-            product: product,
-            size: selectedSize,
-            isWaitlist: isWaitlistSelected
-          };
-
-          const savedName = localStorage.getItem("use416_lead_name") || "";
-          const savedPhone = localStorage.getItem("use416_lead_phone") || "";
-          const savedCoupon = localStorage.getItem("use416_saved_coupon") || "";
-
-          document.getElementById("leadName").value = savedName;
-          document.getElementById("leadPhone").value = savedPhone;
-          document.getElementById("leadCoupon").value = savedCoupon;
-
-          if (isWaitlistSelected) {
-            document.getElementById("orderModalTitle").textContent = "🔔 Lista de Espera";
-            document.getElementById("orderModalDesc").textContent = `Deixe seu contato para avisarmos assim que o tamanho ${selectedSize} de "${product.Nome}" chegar!`;
-            document.getElementById("couponInputField").style.display = "none";
-            document.getElementById("orderModalSubmitBtn").textContent = "Entrar na Lista de Espera";
-          } else {
-            document.getElementById("orderModalTitle").textContent = "Quase lá!";
-            document.getElementById("orderModalDesc").textContent = "Informe seu nome e WhatsApp para continuar seu pedido.";
-            document.getElementById("couponInputField").style.display = "block";
-            document.getElementById("orderModalSubmitBtn").textContent = "Continuar para o WhatsApp";
-          }
-
-          document.getElementById("orderLeadModal").classList.add("open");
+          openLeadModal(product, selectedSize, isSelectedOut);
         });
 
         grid.appendChild(card);
       });
     }
 
-    // Submissão Lista VIP
     document.getElementById("vipForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+      const nome = document.getElementById("vipName").value.trim();
+      const whatsapp = document.getElementById("vipWhatsapp").value.trim();
+      const tamanho = document.getElementById("vipSize").value;
       const btn = document.getElementById("vipSubmitBtn");
       const feedback = document.getElementById("vipFeedback");
-      const nome = document.getElementById("vipName").value.trim();
-      const whatsapp = document.getElementById("vipPhone").value.trim();
-      const tamanho = document.getElementById("vipSize").value;
 
       btn.disabled = true;
-      btn.textContent = "Cadastrando...";
+      btn.textContent = "Verificando...";
 
-      const resp = await sendLeadToSheet({
+      const res = await saveLeadToSheet({
         tipo: "Lista VIP",
-        nome: nome,
-        whatsapp: whatsapp,
-        peca: "-",
-        tamanho: tamanho
+        nome,
+        whatsapp,
+        peca: "Cadastro VIP Topo",
+        tamanho
       });
 
-      localStorage.setItem("use416_lead_name", nome);
-      localStorage.setItem("use416_lead_phone", whatsapp);
+      document.getElementById("vipForm").style.display = "none";
+      feedback.style.display = "block";
 
-      feedback.className = "vip-feedback";
-      if (resp && resp.status === "duplicado") {
+      if (res && res.status === "duplicado") {
         feedback.classList.add("warning");
-        feedback.innerHTML = `⚠️ Este WhatsApp já está cadastrado na nossa Lista VIP! Em breve enviaremos novidades e cupons exclusivos diretamente por lá.`;
+        feedback.innerHTML = `⚠️ O WhatsApp <strong>${whatsapp}</strong> já está cadastrado na nossa Lista VIP! Você continuará recebendo nossas novidades e cupons exclusivos por lá.`;
       } else {
-        feedback.classList.add("success");
-        feedback.innerHTML = `✨ Você entrou na Lista VIP <strong>use4'16</strong>! Em breve enviaremos novidades e cupons exclusivos no seu WhatsApp.`;
-        document.getElementById("vipForm").reset();
+        localStorage.setItem("use416_lead_nome", nome);
+        localStorage.setItem("use416_lead_whats", whatsapp);
+        feedback.innerHTML = `✨ Cadastro confirmado, <strong>${nome}</strong>! Você entrou na Lista VIP <span class="brand-inline">use4<span class="apos">'</span>16</span> e receberá novidades e cupons exclusivos direto no seu WhatsApp.`;
       }
-
-      btn.disabled = false;
-      btn.textContent = "Entrar na Lista VIP";
     });
 
-    // Modal Cupom 1ª Compra
-    document.getElementById("openFirstPurchaseBtn").addEventListener("click", () => {
-      document.getElementById("fpCouponResult").style.display = "none";
-      document.getElementById("firstPurchaseModal").classList.add("open");
+    const couponModal = document.getElementById("couponModal");
+    document.getElementById("openCouponModalBtn").addEventListener("click", () => {
+      couponModal.classList.add("open");
     });
-
-    document.getElementById("closeFirstPurchaseModal").addEventListener("click", () => {
-      document.getElementById("firstPurchaseModal").classList.remove("open");
+    document.getElementById("closeCouponModal").addEventListener("click", () => {
+      couponModal.classList.remove("open");
     });
 
     document.getElementById("firstPurchaseForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const btn = document.getElementById("fpSubmitBtn");
       const nome = document.getElementById("fpName").value.trim();
-      const whatsapp = document.getElementById("fpPhone").value.trim();
+      const whatsapp = document.getElementById("fpWhatsapp").value.trim();
+      const btn = document.getElementById("fpSubmitBtn");
+      const resultBox = document.getElementById("fpResultBox");
 
       btn.disabled = true;
-      btn.textContent = "Liberando...";
+      btn.textContent = "Verificando...";
 
-      const resp = await sendLeadToSheet({
+      const res = await saveLeadToSheet({
         tipo: "Primeira Compra",
-        nome: nome,
-        whatsapp: whatsapp,
-        peca: `Cupom: ${activeFirstPurchaseCoupon}`,
+        nome,
+        whatsapp,
+        peca: "Resgate Cupom 1ª Compra",
         tamanho: "-"
       });
 
-      localStorage.setItem("use416_lead_name", nome);
-      localStorage.setItem("use416_lead_phone", whatsapp);
-      localStorage.setItem("use416_saved_coupon", activeFirstPurchaseCoupon);
+      document.getElementById("firstPurchaseForm").style.display = "none";
+      resultBox.style.display = "block";
 
-      const msgEl = document.getElementById("fpCouponMsg");
-      if (resp && resp.status === "duplicado") {
-        msgEl.textContent = "⚠️ Este WhatsApp já resgatou o cupom de 1ª compra! Seu código ativo é:";
+      if (res && res.status === "duplicado") {
+        resultBox.innerHTML = `
+          <span>⚠️ Este WhatsApp já resgatou o cupom de boas-vindas!</span>
+          <span class="coupon-code-highlight">${activeCupomPrimeiraCompra}</span>
+          <small>Se ainda não realizou seu primeiro pedido, basta informar este código no WhatsApp.</small>
+        `;
       } else {
-        msgEl.textContent = "🎉 Parabéns! Use este código no seu pedido:";
+        localStorage.setItem("use416_lead_nome", nome);
+        localStorage.setItem("use416_lead_whats", whatsapp);
+        localStorage.setItem("use416_cupom_ativo", activeCupomPrimeiraCompra);
+        resultBox.innerHTML = `
+          <span>🎉 Cupom liberado, <strong>${nome}</strong>! Use no seu pedido:</span>
+          <span class="coupon-code-highlight">${activeCupomPrimeiraCompra}</span>
+          <small>O código já foi salvo e será preenchido automaticamente quando você escolher sua peça!</small>
+        `;
+      }
+    });
+
+    const leadModal = document.getElementById("leadModal");
+    const closeLeadModal = document.getElementById("closeLeadModal");
+
+    function openLeadModal(product, size, isOut) {
+      pendingAction = { product, size, isOut };
+
+      const savedName = localStorage.getItem("use416_lead_nome") || "";
+      const savedWhats = localStorage.getItem("use416_lead_whats") || "";
+      const savedCoupon = localStorage.getItem("use416_cupom_ativo") || "";
+
+      document.getElementById("modalName").value = savedName;
+      document.getElementById("modalWhatsapp").value = savedWhats;
+      document.getElementById("modalCoupon").value = savedCoupon;
+
+      if (isOut) {
+        document.getElementById("modalTitle").textContent = "Avise-me quando chegar";
+        document.getElementById("modalDesc").textContent = `Deixe seu WhatsApp para avisarmos assim que o tamanho ${size} da peça "${product.Nome}" voltar ao estoque.`;
+        document.getElementById("modalCoupon").style.display = "none";
+        document.getElementById("modalSubmitBtn").textContent = "Entrar na Lista de Espera";
+        document.getElementById("modalSubmitBtn").classList.add("vip-color");
+      } else {
+        document.getElementById("modalTitle").textContent = "Quase lá!";
+        document.getElementById("modalDesc").textContent = `Informe seu nome e WhatsApp para reservar o tamanho ${size} de "${product.Nome}".`;
+        document.getElementById("modalCoupon").style.display = "block";
+        document.getElementById("modalSubmitBtn").textContent = "Continuar para o WhatsApp";
+        document.getElementById("modalSubmitBtn").classList.remove("vip-color");
       }
 
-      document.getElementById("fpCouponCodeText").textContent = activeFirstPurchaseCoupon;
-      document.getElementById("fpCouponResult").style.display = "block";
+      leadModal.classList.add("open");
+    }
 
-      btn.disabled = false;
-      btn.textContent = "Liberar Meu Cupom";
+    closeLeadModal.addEventListener("click", () => {
+      leadModal.classList.remove("open");
     });
 
-    // Modal Pedido / Lista de Espera
-    document.getElementById("closeOrderLeadModal").addEventListener("click", () => {
-      document.getElementById("orderLeadModal").classList.remove("open");
-    });
-
-    document.getElementById("orderLeadForm").addEventListener("submit", async (e) => {
+    document.getElementById("leadModalForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!pendingAction) return;
 
-      const btn = document.getElementById("orderModalSubmitBtn");
-      const nome = document.getElementById("leadName").value.trim();
-      const whatsapp = document.getElementById("leadPhone").value.trim();
-      const cupom = document.getElementById("leadCoupon").value.trim().toUpperCase();
+      const nome = document.getElementById("modalName").value.trim();
+      const whatsapp = document.getElementById("modalWhatsapp").value.trim();
+      const cupom = document.getElementById("modalCoupon").value.trim().toUpperCase();
+      const submitBtn = document.getElementById("modalSubmitBtn");
 
-      localStorage.setItem("use416_lead_name", nome);
-      localStorage.setItem("use416_lead_phone", whatsapp);
+      localStorage.setItem("use416_lead_nome", nome);
+      localStorage.setItem("use416_lead_whats", whatsapp);
 
-      btn.disabled = true;
-      btn.textContent = "Registrando...";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Registrando...";
 
-      const { product, size, isWaitlist } = pendingAction;
-      const cleanWa = String(activeWhatsapp).replace(/\D/g, "") || CONFIG.whatsappNumber;
+      const { product, size, isOut } = pendingAction;
 
-      if (isWaitlist) {
-        await sendLeadToSheet({
-          tipo: "Lista de Espera",
-          nome: nome,
-          whatsapp: whatsapp,
-          peca: `${product.Nome} (Cód: ${product.ID})`,
-          tamanho: size
-        });
+      await saveLeadToSheet({
+        tipo: isOut ? "Lista de Espera (Reposição)" : (cupom ? `Pedido WhatsApp (Cupom: ${cupom})` : "Pedido WhatsApp"),
+        nome,
+        whatsapp,
+        peca: `${product.Nome} (Cód: ${product.ID})`,
+        tamanho: size
+      });
 
-        document.getElementById("orderLeadModal").classList.remove("open");
-        alert(`Pronto, ${nome}! Você entrou na lista de espera para o tamanho ${size} da peça "${product.Nome}". Avisaremos no seu WhatsApp assim que chegar!`);
+      submitBtn.disabled = false;
+      leadModal.classList.remove("open");
+
+      if (isOut) {
+        alert(`Pronto, ${nome}! Você entrou na lista de espera do tamanho ${size} (${product.Nome}). Avisaremos no seu WhatsApp assim que chegar!`);
       } else {
-        const tipoPedido = cupom ? `Pedido WhatsApp (Cupom: ${cupom})` : "Pedido WhatsApp";
-        await sendLeadToSheet({
-          tipo: tipoPedido,
-          nome: nome,
-          whatsapp: whatsapp,
-          peca: `${product.Nome} (Cód: ${product.ID})`,
-          tamanho: size
-        });
-
-        document.getElementById("orderLeadModal").classList.remove("open");
-
-        let text = `Olá! Meu nome é *${nome}*, vim pelo catálogo da *use4'16* e gostaria de encomendar:
+        const cupomLine = cupom ? `
+• *Cupom aplicado:* ${cupom}` : "";
+        const text = `Olá! Meu nome é *${nome}*, vim pelo catálogo da *use4'16* e gostaria de encomendar:
 
 • *Peça:* ${product.Nome} (Cód: ${product.ID})
 • *Tamanho:* ${size}
-• *Valor:* R$ ${product.Preco}`;
-        if (cupom) {
-          text += `
-• *Cupom aplicado:* ${cupom}`;
-        }
-        text += `
+• *Valor:* R$ ${product.Preco}${cupomLine}
 
 Ainda está disponível?`;
-
-        const waUrl = `https://wa.me/${cleanWa}?text=${encodeURIComponent(text)}`;
+        const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(text)}`;
         window.open(waUrl, "_blank");
       }
-
-      btn.disabled = false;
     });
 
-    // Filtros
     document.querySelectorAll(".filter-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
