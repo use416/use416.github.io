@@ -2778,6 +2778,10 @@
                 <span class="pay-opt-title">Dinheiro</span>
                 <span class="pay-opt-sub">Pagamento na entrega</span>
               </button>
+              <button type="button" class="pay-option-card" data-payment="Link de Pagamento">
+                <span class="pay-opt-title">Link de Pagamento</span>
+                <span class="pay-opt-sub">Cartão à distância</span>
+              </button>
             </div>
           </div>
 
@@ -3328,7 +3332,8 @@
         const urlWithCacheBust = `${CONFIG.googleSheetsCsvUrl}${separator}t=${new Date().getTime()}`;
         const [response] = await Promise.all([
           fetch(urlWithCacheBust),
-          fetchGlobalRatingsFromAppsScript()
+          fetchGlobalRatingsFromAppsScript(),
+          fetchStoreConfigFromAppsScript()
         ]);
         const csvData = await response.text();
         allProducts = parseCSV(csvData);
@@ -3443,6 +3448,76 @@
         }
       } catch (err) {
         console.warn("Avaliações globais indisponíveis no momento:", err);
+      }
+    }
+
+    async function fetchStoreConfigFromAppsScript() {
+      if (!CONFIG.googleAppsScriptUrl) return;
+      try {
+        const sep = CONFIG.googleAppsScriptUrl.includes("?") ? "&" : "?";
+        const url = `${CONFIG.googleAppsScriptUrl}${sep}action=getConfigLoja&t=${Date.now()}`;
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const cfg = await res.json();
+
+        if (Array.isArray(cfg.pagamentos) && cfg.pagamentos.length > 0) {
+          const ativosMap = new Map(cfg.pagamentos.map(p => [String(p.nome || "").trim().toLowerCase(), p]));
+          const cards = Array.from(document.querySelectorAll("#paymentOptionsGrid .pay-option-card"));
+          let defaultPay = null;
+
+          cards.forEach(card => {
+            const label = (card.getAttribute("data-payment") || "").trim();
+            const item = ativosMap.get(label.toLowerCase());
+            if (item) {
+              card.style.display = "";
+              if (item.padrao) defaultPay = label;
+            } else {
+              card.style.display = "none";
+              card.classList.remove("selected");
+            }
+          });
+
+          const firstVisible = cards.find(c => c.style.display !== "none");
+          const chosenPay = defaultPay || (firstVisible ? firstVisible.getAttribute("data-payment") : "Pix");
+          selectedPaymentMethod = chosenPay;
+          cards.forEach(c => {
+            c.classList.toggle("selected", c.getAttribute("data-payment") === chosenPay);
+          });
+        }
+
+        if (Array.isArray(cfg.entregas) && cfg.entregas.length > 0) {
+          const ativosEntMap = new Map(cfg.entregas.map(ent => [String(ent.nome || "").trim().toLowerCase(), ent]));
+          const pills = Array.from(document.querySelectorAll(".delivery-pill-btn"));
+          let defaultDel = null;
+
+          pills.forEach(btn => {
+            const label = (btn.getAttribute("data-delivery") || "").trim();
+            const item = ativosEntMap.get(label.toLowerCase());
+            if (item) {
+              btn.style.display = "";
+              if (item.padrao) defaultDel = label;
+            } else {
+              btn.style.display = "none";
+              btn.classList.remove("selected");
+            }
+          });
+
+          const firstVisiblePill = pills.find(b => b.style.display !== "none");
+          const chosenDel = defaultDel || (firstVisiblePill ? firstVisiblePill.getAttribute("data-delivery") : "Entrega em Maceió/AL");
+          selectedDeliveryMethod = chosenDel;
+          pills.forEach(b => {
+            b.classList.toggle("selected", b.getAttribute("data-delivery") === chosenDel);
+          });
+
+          const addrInput = document.getElementById("cartAddressInput");
+          if (addrInput) {
+            addrInput.style.display = selectedDeliveryMethod.includes("Maceió") ? "block" : "none";
+          }
+        }
+
+        updateCartUI();
+      } catch (err) {
+        console.warn("Não foi possível carregar Config_Loja:", err);
       }
     }
 
