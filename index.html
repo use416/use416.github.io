@@ -3460,6 +3460,33 @@
         if (!res.ok) return;
         const cfg = await res.json();
 
+        // Aplica configurações gerais da aba Config_Loja (colunas A:F)
+        if (cfg.gerais && typeof cfg.gerais === "object") {
+          const g = cfg.gerais;
+          if (g.Cupom_VIP && String(g.Cupom_VIP).trim()) {
+            activeCupomVip = String(g.Cupom_VIP).trim().toUpperCase();
+          }
+          if (g.Cupom_Primeira_Compra && String(g.Cupom_Primeira_Compra).trim()) {
+            activeCupomPrimeiraCompra = String(g.Cupom_Primeira_Compra).trim().toUpperCase();
+          }
+          if (g.WhatsApp && String(g.WhatsApp).trim()) {
+            const digits = String(g.WhatsApp).replace(/\D/g, "");
+            if (digits.length >= 10) activeWhatsappNumber = digits;
+          }
+          if (g.Instagram && String(g.Instagram).trim()) {
+            activeInstagramUser = String(g.Instagram).trim();
+          }
+          if (g.Tema_Site && String(g.Tema_Site).trim()) {
+            activeSiteTheme = String(g.Tema_Site).trim();
+          }
+          if (typeof g.Mensagem_Tema === "string") {
+            activeThemeCustomMessage = g.Mensagem_Tema.trim();
+          }
+          applySeasonalTheme();
+          updateStoreLinks();
+        }
+
+        // Aplica formas de pagamento ativas e padrão (colunas G:I)
         if (Array.isArray(cfg.pagamentos) && cfg.pagamentos.length > 0) {
           const ativosMap = new Map(cfg.pagamentos.map(p => [String(p.nome || "").trim().toLowerCase(), p]));
           const cards = Array.from(document.querySelectorAll("#paymentOptionsGrid .pay-option-card"));
