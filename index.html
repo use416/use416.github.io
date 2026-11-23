@@ -1531,14 +1531,14 @@
     }
 
 
-    /* Banner temático delicado inserido entre as linhas da grade de produtos */
+    /* Banner temático delicado inserido entre as linhas da grade de produtos (com decoração no lugar de botão) */
     .inline-theme-banner {
       grid-column: 1 / -1;
       background: linear-gradient(120deg, #FFFFFF 0%, var(--surface-warm, #F4F0E8) 100%);
       border: 1px solid var(--border-subtle, #E6E0D6);
       border-left: 4px solid var(--accent-terracotta, #E06D53);
       border-radius: 18px;
-      padding: 18px 24px;
+      padding: 16px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1582,34 +1582,141 @@
     .inline-theme-title {
       font-family: 'Nunito', sans-serif;
       font-weight: 900;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       color: var(--text-main, #1B2A4A);
       line-height: 1.25;
     }
 
     .inline-theme-sub {
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: var(--text-muted, #5C667A);
       margin-top: 2px;
     }
 
-    .inline-theme-cta {
-      background: var(--text-main, #1B2A4A);
-      color: #FFFFFF;
-      border: none;
-      border-radius: 11px;
-      padding: 10px 18px;
+    .inline-theme-decor {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border-subtle, #E6E0D6);
+      color: var(--text-main, #1B2A4A);
       font-family: 'Nunito', sans-serif;
+      font-size: 0.76rem;
       font-weight: 800;
-      font-size: 0.84rem;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: transform 0.16s ease, background-color 0.16s ease;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
     }
 
-    .inline-theme-cta:hover {
+    .inline-theme-decor-line {
+      width: 22px;
+      height: 1px;
       background: var(--accent-terracotta, #E06D53);
-      transform: translateY(-1px);
+      opacity: 0.55;
+    }
+
+    /* Avaliação por estrelas (1 a 5) e média em cada peça */
+    .product-rating-box {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .stars-interactive {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .star-rate-btn {
+      background: none;
+      border: none;
+      padding: 2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #D5CEC2;
+      transition: transform 0.14s ease, color 0.14s ease;
+    }
+
+    .star-rate-btn:hover,
+    .star-rate-btn.hovered {
+      transform: scale(1.15);
+      color: #E5A93C;
+    }
+
+    .star-rate-btn.filled {
+      color: #E5A93C;
+    }
+
+    .rating-summary-text {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .rating-summary-text strong {
+      color: var(--text-main);
+    }
+
+
+    /* Preço promocional no Pix com selo de porcentagem */
+    .pix-promo-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+      padding: 5px 10px;
+      border-radius: 9px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .pix-promo-box strong {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 0.92rem;
+      color: #047857;
+    }
+
+    .pix-pct-pill {
+      background: #059669;
+      color: #FFFFFF;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 0.7rem;
+      padding: 1px 6px;
+      border-radius: 5px;
+      letter-spacing: 0.2px;
+    }
+
+    /* Opção de parcelamento sem juros no cartão */
+    .installment-line {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: -8px;
+      margin-bottom: 14px;
+      line-height: 1.35;
+    }
+
+    .installment-line strong {
+      color: var(--text-main);
+      font-weight: 800;
     }
 
     /* Rodapé com emblema de etiqueta e assinatura escolhida */
@@ -2462,12 +2569,29 @@
         const totalEstoque = Object.values(estoque).reduce((acc, q) => acc + q, 0);
         const descontoPct = row.Preco_Antigo ? calcDiscountPercent(row.Preco_Antigo, row.Preco) : 0;
 
+        const rawParcelas = row.Parcelas_Cartao || row.Parcelas || row.Qtd_Parcelas || row.Parcelamento || "";
+        const parcelasParsed = parseInt(String(rawParcelas).replace(/\D/g, ""), 10);
+        const parcelasNum = (!isNaN(parcelasParsed) && parcelasParsed >= 1) ? Math.min(12, parcelasParsed) : 1;
+        const precoNum = parsePriceNumber(row.Preco);
+        const valorParcelaFormatado = precoNum > 0
+          ? (precoNum / parcelasNum).toFixed(2).replace(".", ",")
+          : formatPrice(row.Preco);
+
+        const rawPix = row.Preco_Pix || row.Valor_Pix || row.Pix || "";
+        const pixNum = parsePriceNumber(rawPix);
+        const hasPixPromo = pixNum > 0 && precoNum > 0 && pixNum < precoNum;
+        const pixDescontoPct = hasPixPromo ? calcDiscountPercent(row.Preco, rawPix) : 0;
+
         return {
           ID: row.ID || "",
           Nome: row.Nome || "Peça sem nome",
           Mundo: row.Mundo || "Kids",
           Preco: formatPrice(row.Preco),
           Preco_Antigo: row.Preco_Antigo ? formatPrice(row.Preco_Antigo) : "",
+          precoPix: hasPixPromo ? formatPrice(rawPix) : "",
+          pixDescontoPct,
+          parcelasQtd: parcelasNum,
+          valorParcela: valorParcelaFormatado,
           descontoPct,
           Tag: row.Tag ? row.Tag.trim() : "",
           Fotos: fotos,
@@ -2481,7 +2605,10 @@
       try {
         const separator = CONFIG.googleSheetsCsvUrl.includes("?") ? "&" : "?";
         const urlWithCacheBust = `${CONFIG.googleSheetsCsvUrl}${separator}t=${new Date().getTime()}`;
-        const response = await fetch(urlWithCacheBust);
+        const [response] = await Promise.all([
+          fetch(urlWithCacheBust),
+          fetchGlobalRatingsFromAppsScript()
+        ]);
         const csvData = await response.text();
         allProducts = parseCSV(csvData);
         applySeasonalTheme();
@@ -2526,17 +2653,150 @@
             <div class="inline-theme-sub">Peças do tamanho 4 ao 16 com atendimento direto no WhatsApp.</div>
           </div>
         </div>
-        <button type="button" class="inline-theme-cta">Ver Cupom 1ª Compra</button>
+        <div class="inline-theme-decor" aria-hidden="true">
+          <span class="inline-theme-decor-line"></span>
+          ${themeObj.badgeSvg || ""}
+          <span>use4'16</span>
+          ${themeObj.badgeSvg || ""}
+          <span class="inline-theme-decor-line"></span>
+        </div>
       `;
 
-      const ctaBtn = banner.querySelector(".inline-theme-cta");
-      if (ctaBtn) {
-        ctaBtn.addEventListener("click", () => {
-          document.getElementById("couponModal").classList.add("open");
-        });
+      return banner;
+    }
+
+
+    const RATINGS_STORAGE_KEY = "use416_product_ratings_v1";
+    const GLOBAL_RATINGS_CACHE_KEY = "use416_global_ratings_cache_v1";
+    let globalRatingsMap = {};
+
+    try {
+      const cachedGlobal = localStorage.getItem(GLOBAL_RATINGS_CACHE_KEY);
+      if (cachedGlobal) globalRatingsMap = JSON.parse(cachedGlobal);
+    } catch (e) {}
+
+    function getProductKey(product) {
+      return String(product.ID || product.Nome).trim().toLowerCase();
+    }
+
+    function loadUserVotesMap() {
+      try {
+        const raw = localStorage.getItem(RATINGS_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveUserVotesMap(map) {
+      try {
+        localStorage.setItem(RATINGS_STORAGE_KEY, JSON.stringify(map));
+      } catch (e) {}
+    }
+
+    async function fetchGlobalRatingsFromAppsScript() {
+      if (!CONFIG.googleAppsScriptUrl) return;
+      try {
+        const sep = CONFIG.googleAppsScriptUrl.includes("?") ? "&" : "?";
+        const url = `${CONFIG.googleAppsScriptUrl}${sep}action=getRatings&t=${Date.now()}`;
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const data = await res.json();
+        const rawMap = data && (data.ratings || data.data || data);
+        if (rawMap && typeof rawMap === "object" && !Array.isArray(rawMap)) {
+          const normalized = {};
+          Object.keys(rawMap).forEach(k => {
+            const item = rawMap[k];
+            if (item && typeof item === "object") {
+              const count = Number(item.count || item.total || item.qtd || 0);
+              const sum = Number(item.sum || item.soma || (item.avg ? item.avg * count : 0));
+              if (count > 0) {
+                normalized[String(k).trim().toLowerCase()] = { count, sum };
+              }
+            }
+          });
+          globalRatingsMap = normalized;
+          try {
+            localStorage.setItem(GLOBAL_RATINGS_CACHE_KEY, JSON.stringify(globalRatingsMap));
+          } catch (e) {}
+        }
+      } catch (err) {
+        console.warn("Avaliações globais indisponíveis no momento:", err);
+      }
+    }
+
+    function getRatingStats(product) {
+      const key = getProductKey(product);
+      const userMap = loadUserVotesMap();
+      const userEntry = userMap[key] || { userStar: 0, syncedStar: 0 };
+      const globalEntry = globalRatingsMap[key] || { count: 0, sum: 0 };
+
+      let totalCount = Number(globalEntry.count || 0);
+      let totalSum = Number(globalEntry.sum || 0);
+
+      // Soma ou ajusta otimisticamente o voto deste visitante caso o backend ainda não tenha refletido a última alteração
+      if (userEntry.userStar > 0) {
+        if (userEntry.syncedStar > 0) {
+          totalSum = Math.max(0, totalSum - userEntry.syncedStar + userEntry.userStar);
+        } else {
+          totalCount += 1;
+          totalSum += userEntry.userStar;
+        }
       }
 
-      return banner;
+      const avg = totalCount > 0 ? (totalSum / totalCount) : 0;
+      return {
+        count: totalCount,
+        sum: totalSum,
+        avg,
+        avgFormatted: avg > 0 ? avg.toFixed(1).replace(".", ",") : "0,0",
+        userStar: userEntry.userStar || 0
+      };
+    }
+
+    async function submitStarRating(product, starValue) {
+      const key = getProductKey(product);
+      const userMap = loadUserVotesMap();
+      const prev = userMap[key] || { userStar: 0, syncedStar: 0 };
+      const previousStar = prev.userStar || 0;
+
+      userMap[key] = {
+        userStar: starValue,
+        syncedStar: prev.syncedStar || 0
+      };
+      saveUserVotesMap(userMap);
+
+      // Envia para o Apps Script contabilizar na média global de todos os visitantes
+      saveLeadToSheet({
+        action: "rateProduct",
+        tipo: "Avaliação Estrelas",
+        produtoKey: key,
+        produtoId: String(product.ID || ""),
+        nota: starValue,
+        notaAnterior: previousStar,
+        nome: localStorage.getItem("use416_lead_nome") || "Visitante",
+        whatsapp: localStorage.getItem("use416_lead_whats") || "-",
+        peca: `${product.Nome} (Cód: ${product.ID})`,
+        tamanho: `${starValue} estrelas`
+      }).then(res => {
+        if (res && res.ratings && typeof res.ratings === "object") {
+          globalRatingsMap = res.ratings;
+          const updatedMap = loadUserVotesMap();
+          if (updatedMap[key]) {
+            updatedMap[key].syncedStar = starValue;
+            saveUserVotesMap(updatedMap);
+          }
+          try {
+            localStorage.setItem(GLOBAL_RATINGS_CACHE_KEY, JSON.stringify(globalRatingsMap));
+          } catch (e) {}
+        }
+      });
+
+      return getRatingStats(product);
+    }
+
+    function renderStarSvg(size = 14) {
+      return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
     }
 
     function renderCatalog() {
@@ -2629,12 +2889,31 @@
           </div>
           <div class="product-info">
             <h2 class="product-title">${product.Nome}</h2>
+            <div class="product-rating-box" data-product-rating>
+              <div class="stars-interactive" role="group" aria-label="Avaliar de 1 a 5 estrelas">
+                ${[1, 2, 3, 4, 5].map(n => `
+                  <button type="button" class="star-rate-btn" data-star="${n}" aria-label="Avaliar com ${n} ${n === 1 ? 'estrela' : 'estrelas'}" title="${n} ${n === 1 ? 'estrela' : 'estrelas'}">
+                    ${renderStarSvg(15)}
+                  </button>
+                `).join("")}
+              </div>
+              <span class="rating-summary-text" data-rating-summary></span>
+            </div>
             <div class="price-box">
               ${product.Preco_Antigo ? `<span class="old-price">De R$ ${product.Preco_Antigo}</span>` : ''}
               <span class="product-price ${product.Preco_Antigo ? 'promo' : ''}">
                 ${product.Preco_Antigo ? 'Por ' : ''}R$ ${product.Preco}
               </span>
               ${product.descontoPct > 0 ? `<span class="discount-badge">-${product.descontoPct}% OFF</span>` : ''}
+            </div>
+            ${product.precoPix ? `
+              <div class="pix-promo-box">
+                <span>No Pix: <strong>R$ ${product.precoPix}</strong></span>
+                ${product.pixDescontoPct > 0 ? `<span class="pix-pct-pill">-${product.pixDescontoPct}% OFF</span>` : ''}
+              </div>
+            ` : ''}
+            <div class="installment-line">
+              (ou <strong>${product.parcelasQtd}x de R$ ${product.valorParcela}</strong> no cartão s/ juros)
             </div>
             <span class="sizes-label">Selecione o tamanho (ou clique no esgotado para aviso):</span>
             <div class="sizes-grid">${sizesHtml}</div>
@@ -2668,6 +2947,38 @@
             syncDots();
           });
         }
+
+        const starButtons = card.querySelectorAll(".star-rate-btn");
+        const ratingSummaryEl = card.querySelector("[data-rating-summary]");
+
+        const paintStars = (stats, hoverVal = 0) => {
+          const activeVal = hoverVal > 0 ? hoverVal : stats.userStar;
+          starButtons.forEach(sb => {
+            const val = parseInt(sb.getAttribute("data-star"), 10);
+            sb.classList.toggle("filled", val <= activeVal);
+            sb.classList.toggle("hovered", hoverVal > 0 && val <= hoverVal);
+          });
+          if (ratingSummaryEl) {
+            if (stats.count > 0) {
+              ratingSummaryEl.innerHTML = `★ <strong>${stats.avgFormatted}</strong> (${stats.count})`;
+            } else {
+              ratingSummaryEl.innerHTML = `<span>Avalie</span>`;
+            }
+          }
+        };
+
+        paintStars(getRatingStats(product));
+
+        starButtons.forEach(sb => {
+          const val = parseInt(sb.getAttribute("data-star"), 10);
+          sb.addEventListener("mouseenter", () => paintStars(getRatingStats(product), val));
+          sb.addEventListener("mouseleave", () => paintStars(getRatingStats(product), 0));
+          sb.addEventListener("click", async (e) => {
+            e.stopPropagation();
+            const updatedStats = await submitStarRating(product, val);
+            paintStars(updatedStats, 0);
+          });
+        });
 
         let selectedSize = null;
         let isSelectedOut = false;
@@ -2860,11 +3171,15 @@
       } else {
         const cupomLine = cupom ? `
 • *Cupom aplicado:* ${cupom}` : "";
+        const pixLine = product.precoPix
+          ? `
+• *Valor no Pix:* R$ ${product.precoPix}${product.pixDescontoPct > 0 ? ` (-${product.pixDescontoPct}% OFF)` : ""}`
+          : "";
         const text = `Olá! Meu nome é *${nome}*, vim pelo catálogo da *use4'16* e gostaria de encomendar:
 
 • *Peça:* ${product.Nome} (Cód: ${product.ID})
 • *Tamanho:* ${size}
-• *Valor:* R$ ${product.Preco}${cupomLine}
+• *Valor:* R$ ${product.Preco}${pixLine}${cupomLine}
 
 Ainda está disponível?`;
         const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(text)}`;
