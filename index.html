@@ -2837,7 +2837,6 @@
       }
 
       const colsCount = getCatalogColumnCount(grid);
-      const insertBannerAfterIndex = (filtered.length > colsCount) ? (colsCount - 1) : -1;
 
       filtered.forEach((product, idx) => {
         const isAllOut = product.totalEstoque <= 0;
@@ -3012,7 +3011,9 @@
 
         grid.appendChild(card);
 
-        if (idx === insertBannerAfterIndex) {
+        const isEndOfRow = (idx + 1) % colsCount === 0;
+        const hasMoreRowsBelow = idx < filtered.length - 1;
+        if (isEndOfRow && hasMoreRowsBelow) {
           const inlineBanner = createInlineThemeBanner();
           if (inlineBanner) {
             grid.appendChild(inlineBanner);
