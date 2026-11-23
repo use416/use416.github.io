@@ -4373,8 +4373,7 @@ Ainda está disponível?`;
         const unitVal = totals.isPix ? item.pixNum : item.precoNum;
         return `• *${item.qty}x ${item.nome}* (Cód: ${item.id || "-"})
   Tamanho: *${item.size}* — R$ ${formatBRL(unitVal * item.qty)}`;
-      }).join("
-");
+      }).join("\n");
 
       // Envia para o Google Apps Script gravar na aba "Pedidos" (e também mantém compatibilidade)
       await saveLeadToSheet({
@@ -4432,8 +4431,7 @@ Ainda está disponível?`;
       messageParts.push(``);
       messageParts.push(`Pode confirmar a disponibilidade para concluirmos?`);
 
-      const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(messageParts.join("
-"))}`;
+      const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(messageParts.join("\n"))}`;
 
       // Limpa a sacola após enviar o pedido
       shoppingCart = [];
