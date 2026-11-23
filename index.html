@@ -1530,6 +1530,88 @@
       grid-column: 1 / -1;
     }
 
+
+    /* Banner temático delicado inserido entre as linhas da grade de produtos */
+    .inline-theme-banner {
+      grid-column: 1 / -1;
+      background: linear-gradient(120deg, #FFFFFF 0%, var(--surface-warm, #F4F0E8) 100%);
+      border: 1px solid var(--border-subtle, #E6E0D6);
+      border-left: 4px solid var(--accent-terracotta, #E06D53);
+      border-radius: 18px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      box-shadow: 0 6px 22px rgba(27, 42, 74, 0.04);
+      animation: cardFadeIn 0.32s ease both;
+    }
+
+    .inline-theme-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .inline-theme-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--kids-soft, #FDECE8);
+      border: 1px solid var(--border-subtle, #E6E0D6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .inline-theme-kicker {
+      display: inline-block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.85px;
+      color: var(--accent-terracotta, #E06D53);
+      margin-bottom: 2px;
+    }
+
+    .inline-theme-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.08rem;
+      color: var(--text-main, #1B2A4A);
+      line-height: 1.25;
+    }
+
+    .inline-theme-sub {
+      font-size: 0.84rem;
+      color: var(--text-muted, #5C667A);
+      margin-top: 2px;
+    }
+
+    .inline-theme-cta {
+      background: var(--text-main, #1B2A4A);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 11px;
+      padding: 10px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.84rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.16s ease, background-color 0.16s ease;
+    }
+
+    .inline-theme-cta:hover {
+      background: var(--accent-terracotta, #E06D53);
+      transform: translateY(-1px);
+    }
+
     /* Rodapé com emblema de etiqueta e assinatura escolhida */
     footer.site-footer {
       background-color: var(--text-main);
@@ -2413,6 +2495,50 @@
       }
     }
 
+
+    function getCatalogColumnCount(gridEl) {
+      const cols = window.getComputedStyle(gridEl).gridTemplateColumns;
+      if (!cols) return 4;
+      const count = cols.split(" ").filter(Boolean).length;
+      return count > 0 ? count : 1;
+    }
+
+    function createInlineThemeBanner() {
+      const key = normalizeThemeKey(activeSiteTheme);
+      const themeObj = SEASONAL_THEMES[key] || SEASONAL_THEMES["padrao"];
+      if (!themeObj || themeObj.slug === "padrao") return null;
+
+      const banner = document.createElement("div");
+      banner.className = "inline-theme-banner";
+      banner.setAttribute("role", "region");
+      banner.setAttribute("aria-label", themeObj.tag);
+
+      const message = activeThemeCustomMessage || themeObj.defaultMsg || "Seleção especial preparada para este momento.";
+
+      banner.innerHTML = `
+        <div class="inline-theme-banner-left">
+          <div class="inline-theme-icon-box" aria-hidden="true">
+            ${themeObj.badgeSvg || ""}
+          </div>
+          <div>
+            <span class="inline-theme-kicker">${themeObj.tag}</span>
+            <div class="inline-theme-title">${message}</div>
+            <div class="inline-theme-sub">Peças do tamanho 4 ao 16 com atendimento direto no WhatsApp.</div>
+          </div>
+        </div>
+        <button type="button" class="inline-theme-cta">Ver Cupom 1ª Compra</button>
+      `;
+
+      const ctaBtn = banner.querySelector(".inline-theme-cta");
+      if (ctaBtn) {
+        ctaBtn.addEventListener("click", () => {
+          document.getElementById("couponModal").classList.add("open");
+        });
+      }
+
+      return banner;
+    }
+
     function renderCatalog() {
       const grid = document.getElementById("catalogGrid");
       const countEl = document.getElementById("resultsCount");
@@ -2450,7 +2576,10 @@
         return;
       }
 
-      filtered.forEach(product => {
+      const colsCount = getCatalogColumnCount(grid);
+      const insertBannerAfterIndex = (filtered.length > colsCount) ? (colsCount - 1) : -1;
+
+      filtered.forEach((product, idx) => {
         const isAllOut = product.totalEstoque <= 0;
         const card = document.createElement("div");
         card.className = `product-card ${isAllOut ? 'sold-out-card' : ''}`;
@@ -2571,6 +2700,13 @@
         });
 
         grid.appendChild(card);
+
+        if (idx === insertBannerAfterIndex) {
+          const inlineBanner = createInlineThemeBanner();
+          if (inlineBanner) {
+            grid.appendChild(inlineBanner);
+          }
+        }
       });
     }
 
@@ -2757,6 +2893,18 @@ Ainda está disponível?`;
         currentSize = pill.getAttribute("data-size");
         renderCatalog();
       });
+    });
+
+
+    let lastColsCount = null;
+    window.addEventListener("resize", () => {
+      const grid = document.getElementById("catalogGrid");
+      if (!grid || allProducts.length === 0) return;
+      const nowCols = getCatalogColumnCount(grid);
+      if (lastColsCount !== null && nowCols !== lastColsCount) {
+        renderCatalog();
+      }
+      lastColsCount = nowCols;
     });
 
     loadProducts();
