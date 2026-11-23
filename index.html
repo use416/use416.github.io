@@ -130,9 +130,19 @@
       background-size: 180px 180px;
     }
 
-    body[data-theme] > * {
+    body[data-theme] > header,
+    body[data-theme] > main,
+    body[data-theme] > footer,
+    body[data-theme] > .top-promo-bar,
+    body[data-theme] > .seasonal-ribbon {
       position: relative;
       z-index: 1;
+    }
+
+    body[data-theme] > header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     /* --- NATAL (Elegante: off-white quente, pinho profundo, bordô suave e dourado champanhe) --- */
@@ -1871,9 +1881,10 @@
       align-items: center;
       gap: 7px;
       cursor: pointer;
+      pointer-events: auto;
       box-shadow: 0 4px 12px rgba(27, 42, 74, 0.14);
       transition: transform 0.15s ease, background-color 0.18s ease;
-      z-index: 105;
+      z-index: 120;
     }
 
     .header-bag-btn:hover {
