@@ -2763,7 +2763,7 @@
           <div class="checkout-section-box">
             <div class="checkout-section-title">Cupom de Desconto</div>
             <div class="coupon-inline-row">
-              <input type="text" id="cartCouponInput" placeholder="Ex.: BEMVINDA10 ou VIP10" />
+              <input type="text" id="cartCouponInput" placeholder="Ex.: CUPOM1234" />
               <button type="button" class="coupon-apply-btn" id="applyCartCouponBtn">Aplicar</button>
             </div>
             <div class="coupon-applied-msg" id="cartCouponFeedback"></div>
@@ -4308,8 +4308,8 @@ Ainda está disponível?`;
       }
       if (creditSub) {
         creditSub.textContent = totals.maxInstallments > 1
-          ? `Até ${totals.maxInstallments}x de R$ ${formatBRL(totals.installmentValue)}`
-          : `R$ ${formatBRL(totals.finalTotal)} à vista`;
+          ? `Até ${totals.maxInstallments}x sem juros`
+          : `1x sem juros`;
       }
 
       // Atualiza resumo de valores
