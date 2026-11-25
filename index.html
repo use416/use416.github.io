@@ -3950,7 +3950,7 @@
         markPhoneRedeemed("vip", whatsapp);
         localStorage.setItem("use416_lead_nome", nome);
         localStorage.setItem("use416_lead_whats", whatsapp);
-        if (!localStorage.setItem("use416_cupom_ativo")) {
+        if (!localStorage.getItem("use416_cupom_ativo")) {
           localStorage.setItem("use416_cupom_ativo", activeCupomVip);
         }
         feedback.innerHTML = `Cadastro confirmado, <strong>${nome}</strong>. Você entrou na Lista VIP <span class="brand-inline">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></span> (Tam. ${tamanho}) e liberou o cupom <span class="vip-coupon-badge">${activeCupomVip}</span> para aplicar no seu pedido.`;
