@@ -3945,7 +3945,7 @@
       if ((res && res.status === "duplicado") || hasPhoneRedeemed("vip", whatsapp)) {
         markPhoneRedeemed("vip", whatsapp);
         feedback.classList.add("warning");
-        feedback.innerHTML = `Aviso: o número <strong>${whatsapp}</strong> já entrou na Lista VIP anteriormente (independente do tamanho escolhido). Seu cupom exclusivo <span class="vip-coupon-badge">${activeCupomVip}</span> já foi resgatado para este número.`;
+        feedback.innerHTML = `Aviso: o número <strong>${whatsapp}</strong> já entrou na Lista VIP anteriormente (independente do tamanho escolhido) e o cupom exclusivo já foi resgatado para este número.`;
       } else {
         markPhoneRedeemed("vip", whatsapp);
         localStorage.setItem("use416_lead_nome", nome);
