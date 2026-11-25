@@ -2466,6 +2466,79 @@
       transform: none;
     }
 
+
+    /* ==========================================================================
+       MODAL EDITORIAL DE POLÍTICA DE TROCAS
+       ========================================================================== */
+    .policy-modal-box {
+      max-width: 500px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 28px 24px 24px;
+    }
+
+    .policy-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--accent-terracotta);
+      background: var(--kids-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .policy-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 14px 0 16px;
+    }
+
+    .policy-item-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--accent-terracotta);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .policy-item-card strong.policy-topic {
+      display: block;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .policy-steps-note {
+      background: var(--surface-warm);
+      border: 1px dashed var(--border-strong);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 0.81rem;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+
+    .policy-wa-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
   </style>
 </head>
 <body>
@@ -2689,7 +2762,7 @@
             </a>
           </li>
           <li>
-            <a href="#" id="footerTrocasLink" target="_blank" rel="noopener">
+            <a href="#politica-de-trocas" id="footerTrocasLink" aria-haspopup="dialog">
               <svg class="icon-svg" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
                 <polyline points="23 4 23 10 17 10"></polyline>
                 <polyline points="1 20 1 14 7 14"></polyline>
@@ -2868,6 +2941,56 @@
         <input type="text" id="modalCoupon" class="modal-field" placeholder="Tem cupom de desconto? (Opcional)" />
         <button type="submit" class="modal-action-btn" id="modalSubmitBtn">Continuar para o WhatsApp</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal 3: Política de Trocas e Devoluções -->
+  <div class="modal-overlay" id="trocasModal" role="dialog" aria-modal="true" aria-labelledby="trocasModalTitle">
+    <div class="modal-box policy-modal-box">
+      <button type="button" class="modal-close" id="closeTrocasModal" aria-label="Fechar política de trocas">×</button>
+      <span class="policy-kicker">
+        <svg class="icon-svg" width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+        Atendimento Transparente
+      </span>
+      <h3 id="trocasModalTitle">Política de Trocas e Devoluções</h3>
+      <p style="margin-bottom: 0;">Queremos que os pequenos vistam a <span class="brand-inline">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></span> com total conforto! Confira nossas regras:</p>
+
+      <div class="policy-items-list">
+        <div class="policy-item-card">
+          <strong class="policy-topic">1. Prazo de Solicitação</strong>
+          Você tem até <strong>7 dias corridos</strong> após o recebimento para solicitar troca de tamanho/modelo ou devolução. <em>Comprou para presente?</em> Avise na observação do pedido para estendermos a troca de tamanho para <strong>15 dias corridos</strong>.
+        </div>
+
+        <div class="policy-item-card">
+          <strong class="policy-topic">2. Condições da Peça</strong>
+          A peça deve estar exatamente como foi entregue: com a <strong>etiqueta original fixada</strong>, sem indícios de uso, sem odores e <strong>sem ter sido lavada</strong>.
+        </div>
+
+        <div class="policy-item-card">
+          <strong class="policy-topic">3. Entregas e Taxas (Maceió/AL)</strong>
+          Em trocas por tamanho ou escolha pessoal, os custos de deslocamento (motoboy) ficam por conta do cliente — ou combinamos retirada sem custo. Em caso de <strong>defeito de fabricação</strong> (até 30 dias) ou erro no envio, o frete é 100% por nossa conta.
+        </div>
+
+        <div class="policy-item-card">
+          <strong class="policy-topic">4. Créditos e Peças Promocionais</strong>
+          O crédito de troca considera sempre o <strong>valor efetivamente pago</strong> no pedido (respeitando descontos de Pix ou cupons). Peças da categoria <em>Última Peça / Liquidação</em> possuem troca apenas em caso de defeito.
+        </div>
+      </div>
+
+      <div class="policy-steps-note">
+        <strong>Como solicitar:</strong> Tenha em mãos o <strong>Número do Pedido</strong> (ex.: <code>PED-...</code>), uma foto da peça com a etiqueta fixada e informe o novo tamanho desejado no nosso WhatsApp.
+      </div>
+
+      <a href="#" id="modalSolicitarTrocaWa" target="_blank" rel="noopener" class="modal-action-btn policy-wa-cta">
+        <svg class="icon-svg" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        <span>Solicitar uma Troca no WhatsApp</span>
+      </a>
     </div>
   </div>
 
@@ -3204,8 +3327,11 @@
         `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16.")}`;
       document.getElementById("footerMedidasLink").href =
         `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de conferir a tabela de medidas da use4'16.")}`;
-      document.getElementById("footerTrocasLink").href =
-        `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de saber como funciona a política de trocas da use4'16.")}`;
+      const trocaWaBtn = document.getElementById("modalSolicitarTrocaWa");
+      if (trocaWaBtn) {
+        trocaWaBtn.href =
+          `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de solicitar uma troca na *use4'16*:\n\n• *Número do Pedido:* PED-\n• *Peça atual:* \n• *Novo tamanho ou peça desejada:* ")}`;
+      }
       document.getElementById("footerEncomendaLink").href =
         `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de encomendar um tamanho específico na use4'16.")}`;
 
@@ -4767,6 +4893,39 @@ Ainda está disponível?`;
       closeCartDrawer();
 
       openSafeWhatsappUrl(waUrl, preWin);
+    });
+
+    // Controle do Modal de Política de Trocas
+    const trocasModal = document.getElementById("trocasModal");
+    const footerTrocasLink = document.getElementById("footerTrocasLink");
+    const closeTrocasModalBtn = document.getElementById("closeTrocasModal");
+
+    if (footerTrocasLink && trocasModal) {
+      footerTrocasLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        updateStoreLinks();
+        trocasModal.classList.add("open");
+      });
+    }
+
+    if (closeTrocasModalBtn && trocasModal) {
+      closeTrocasModalBtn.addEventListener("click", () => {
+        trocasModal.classList.remove("open");
+      });
+    }
+
+    if (trocasModal) {
+      trocasModal.addEventListener("click", (e) => {
+        if (e.target.id === "trocasModal") {
+          trocasModal.classList.remove("open");
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && trocasModal && trocasModal.classList.contains("open")) {
+        trocasModal.classList.remove("open");
+      }
     });
 
     updateCartUI();
