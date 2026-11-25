@@ -3891,6 +3891,35 @@
       });
     }
 
+    function getRedeemedPhoneMap() {
+      try {
+        const raw = localStorage.getItem("use416_redeemed_phones_v1");
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function markPhoneRedeemed(tipoKey, whatsapp) {
+      const digits = String(whatsapp || "").replace(/\D/g, "");
+      if (!digits) return;
+      const map = getRedeemedPhoneMap();
+      if (!map[tipoKey]) map[tipoKey] = [];
+      if (!map[tipoKey].includes(digits)) {
+        map[tipoKey].push(digits);
+      }
+      try {
+        localStorage.setItem("use416_redeemed_phones_v1", JSON.stringify(map));
+      } catch (e) {}
+    }
+
+    function hasPhoneRedeemed(tipoKey, whatsapp) {
+      const digits = String(whatsapp || "").replace(/\D/g, "");
+      if (!digits) return false;
+      const map = getRedeemedPhoneMap();
+      return Array.isArray(map[tipoKey]) && map[tipoKey].includes(digits);
+    }
+
     document.getElementById("vipForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const nome = document.getElementById("vipName").value.trim();
@@ -3913,16 +3942,18 @@
       document.getElementById("vipForm").style.display = "none";
       feedback.style.display = "block";
 
-      if (res && res.status === "duplicado") {
+      if ((res && res.status === "duplicado") || hasPhoneRedeemed("vip", whatsapp)) {
+        markPhoneRedeemed("vip", whatsapp);
         feedback.classList.add("warning");
-        feedback.innerHTML = `O WhatsApp <strong>${whatsapp}</strong> já está cadastrado na nossa Lista VIP. Aproveite seu cupom exclusivo <span class="vip-coupon-badge">${activeCupomVip}</span> nos seus pedidos.`;
+        feedback.innerHTML = `Aviso: o número <strong>${whatsapp}</strong> já entrou na Lista VIP anteriormente (independente do tamanho escolhido). Seu cupom exclusivo <span class="vip-coupon-badge">${activeCupomVip}</span> já foi resgatado para este número.`;
       } else {
+        markPhoneRedeemed("vip", whatsapp);
         localStorage.setItem("use416_lead_nome", nome);
         localStorage.setItem("use416_lead_whats", whatsapp);
-        if (!localStorage.getItem("use416_cupom_ativo")) {
+        if (!localStorage.setItem("use416_cupom_ativo")) {
           localStorage.setItem("use416_cupom_ativo", activeCupomVip);
         }
-        feedback.innerHTML = `Cadastro confirmado, <strong>${nome}</strong>. Você entrou na Lista VIP <span class="brand-inline">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></span> e liberou o cupom <span class="vip-coupon-badge">${activeCupomVip}</span> para aplicar no seu pedido.`;
+        feedback.innerHTML = `Cadastro confirmado, <strong>${nome}</strong>. Você entrou na Lista VIP <span class="brand-inline">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></span> (Tam. ${tamanho}) e liberou o cupom <span class="vip-coupon-badge">${activeCupomVip}</span> para aplicar no seu pedido.`;
       }
     });
 
@@ -3955,13 +3986,15 @@
       document.getElementById("firstPurchaseForm").style.display = "none";
       resultBox.style.display = "block";
 
-      if (res && res.status === "duplicado") {
+      if ((res && res.status === "duplicado") || hasPhoneRedeemed("primeira_compra", whatsapp)) {
+        markPhoneRedeemed("primeira_compra", whatsapp);
         resultBox.innerHTML = `
-          <span>Este WhatsApp já resgatou o cupom de boas-vindas.</span>
+          <span>Aviso: o cupom de 1ª compra <strong>já foi resgatado</strong> para o número <strong>${whatsapp}</strong>.</span>
           <span class="coupon-code-highlight">${activeCupomPrimeiraCompra}</span>
-          <small>Se ainda não realizou seu primeiro pedido, basta informar este código no WhatsApp.</small>
+          <small>Este telefone já consta registrado no resgate de 1ª compra na nossa base.</small>
         `;
       } else {
+        markPhoneRedeemed("primeira_compra", whatsapp);
         localStorage.setItem("use416_lead_nome", nome);
         localStorage.setItem("use416_lead_whats", whatsapp);
         localStorage.setItem("use416_cupom_ativo", activeCupomPrimeiraCompra);
