@@ -2901,6 +2901,7 @@
     let activeSiteTheme = "padrao";
     let activeThemeCustomMessage = "";
     let pendingAction = null;
+    let activeCuponsLista = [];
 
     const SEASONAL_THEMES = {
       "padrao": {
@@ -3496,7 +3497,10 @@
           applySeasonalTheme();
           updateStoreLinks();
         }
-
+        if (Array.isArray(cfg.cupons)) {
+          activeCuponsLista = cfg.cupons;
+        }
+        
         // Aplica formas de pagamento ativas e padrão (colunas G:I)
         if (Array.isArray(cfg.pagamentos) && cfg.pagamentos.length > 0) {
           const ativosMap = new Map(cfg.pagamentos.map(p => [String(p.nome || "").trim().toLowerCase(), p]));
@@ -4116,18 +4120,40 @@ Ainda está disponível?`;
       return Number(num || 0).toFixed(2).replace(".", ",");
     }
 
-    function parseCouponDiscountPct(code) {
+    function findValidBagCoupon(code) {
       const clean = String(code || "").trim().toUpperCase();
-      if (!clean) return 0;
-      const numMatch = clean.match(/(\d{1,2})/);
-      if (numMatch) {
-        const pct = parseInt(numMatch[1], 10);
-        if (pct > 0 && pct <= 50) return pct;
+      if (!clean) return null;
+
+      const found = activeCuponsLista.find(
+        c => String(c.codigo || "").trim().toUpperCase() === clean
+      );
+
+      if (!found) {
+        return { valid: false, reason: `Cupom "${clean}" não encontrado.` };
       }
-      if (clean === activeCupomVip || clean === activeCupomPrimeiraCompra) {
-        return 10;
+      if (!found.ativo) {
+        return { valid: false, reason: `Cupom "${clean}" está inativo no momento.` };
       }
-      return 0;
+      if (!found.aplicarSacola) {
+        return { valid: false, reason: `Cupom "${clean}" não se aplica direto na sacola.` };
+      }
+
+      let pctRaw = Number(found.descontoSacola || found.desconto || 0);
+      if (pctRaw > 0 && pctRaw <= 1) {
+        pctRaw = pctRaw * 100;
+      }
+
+      return {
+        valid: true,
+        codigo: clean,
+        pct: Math.round(pctRaw * 100) / 100,
+        regra: found.regra || ""
+      };
+    }
+
+    function parseCouponDiscountPct(code) {
+      const res = findValidBagCoupon(code);
+      return res && res.valid ? res.pct : 0;
     }
 
     function showCartToast(message) {
@@ -4437,19 +4463,46 @@ Ainda está disponível?`;
       const input = document.getElementById("cartCouponInput");
       const fb = document.getElementById("cartCouponFeedback");
       const code = (input.value || "").trim().toUpperCase();
+
       if (!code) {
         appliedCartCoupon = "";
+        localStorage.removeItem("use416_cupom_ativo");
         fb.style.display = "none";
+        fb.style.color = "#047857";
         updateCartUI();
         return;
       }
+
+      if (activeCuponsLista.length > 0) {
+        const check = findValidBagCoupon(code);
+        if (!check.valid) {
+          appliedCartCoupon = "";
+          localStorage.removeItem("use416_cupom_ativo");
+          fb.style.display = "block";
+          fb.style.color = "#B91C1C";
+          fb.textContent = check.reason;
+          updateCartUI();
+          return;
+        }
+
+        appliedCartCoupon = check.codigo;
+        localStorage.setItem("use416_cupom_ativo", check.codigo);
+        fb.style.display = "block";
+        fb.style.color = "#047857";
+        const regraTxt = check.regra ? ` — ${check.regra}` : "";
+        fb.textContent = `1 cupom na sacola: ${check.codigo} (-${check.pct}% sobre as peças)${regraTxt}`;
+        updateCartUI();
+        return;
+      }
+
       appliedCartCoupon = code;
       localStorage.setItem("use416_cupom_ativo", code);
       const pct = parseCouponDiscountPct(code);
       fb.style.display = "block";
+      fb.style.color = "#047857";
       fb.textContent = pct > 0
-        ? `Cupom ${code} aplicado (${pct}% de desconto)!`
-        : `Cupom ${code} registrado para conferência no pedido!`;
+        ? `Cupom ${code} aplicado (-${pct}% sobre as peças).`
+        : `Cupom ${code} registrado para conferência no pedido.`;
       updateCartUI();
     });
 
