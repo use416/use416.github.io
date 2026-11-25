@@ -2875,9 +2875,8 @@
     const CONFIG = {
       defaultWhatsappNumber: "5582996498298",
       defaultInstagramUser: "use4.16",
-      defaultCupomPrimeiraCompra: "BEMVINDA10",
-      defaultCupomVip: "VIP10",
-      googleSheetsCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQPcYZvH8TbGD0Eto58Ckd5ubrVLeGFU_yra-EoQdNIAiC_vVLQ-7Q_0tIQzEMOf96Thj4Nlfq4P6io/pub?gid=0&single=true&output=csv",
+      defaultCupomPrimeiraCompra: "BEMVINDA416",
+      defaultCupomVip: "VIP416",
       googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbyFfidp6vRVMJSag3b3SpemlNU6yEnVoho9HOkvFyLfR61_n_4GVk6z4rGAsPjrPQqM/exec"
     };
 
@@ -3030,6 +3029,13 @@
         headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#2482AA" stroke-width="1.35" stroke-linecap="round"><circle cx="22" cy="16" r="4.5"/><path d="M36 18c4-3 8-3 12 0s8 3 12 0" stroke="#DF6D53"/></svg>`,
         badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2482AA" stroke-width="1.8"><circle cx="12" cy="12" r="5"/></svg>`
       },
+      "amigo": {
+        slug: "ferias-amizade",
+        tag: "Dia do Amigo",
+        defaultMsg: "Celebrando as melhores amizades com presentes especiais do 4 ao 16!",
+        headerSvg: `<svg width="64" height="32" viewBox="0 0 64 32" fill="none" stroke="#2482AA" stroke-width="1.35" stroke-linecap="round"><circle cx="22" cy="16" r="4.5"/><path d="M36 18c4-3 8-3 12 0s8 3 12 0" stroke="#DF6D53"/></svg>`,
+        badgeSvg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2482AA" stroke-width="1.8"><circle cx="12" cy="12" r="5"/></svg>`
+      },
       "halloween": {
         slug: "halloween",
         tag: "Especial de Outubro",
@@ -3084,6 +3090,32 @@
         ornRight.innerHTML = themeObj.headerSvg;
         ornLeft.classList.add("visible");
         ornRight.classList.add("visible");
+      }
+    }
+
+    // Abertura segura do WhatsApp compatível com iOS/Safari (sem bloqueio de pop-up após await)
+    function prepareSafePopup() {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      const isMobile = isIOS || /Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile) {
+        return null; // Em telemóveis usamos navegação direta para abrir o app nativo do WhatsApp sem bloqueio
+      }
+      try {
+        return window.open("about:blank", "_blank");
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function openSafeWhatsappUrl(waUrl, preOpenedWin) {
+      if (preOpenedWin && !preOpenedWin.closed) {
+        preOpenedWin.location.href = waUrl;
+        return;
+      }
+      const win = window.open(waUrl, "_blank");
+      if (!win) {
+        window.location.href = waUrl;
       }
     }
 
@@ -3185,26 +3217,27 @@
     updateStoreLinks();
 
     function normalizeImageUrl(url) {
-      const trimmed = url.trim();
+      const trimmed = String(url || "").trim();
       const match = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
-      if (match && match.at(1)) {
-        return "https://lh3." + "googleusercontent.com" + "/d/" + match.at(1);
+      if (match && match[1]) {
+        return "https://lh3.googleusercontent.com/d/" + match[1];
       }
       return trimmed;
     }
 
     function parsePriceNumber(val) {
-      if (!val) return 0;
+      if (val === null || val === undefined || val === "") return 0;
+      if (typeof val === "number") return isNaN(val) ? 0 : val;
       const clean = String(val).replace("R$", "").trim().replace(",", ".");
       const num = parseFloat(clean);
       return isNaN(num) ? 0 : num;
     }
 
     function formatPrice(val) {
-      if (!val) return "0,00";
+      if (val === null || val === undefined || val === "") return "0,00";
       const num = parsePriceNumber(val);
       if (num === 0 && String(val).trim() !== "0" && String(val).trim() !== "0,00") {
-        return val;
+        return String(val);
       }
       return num.toFixed(2).replace(".", ",");
     }
@@ -3230,78 +3263,34 @@
         return result;
       } catch (err) {
         console.error("Erro ao registrar lead:", err);
-        return { status: "ok" };
+        return { status: "erro" };
       }
     }
 
-    function parseCSV(csvText) {
-      const lineBreakRegex = new RegExp("\r?\n");
-      const lines = csvText.trim().split(lineBreakRegex);
-      if (lines.length < 2) return [];
-      const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""));
+    // Normaliza lista JSON de produtos vinda do Apps Script (sem necessidade de CSV público)
+    function normalizeCatalogProducts(rawList) {
+      if (!Array.isArray(rawList)) return [];
 
-      return lines.slice(1).map(line => {
-        const values = [];
-        let current = "";
-        let inQuotes = false;
-
-        for (let i = 0; i < line.length; i++) {
-          const char = line[i];
-          if (char === '"') {
-            inQuotes = !inQuotes;
-          } else if (char === ',' && !inQuotes) {
-            values.push(current.trim());
-            current = "";
-          } else {
-            current += char;
-          }
-        }
-        values.push(current.trim());
-
-        const row = {};
-        headers.forEach((header, i) => {
-          row[header] = values[i] || "";
-        });
-
-        if (row.Cupom_Primeira_Compra && row.Cupom_Primeira_Compra.trim() !== "") {
-          activeCupomPrimeiraCompra = row.Cupom_Primeira_Compra.trim().toUpperCase();
-        }
-        if (row.Cupom_VIP && row.Cupom_VIP.trim() !== "") {
-          activeCupomVip = row.Cupom_VIP.trim().toUpperCase();
-        }
-        if (row.Instagram && row.Instagram.trim() !== "") {
-          activeInstagramUser = row.Instagram.trim();
-        }
-        if (row.WhatsApp && row.WhatsApp.trim() !== "") {
-          const digits = row.WhatsApp.replace(/\D/g, "");
-          if (digits.length >= 10) {
-            activeWhatsappNumber = digits;
-          }
-        }
-        if (row.Tema_Site && row.Tema_Site.trim() !== "") {
-          activeSiteTheme = row.Tema_Site.trim();
-        }
-        if (row.Mensagem_Tema && row.Mensagem_Tema.trim() !== "") {
-          activeThemeCustomMessage = row.Mensagem_Tema.trim();
-        }
-
-        const rawFotos = row.Foto_URL
-          ? row.Foto_URL.split(",").map(u => normalizeImageUrl(u.trim())).filter(Boolean)
+      return rawList.map(row => {
+        const rawFotoStr = String(row.Foto_URL || "");
+        const rawFotos = rawFotoStr
+          ? rawFotoStr.split(",").map(u => normalizeImageUrl(u)).filter(Boolean)
           : [];
         const fotos = rawFotos.length > 0 ? rawFotos : [FALLBACK_IMAGE];
 
         const estoque = {
-          "4": parseInt(row.Tam_4) || 0,
-          "6": parseInt(row.Tam_6) || 0,
-          "8": parseInt(row.Tam_8) || 0,
-          "10": parseInt(row.Tam_10) || 0,
-          "12": parseInt(row.Tam_12) || 0,
-          "14": parseInt(row.Tam_14) || 0,
-          "16": parseInt(row.Tam_16) || 0
+          "4": parseInt(row.Tam_4, 10) || 0,
+          "6": parseInt(row.Tam_6, 10) || 0,
+          "8": parseInt(row.Tam_8, 10) || 0,
+          "10": parseInt(row.Tam_10, 10) || 0,
+          "12": parseInt(row.Tam_12, 10) || 0,
+          "14": parseInt(row.Tam_14, 10) || 0,
+          "16": parseInt(row.Tam_16, 10) || 0
         };
 
         const totalEstoque = Object.values(estoque).reduce((acc, q) => acc + q, 0);
-        const descontoPct = row.Preco_Antigo ? calcDiscountPercent(row.Preco_Antigo, row.Preco) : 0;
+        const hasOldPrice = row.Preco_Antigo !== null && row.Preco_Antigo !== undefined && String(row.Preco_Antigo).trim() !== "";
+        const descontoPct = hasOldPrice ? calcDiscountPercent(row.Preco_Antigo, row.Preco) : 0;
 
         const rawParcelas = row.Parcelas_Cartao || row.Parcelas || row.Qtd_Parcelas || row.Parcelamento || "";
         const parcelasParsed = parseInt(String(rawParcelas).replace(/\D/g, ""), 10);
@@ -3317,12 +3306,12 @@
         const pixDescontoPct = hasPixPromo ? calcDiscountPercent(row.Preco, rawPix) : 0;
 
         return {
-          ID: row.ID || "",
-          Nome: row.Nome || "Peça sem nome",
-          Mundo: row.Mundo || "Kids",
+          ID: row.ID !== undefined && row.ID !== null ? String(row.ID).trim() : "",
+          Nome: String(row.Nome || "Peça sem nome").trim(),
+          Mundo: String(row.Mundo || "Kids").trim(),
           Preco: formatPrice(row.Preco),
           precoNum,
-          Preco_Antigo: row.Preco_Antigo ? formatPrice(row.Preco_Antigo) : "",
+          Preco_Antigo: hasOldPrice ? formatPrice(row.Preco_Antigo) : "",
           precoPix: hasPixPromo ? formatPrice(rawPix) : "",
           pixNum: hasPixPromo ? pixNum : precoNum,
           hasPixPromo,
@@ -3330,7 +3319,7 @@
           parcelasQtd: parcelasNum,
           valorParcela: valorParcelaFormatado,
           descontoPct,
-          Tag: row.Tag ? row.Tag.trim() : "",
+          Tag: row.Tag ? String(row.Tag).trim() : "",
           Fotos: fotos,
           estoque,
           totalEstoque
@@ -3338,28 +3327,176 @@
       }).filter(item => item.Nome && item.Nome !== "Peça sem nome");
     }
 
+    const RATINGS_STORAGE_KEY = "use416_product_ratings_v1";
+    const GLOBAL_RATINGS_CACHE_KEY = "use416_global_ratings_cache_v1";
+    let globalRatingsMap = {};
+
+    try {
+      const cachedGlobal = localStorage.getItem(GLOBAL_RATINGS_CACHE_KEY);
+      if (cachedGlobal) globalRatingsMap = JSON.parse(cachedGlobal);
+    } catch (e) {}
+
+    function applyRatingsPayload(rawMap) {
+      if (rawMap && typeof rawMap === "object" && !Array.isArray(rawMap)) {
+        const normalized = {};
+        Object.keys(rawMap).forEach(k => {
+          const item = rawMap[k];
+          if (item && typeof item === "object") {
+            const count = Number(item.count || item.total || item.qtd || 0);
+            const sum = Number(item.sum || item.soma || (item.avg ? item.avg * count : 0));
+            if (count > 0) {
+              normalized[String(k).trim().toLowerCase()] = { count, sum };
+            }
+          }
+        });
+        globalRatingsMap = normalized;
+        try {
+          localStorage.setItem(GLOBAL_RATINGS_CACHE_KEY, JSON.stringify(globalRatingsMap));
+        } catch (e) {}
+      }
+    }
+
+    function applyStoreConfigPayload(cfg) {
+      if (!cfg || typeof cfg !== "object") return;
+
+      if (cfg.gerais && typeof cfg.gerais === "object") {
+        const g = cfg.gerais;
+        if (g.Cupom_VIP && String(g.Cupom_VIP).trim()) {
+          activeCupomVip = String(g.Cupom_VIP).trim().toUpperCase();
+        }
+        if (g.Cupom_Primeira_Compra && String(g.Cupom_Primeira_Compra).trim()) {
+          activeCupomPrimeiraCompra = String(g.Cupom_Primeira_Compra).trim().toUpperCase();
+        }
+        if (g.WhatsApp && String(g.WhatsApp).trim()) {
+          const digits = String(g.WhatsApp).replace(/\D/g, "");
+          if (digits.length >= 10) activeWhatsappNumber = digits;
+        }
+        if (g.Instagram && String(g.Instagram).trim()) {
+          activeInstagramUser = String(g.Instagram).trim();
+        }
+        if (g.Tema_Site && String(g.Tema_Site).trim()) {
+          activeSiteTheme = String(g.Tema_Site).trim();
+        }
+        if (typeof g.Mensagem_Tema === "string") {
+          activeThemeCustomMessage = g.Mensagem_Tema.trim();
+        }
+        applySeasonalTheme();
+        updateStoreLinks();
+      }
+
+      if (Array.isArray(cfg.cupons)) {
+        activeCuponsLista = cfg.cupons;
+      }
+
+      if (Array.isArray(cfg.pagamentos) && cfg.pagamentos.length > 0) {
+        const ativosMap = new Map(cfg.pagamentos.map(p => [String(p.nome || "").trim().toLowerCase(), p]));
+        const cards = Array.from(document.querySelectorAll("#paymentOptionsGrid .pay-option-card"));
+        let defaultPay = null;
+
+        cards.forEach(card => {
+          const label = (card.getAttribute("data-payment") || "").trim();
+          const item = ativosMap.get(label.toLowerCase());
+          if (item) {
+            card.style.display = "";
+            if (item.padrao) defaultPay = label;
+          } else {
+            card.style.display = "none";
+            card.classList.remove("selected");
+          }
+        });
+
+        const firstVisible = cards.find(c => c.style.display !== "none");
+        const chosenPay = defaultPay || (firstVisible ? firstVisible.getAttribute("data-payment") : "Pix");
+        selectedPaymentMethod = chosenPay;
+        cards.forEach(c => {
+          c.classList.toggle("selected", c.getAttribute("data-payment") === chosenPay);
+        });
+      }
+
+      if (Array.isArray(cfg.entregas) && cfg.entregas.length > 0) {
+        const ativosEntMap = new Map(cfg.entregas.map(ent => [String(ent.nome || "").trim().toLowerCase(), ent]));
+        const pills = Array.from(document.querySelectorAll(".delivery-pill-btn"));
+        let defaultDel = null;
+
+        pills.forEach(btn => {
+          const label = (btn.getAttribute("data-delivery") || "").trim();
+          const item = ativosEntMap.get(label.toLowerCase());
+          if (item) {
+            btn.style.display = "";
+            if (item.padrao) defaultDel = label;
+          } else {
+            btn.style.display = "none";
+            btn.classList.remove("selected");
+          }
+        });
+
+        const firstVisiblePill = pills.find(b => b.style.display !== "none");
+        const chosenDel = defaultDel || (firstVisiblePill ? firstVisiblePill.getAttribute("data-delivery") : "Entrega em Maceió/AL");
+        selectedDeliveryMethod = chosenDel;
+        pills.forEach(b => {
+          b.classList.toggle("selected", b.getAttribute("data-delivery") === chosenDel);
+        });
+
+        const addrInput = document.getElementById("cartAddressInput");
+        if (addrInput) {
+          addrInput.style.display = selectedDeliveryMethod.includes("Maceió") ? "block" : "none";
+        }
+      }
+
+      updateCartUI();
+    }
+
     async function loadProducts() {
+      if (!CONFIG.googleAppsScriptUrl) {
+        document.getElementById("resultsCount").textContent = "API não configurada";
+        document.getElementById("catalogGrid").innerHTML =
+          `<div class="status-msg">Configure a URL do Google Apps Script para carregar o catálogo.</div>`;
+        return;
+      }
+
       try {
-        const separator = CONFIG.googleSheetsCsvUrl.includes("?") ? "&" : "?";
-        const urlWithCacheBust = `${CONFIG.googleSheetsCsvUrl}${separator}t=${new Date().getTime()}`;
-        const [response] = await Promise.all([
-          fetch(urlWithCacheBust),
-          fetchGlobalRatingsFromAppsScript(),
-          fetchStoreConfigFromAppsScript()
-        ]);
-        const csvData = await response.text();
-        allProducts = parseCSV(csvData);
+        const sep = CONFIG.googleAppsScriptUrl.includes("?") ? "&" : "?";
+        const bootstrapUrl = `${CONFIG.googleAppsScriptUrl}${sep}action=getStoreBootstrap&t=${Date.now()}`;
+        const response = await fetch(bootstrapUrl);
+        if (!response.ok) {
+          throw new Error(`Falha ao comunicar com a API (${response.status})`);
+        }
+
+        const data = await response.json();
+
+        // Caso o Apps Script já esteja atualizado com getStoreBootstrap, tudo vem numa única chamada
+        if (data && Array.isArray(data.produtos)) {
+          if (data.ratings) applyRatingsPayload(data.ratings);
+          if (data.config) applyStoreConfigPayload(data.config);
+          allProducts = normalizeCatalogProducts(data.produtos);
+        } else {
+          // Fallback caso use endpoints individuais (getCatalogo + getConfigLoja + getRatings)
+          const [catRes, cfgRes, ratRes] = await Promise.all([
+            fetch(`${CONFIG.googleAppsScriptUrl}${sep}action=getCatalogo&t=${Date.now()}`),
+            fetch(`${CONFIG.googleAppsScriptUrl}${sep}action=getConfigLoja&t=${Date.now()}`),
+            fetch(`${CONFIG.googleAppsScriptUrl}${sep}action=getRatings&t=${Date.now()}`)
+          ]);
+
+          const catJson = catRes.ok ? await catRes.json() : {};
+          const cfgJson = cfgRes.ok ? await cfgRes.json() : {};
+          const ratJson = ratRes.ok ? await ratRes.json() : {};
+
+          if (ratJson && ratJson.ratings) applyRatingsPayload(ratJson.ratings);
+          if (cfgJson) applyStoreConfigPayload(cfgJson);
+          allProducts = normalizeCatalogProducts(catJson.produtos || []);
+        }
+
         applySeasonalTheme();
         updateStoreLinks();
         renderCatalog();
+        updateCartUI();
       } catch (error) {
         console.error("Erro detalhado:", error);
         document.getElementById("resultsCount").textContent = "Erro ao carregar";
         document.getElementById("catalogGrid").innerHTML =
-          `<div class="status-msg">Erro técnico: ${error.message}</div>`;
+          `<div class="status-msg">Não foi possível carregar o catálogo no momento. Verifique se a nova versão do Apps Script foi implantada. (${error.message})</div>`;
       }
     }
-
 
     function getCatalogColumnCount(gridEl) {
       const cols = window.getComputedStyle(gridEl).gridTemplateColumns;
@@ -3403,16 +3540,6 @@
       return banner;
     }
 
-
-    const RATINGS_STORAGE_KEY = "use416_product_ratings_v1";
-    const GLOBAL_RATINGS_CACHE_KEY = "use416_global_ratings_cache_v1";
-    let globalRatingsMap = {};
-
-    try {
-      const cachedGlobal = localStorage.getItem(GLOBAL_RATINGS_CACHE_KEY);
-      if (cachedGlobal) globalRatingsMap = JSON.parse(cachedGlobal);
-    } catch (e) {}
-
     function getProductKey(product) {
       return String(product.ID || product.Nome).trim().toLowerCase();
     }
@@ -3432,137 +3559,6 @@
       } catch (e) {}
     }
 
-    async function fetchGlobalRatingsFromAppsScript() {
-      if (!CONFIG.googleAppsScriptUrl) return;
-      try {
-        const sep = CONFIG.googleAppsScriptUrl.includes("?") ? "&" : "?";
-        const url = `${CONFIG.googleAppsScriptUrl}${sep}action=getRatings&t=${Date.now()}`;
-        const res = await fetch(url);
-        if (!res.ok) return;
-        const data = await res.json();
-        const rawMap = data && (data.ratings || data.data || data);
-        if (rawMap && typeof rawMap === "object" && !Array.isArray(rawMap)) {
-          const normalized = {};
-          Object.keys(rawMap).forEach(k => {
-            const item = rawMap[k];
-            if (item && typeof item === "object") {
-              const count = Number(item.count || item.total || item.qtd || 0);
-              const sum = Number(item.sum || item.soma || (item.avg ? item.avg * count : 0));
-              if (count > 0) {
-                normalized[String(k).trim().toLowerCase()] = { count, sum };
-              }
-            }
-          });
-          globalRatingsMap = normalized;
-          try {
-            localStorage.setItem(GLOBAL_RATINGS_CACHE_KEY, JSON.stringify(globalRatingsMap));
-          } catch (e) {}
-        }
-      } catch (err) {
-        console.warn("Avaliações globais indisponíveis no momento:", err);
-      }
-    }
-
-    async function fetchStoreConfigFromAppsScript() {
-      if (!CONFIG.googleAppsScriptUrl) return;
-      try {
-        const sep = CONFIG.googleAppsScriptUrl.includes("?") ? "&" : "?";
-        const url = `${CONFIG.googleAppsScriptUrl}${sep}action=getConfigLoja&t=${Date.now()}`;
-        const res = await fetch(url);
-        if (!res.ok) return;
-        const cfg = await res.json();
-
-        // Aplica configurações gerais da aba Config_Loja (colunas A:F)
-        if (cfg.gerais && typeof cfg.gerais === "object") {
-          const g = cfg.gerais;
-          if (g.Cupom_VIP && String(g.Cupom_VIP).trim()) {
-            activeCupomVip = String(g.Cupom_VIP).trim().toUpperCase();
-          }
-          if (g.Cupom_Primeira_Compra && String(g.Cupom_Primeira_Compra).trim()) {
-            activeCupomPrimeiraCompra = String(g.Cupom_Primeira_Compra).trim().toUpperCase();
-          }
-          if (g.WhatsApp && String(g.WhatsApp).trim()) {
-            const digits = String(g.WhatsApp).replace(/\D/g, "");
-            if (digits.length >= 10) activeWhatsappNumber = digits;
-          }
-          if (g.Instagram && String(g.Instagram).trim()) {
-            activeInstagramUser = String(g.Instagram).trim();
-          }
-          if (g.Tema_Site && String(g.Tema_Site).trim()) {
-            activeSiteTheme = String(g.Tema_Site).trim();
-          }
-          if (typeof g.Mensagem_Tema === "string") {
-            activeThemeCustomMessage = g.Mensagem_Tema.trim();
-          }
-          applySeasonalTheme();
-          updateStoreLinks();
-        }
-        if (Array.isArray(cfg.cupons)) {
-          activeCuponsLista = cfg.cupons;
-        }
-        
-        // Aplica formas de pagamento ativas e padrão (colunas G:I)
-        if (Array.isArray(cfg.pagamentos) && cfg.pagamentos.length > 0) {
-          const ativosMap = new Map(cfg.pagamentos.map(p => [String(p.nome || "").trim().toLowerCase(), p]));
-          const cards = Array.from(document.querySelectorAll("#paymentOptionsGrid .pay-option-card"));
-          let defaultPay = null;
-
-          cards.forEach(card => {
-            const label = (card.getAttribute("data-payment") || "").trim();
-            const item = ativosMap.get(label.toLowerCase());
-            if (item) {
-              card.style.display = "";
-              if (item.padrao) defaultPay = label;
-            } else {
-              card.style.display = "none";
-              card.classList.remove("selected");
-            }
-          });
-
-          const firstVisible = cards.find(c => c.style.display !== "none");
-          const chosenPay = defaultPay || (firstVisible ? firstVisible.getAttribute("data-payment") : "Pix");
-          selectedPaymentMethod = chosenPay;
-          cards.forEach(c => {
-            c.classList.toggle("selected", c.getAttribute("data-payment") === chosenPay);
-          });
-        }
-
-        if (Array.isArray(cfg.entregas) && cfg.entregas.length > 0) {
-          const ativosEntMap = new Map(cfg.entregas.map(ent => [String(ent.nome || "").trim().toLowerCase(), ent]));
-          const pills = Array.from(document.querySelectorAll(".delivery-pill-btn"));
-          let defaultDel = null;
-
-          pills.forEach(btn => {
-            const label = (btn.getAttribute("data-delivery") || "").trim();
-            const item = ativosEntMap.get(label.toLowerCase());
-            if (item) {
-              btn.style.display = "";
-              if (item.padrao) defaultDel = label;
-            } else {
-              btn.style.display = "none";
-              btn.classList.remove("selected");
-            }
-          });
-
-          const firstVisiblePill = pills.find(b => b.style.display !== "none");
-          const chosenDel = defaultDel || (firstVisiblePill ? firstVisiblePill.getAttribute("data-delivery") : "Entrega em Maceió/AL");
-          selectedDeliveryMethod = chosenDel;
-          pills.forEach(b => {
-            b.classList.toggle("selected", b.getAttribute("data-delivery") === chosenDel);
-          });
-
-          const addrInput = document.getElementById("cartAddressInput");
-          if (addrInput) {
-            addrInput.style.display = selectedDeliveryMethod.includes("Maceió") ? "block" : "none";
-          }
-        }
-
-        updateCartUI();
-      } catch (err) {
-        console.warn("Não foi possível carregar Config_Loja:", err);
-      }
-    }
-
     function getRatingStats(product) {
       const key = getProductKey(product);
       const userMap = loadUserVotesMap();
@@ -3572,7 +3568,6 @@
       let totalCount = Number(globalEntry.count || 0);
       let totalSum = Number(globalEntry.sum || 0);
 
-      // Soma ou ajusta otimisticamente o voto deste visitante caso o backend ainda não tenha refletido a última alteração
       if (userEntry.userStar > 0) {
         if (userEntry.syncedStar > 0) {
           totalSum = Math.max(0, totalSum - userEntry.syncedStar + userEntry.userStar);
@@ -3604,7 +3599,6 @@
       };
       saveUserVotesMap(userMap);
 
-      // Envia para o Apps Script contabilizar na média global de todos os visitantes
       saveLeadToSheet({
         action: "rateProduct",
         tipo: "Avaliação Estrelas",
@@ -3699,14 +3693,14 @@
           : (product.Tag.toLowerCase().includes("novidade") ? "novidade" : "");
 
         const dotsHtml = hasMultiplePhotos
-          ? `<div class="carousel-dots">${product.Fotos.map((_, idx) =>
-              `<span class="carousel-dot ${idx === 0 ? 'active' : ''}"></span>`
+          ? `<div class="carousel-dots">${product.Fotos.map((_, dotIdx) =>
+              `<span class="carousel-dot ${dotIdx === 0 ? 'active' : ''}"></span>`
             ).join("")}</div>`
           : "";
 
         card.innerHTML = `
           <div class="product-image-wrap" title="Clique para ampliar a foto">
-            <img src="${product.Fotos.at(0)}" alt="${product.Nome}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}';" />
+            <img src="${product.Fotos[0]}" alt="${product.Nome}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}';" />
             <span class="mundo-badge mundo-${product.Mundo}">${mundoLabel}</span>
             ${displayTag ? `<span class="promo-tag ${tagClass}">${displayTag}</span>` : ''}
             <span class="zoom-hint">
@@ -3779,7 +3773,7 @@
           const imgEl = card.querySelector("img");
           const dots = card.querySelectorAll(".carousel-dot");
           const syncDots = () => {
-            dots.forEach((d, idx) => d.classList.toggle("active", idx === currentPhotoIndex));
+            dots.forEach((d, dotIdx) => d.classList.toggle("active", dotIdx === currentPhotoIndex));
           };
           card.querySelector(".prev").addEventListener("click", (e) => {
             e.stopPropagation();
@@ -4000,7 +3994,7 @@
         resultBox.innerHTML = `
           <span>Cupom liberado, <strong>${nome}</strong>. Use no seu pedido:</span>
           <span class="coupon-code-highlight">${activeCupomPrimeiraCompra}</span>
-          <small>O código já foi salvo e será preenchido automaticamente quando você escolher sua peça.</small>
+          <small>O código já foi salvo e será preenchido automaticamente na sua sacola.</small>
         `;
       }
     });
@@ -4052,10 +4046,12 @@
       localStorage.setItem("use416_lead_nome", nome);
       localStorage.setItem("use416_lead_whats", whatsapp);
 
+      const { product, size, isOut } = pendingAction;
+      // Prepara janela antes do await para evitar bloqueio de pop-up no Safari/Desktop
+      const preWin = !isOut ? prepareSafePopup() : null;
+
       submitBtn.disabled = true;
       submitBtn.textContent = "Registrando...";
-
-      const { product, size, isOut } = pendingAction;
 
       await saveLeadToSheet({
         tipo: isOut ? "Lista de Espera (Reposição)" : (cupom ? `Pedido WhatsApp (Cupom: ${cupom})` : "Pedido WhatsApp"),
@@ -4071,21 +4067,27 @@
       if (isOut) {
         alert(`Pronto, ${nome}! Você entrou na lista de espera do tamanho ${size} (${product.Nome}). Avisaremos no seu WhatsApp assim que chegar!`);
       } else {
-        const cupomLine = cupom ? `
-• *Cupom aplicado:* ${cupom}` : "";
+        let cupomNote = "";
+        if (cupom) {
+          const check = findValidBagCoupon(cupom, product.precoNum, 1);
+          if (check && !check.valid && check.minOrderWarning) {
+            cupomNote = `\n• *Cupom informado:* ${cupom} _(sujeito à regra: ${check.reason})_`;
+          } else {
+            cupomNote = `\n• *Cupom aplicado:* ${cupom}`;
+          }
+        }
         const pixLine = product.precoPix
-          ? `
-• *Valor no Pix:* R$ ${product.precoPix}${product.pixDescontoPct > 0 ? ` (-${product.pixDescontoPct}% OFF)` : ""}`
+          ? `\n• *Valor no Pix:* R$ ${product.precoPix}${product.pixDescontoPct > 0 ? ` (-${product.pixDescontoPct}% OFF)` : ""}`
           : "";
         const text = `Olá! Meu nome é *${nome}*, vim pelo catálogo da *use4'16* e gostaria de encomendar:
 
 • *Peça:* ${product.Nome} (Cód: ${product.ID})
 • *Tamanho:* ${size}
-• *Valor:* R$ ${product.Preco}${pixLine}${cupomLine}
+• *Valor:* R$ ${product.Preco}${pixLine}${cupomNote}
 
 Ainda está disponível?`;
         const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(text)}`;
-        window.open(waUrl, "_blank");
+        openSafeWhatsappUrl(waUrl, preWin);
       }
     });
 
@@ -4112,7 +4114,6 @@ Ainda está disponível?`;
       });
     });
 
-
     let lastColsCount = null;
     window.addEventListener("resize", () => {
       const grid = document.getElementById("catalogGrid");
@@ -4124,9 +4125,8 @@ Ainda está disponível?`;
       lastColsCount = nowCols;
     });
 
-
     // ==========================================================================
-    // CARRINHO DE COMPRAS (SACOLA), PAGAMENTO E ENVIO PARA PLANILHA + WHATSAPP
+    // CARRINHO DE COMPRAS (SACOLA), VALIDAÇÃO DE REGRAS DE CUPOM E CHECKOUT
     // ==========================================================================
     const CART_STORAGE_KEY = "use416_shopping_bag_v1";
     let shoppingCart = [];
@@ -4152,9 +4152,36 @@ Ainda está disponível?`;
       return Number(num || 0).toFixed(2).replace(".", ",");
     }
 
-    function findValidBagCoupon(code) {
+    // Extrai limites no front-end caso o objeto do cupom traga apenas o texto de Regra_Uso
+    function parseRuleThresholds(couponObj) {
+      let valorMinimo = Number(couponObj.valorMinimo || 0);
+      let qtdMinima = Number(couponObj.qtdMinima || 0);
+      const regra = String(couponObj.regra || "");
+
+      if (!valorMinimo && regra) {
+        const mVal = regra.match(/R\$\s*(\d+(?:[.,]\d{1,2})?)/i);
+        if (mVal && mVal[1]) {
+          const parsed = parseFloat(mVal[1].replace(",", "."));
+          if (!isNaN(parsed)) valorMinimo = parsed;
+        }
+      }
+      if (!qtdMinima && regra) {
+        const mQtd = regra.match(/(?:a partir de|leve|m[íi]nimo de)\s*(\d+)\s*(?:ou mais\s*)?(?:pe[çc]as|conjuntos|looks)/i);
+        if (mQtd && mQtd[1]) {
+          const parsedQ = parseInt(mQtd[1], 10);
+          if (!isNaN(parsedQ)) qtdMinima = parsedQ;
+        }
+      }
+      return { valorMinimo, qtdMinima };
+    }
+
+    function findValidBagCoupon(code, currentSubtotal = null, currentQty = null) {
       const clean = String(code || "").trim().toUpperCase();
       if (!clean) return null;
+
+      if (activeCuponsLista.length === 0) {
+        return { valid: false, pendingLoad: true, reason: "Verificando regras do cupom..." };
+      }
 
       const found = activeCuponsLista.find(
         c => String(c.codigo || "").trim().toUpperCase() === clean
@@ -4170,6 +4197,28 @@ Ainda está disponível?`;
         return { valid: false, reason: `Cupom "${clean}" não se aplica direto na sacola.` };
       }
 
+      const { valorMinimo, qtdMinima } = parseRuleThresholds(found);
+
+      if (currentSubtotal !== null && valorMinimo > 0 && currentSubtotal + 0.001 < valorMinimo) {
+        const falta = Math.max(0, valorMinimo - currentSubtotal);
+        return {
+          valid: false,
+          minOrderWarning: true,
+          codigo: clean,
+          reason: `O cupom ${clean} é válido para pedidos acima de R$ ${formatBRL(valorMinimo)} (faltam R$ ${formatBRL(falta)}).`
+        };
+      }
+
+      if (currentQty !== null && qtdMinima > 0 && currentQty < qtdMinima) {
+        const faltamPecas = qtdMinima - currentQty;
+        return {
+          valid: false,
+          minOrderWarning: true,
+          codigo: clean,
+          reason: `O cupom ${clean} exige no mínimo ${qtdMinima} peças na sacola (adicione mais ${faltamPecas}).`
+        };
+      }
+
       let pctRaw = Number(found.descontoSacola || found.desconto || 0);
       if (pctRaw > 0 && pctRaw <= 1) {
         pctRaw = pctRaw * 100;
@@ -4179,13 +4228,10 @@ Ainda está disponível?`;
         valid: true,
         codigo: clean,
         pct: Math.round(pctRaw * 100) / 100,
-        regra: found.regra || ""
+        regra: found.regra || "",
+        valorMinimo,
+        qtdMinima
       };
-    }
-
-    function parseCouponDiscountPct(code) {
-      const res = findValidBagCoupon(code);
-      return res && res.valid ? res.pct : 0;
     }
 
     function showCartToast(message) {
@@ -4275,7 +4321,11 @@ Ainda está disponível?`;
       const isPix = selectedPaymentMethod === "Pix";
       const baseBeforeCoupon = isPix ? subtotalPix : subtotalNormal;
 
-      const couponPct = parseCouponDiscountPct(appliedCartCoupon);
+      const couponValidation = appliedCartCoupon
+        ? findValidBagCoupon(appliedCartCoupon, subtotalNormal, totalQty)
+        : null;
+
+      const couponPct = (couponValidation && couponValidation.valid) ? couponValidation.pct : 0;
       const couponDiscountValue = couponPct > 0 ? (baseBeforeCoupon * (couponPct / 100)) : 0;
       const finalTotal = Math.max(0, baseBeforeCoupon - couponDiscountValue);
       const installmentValue = maxInstallments > 1 ? (finalTotal / maxInstallments) : finalTotal;
@@ -4288,10 +4338,43 @@ Ainda está disponível?`;
         isPix,
         couponPct,
         couponDiscountValue,
+        couponValidation,
         finalTotal,
         maxInstallments,
         installmentValue
       };
+    }
+
+    function syncCouponFeedbackUI(totals) {
+      const fb = document.getElementById("cartCouponFeedback");
+      if (!fb) return;
+
+      if (!appliedCartCoupon) {
+        fb.style.display = "none";
+        return;
+      }
+
+      const v = totals.couponValidation;
+      if (!v) {
+        fb.style.display = "none";
+        return;
+      }
+
+      fb.style.display = "block";
+      if (v.valid) {
+        fb.style.color = "#047857";
+        const regraTxt = v.regra ? ` — ${v.regra}` : "";
+        fb.textContent = `Cupom ativo: ${v.codigo} (-${v.pct}% aplicado)${regraTxt}`;
+      } else if (v.minOrderWarning) {
+        fb.style.color = "#B45309";
+        fb.textContent = v.reason;
+      } else if (v.pendingLoad) {
+        fb.style.color = "#5C667A";
+        fb.textContent = v.reason;
+      } else {
+        fb.style.color = "#B91C1C";
+        fb.textContent = v.reason;
+      }
     }
 
     function updateCartUI() {
@@ -4332,6 +4415,8 @@ Ainda está disponível?`;
       filledEl.style.display = "flex";
       footerEl.style.display = "block";
 
+      syncCouponFeedbackUI(totals);
+
       listEl.innerHTML = shoppingCart.map((item, idx) => {
         const lineNormal = item.precoNum * item.qty;
         const linePix = item.pixNum * item.qty;
@@ -4356,7 +4441,6 @@ Ainda está disponível?`;
         `;
       }).join("");
 
-      // Atualiza subtítulos dos botões de pagamento
       const pixSub = document.getElementById("pixOptionSub");
       const creditSub = document.getElementById("creditOptionSub");
       if (pixSub) {
@@ -4370,7 +4454,6 @@ Ainda está disponível?`;
           : `1x sem juros`;
       }
 
-      // Atualiza resumo de valores
       const summaryBox = document.getElementById("cartSummaryBox");
       if (summaryBox) {
         let linesHtml = `
@@ -4394,13 +4477,6 @@ Ainda está disponível?`;
             <div class="summary-line savings">
               <span>Cupom (${appliedCartCoupon} • -${totals.couponPct}%)</span>
               <span>− R$ ${formatBRL(totals.couponDiscountValue)}</span>
-            </div>
-          `;
-        } else if (appliedCartCoupon) {
-          linesHtml += `
-            <div class="summary-line savings">
-              <span>Cupom informado</span>
-              <span>${appliedCartCoupon}</span>
             </div>
           `;
         }
@@ -4444,11 +4520,6 @@ Ainda está disponível?`;
       if (couponInput && !couponInput.value && !appliedCartCoupon && savedCoupon) {
         couponInput.value = savedCoupon;
         appliedCartCoupon = savedCoupon.trim().toUpperCase();
-        const fb = document.getElementById("cartCouponFeedback");
-        if (fb) {
-          fb.style.display = "block";
-          fb.textContent = `Cupom ${appliedCartCoupon} aplicado automaticamente!`;
-        }
       }
 
       updateCartUI();
@@ -4467,7 +4538,6 @@ Ainda está disponível?`;
       if (e.target.id === "cartDrawerOverlay") closeCartDrawer();
     });
 
-    // Seleção de forma de pagamento
     document.querySelectorAll("#paymentOptionsGrid .pay-option-card").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll("#paymentOptionsGrid .pay-option-card").forEach(b => b.classList.remove("selected"));
@@ -4477,7 +4547,6 @@ Ainda está disponível?`;
       });
     });
 
-    // Seleção de entrega / retirada
     document.querySelectorAll(".delivery-pill-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".delivery-pill-btn").forEach(b => b.classList.remove("selected"));
@@ -4490,7 +4559,6 @@ Ainda está disponível?`;
       });
     });
 
-    // Aplicação de cupom no carrinho
     document.getElementById("applyCartCouponBtn").addEventListener("click", () => {
       const input = document.getElementById("cartCouponInput");
       const fb = document.getElementById("cartCouponFeedback");
@@ -4500,45 +4568,30 @@ Ainda está disponível?`;
         appliedCartCoupon = "";
         localStorage.removeItem("use416_cupom_ativo");
         fb.style.display = "none";
-        fb.style.color = "#047857";
         updateCartUI();
         return;
       }
 
-      if (activeCuponsLista.length > 0) {
-        const check = findValidBagCoupon(code);
-        if (!check.valid) {
-          appliedCartCoupon = "";
-          localStorage.removeItem("use416_cupom_ativo");
-          fb.style.display = "block";
-          fb.style.color = "#B91C1C";
-          fb.textContent = check.reason;
-          updateCartUI();
-          return;
-        }
+      const partialTotals = computeCartTotals();
+      const check = findValidBagCoupon(code, partialTotals.subtotalNormal, partialTotals.totalQty);
 
-        appliedCartCoupon = check.codigo;
-        localStorage.setItem("use416_cupom_ativo", check.codigo);
+      if (check && !check.valid && !check.minOrderWarning && !check.pendingLoad) {
+        appliedCartCoupon = "";
+        localStorage.removeItem("use416_cupom_ativo");
         fb.style.display = "block";
-        fb.style.color = "#047857";
-        const regraTxt = check.regra ? ` — ${check.regra}` : "";
-        fb.textContent = `1 cupom na sacola: ${check.codigo} (-${check.pct}% sobre as peças)${regraTxt}`;
+        fb.style.color = "#B91C1C";
+        fb.textContent = check.reason;
         updateCartUI();
         return;
       }
 
+      // Se o cupom existe mas ainda falta atingir o mínimo (minOrderWarning), mantém salvo para ativar assim que o cliente adicionar mais peças
       appliedCartCoupon = code;
       localStorage.setItem("use416_cupom_ativo", code);
-      const pct = parseCouponDiscountPct(code);
-      fb.style.display = "block";
-      fb.style.color = "#047857";
-      fb.textContent = pct > 0
-        ? `Cupom ${code} aplicado (-${pct}% sobre as peças).`
-        : `Cupom ${code} registrado para conferência no pedido.`;
       updateCartUI();
     });
 
-    // Finalizar pedido consolidado (Planilha aba Pedidos + WhatsApp)
+    // Finalizar pedido consolidado (Planilha aba Pedidos + WhatsApp sem bloqueio no iOS)
     document.getElementById("checkoutWhatsappBtn").addEventListener("click", async () => {
       if (shoppingCart.length === 0) return;
 
@@ -4555,11 +4608,17 @@ Ainda está disponível?`;
       localStorage.setItem("use416_lead_nome", nome);
       localStorage.setItem("use416_lead_whats", whatsapp);
 
+      // Abre referência segura antes do await para evitar bloqueio de pop-up
+      const preWin = prepareSafePopup();
+
       const submitBtn = document.getElementById("checkoutWhatsappBtn");
       submitBtn.disabled = true;
       submitBtn.querySelector("span").textContent = "Registrando pedido...";
 
       const totals = computeCartTotals();
+      const effectiveCouponCode = (totals.couponValidation && totals.couponValidation.valid)
+        ? appliedCartCoupon
+        : "";
       const orderNumber = "PED-" + String(Date.now()).slice(-6);
 
       const itemsSummaryPlain = shoppingCart.map(item => {
@@ -4569,11 +4628,9 @@ Ainda está disponível?`;
 
       const itemsWhatsappLines = shoppingCart.map(item => {
         const unitVal = totals.isPix ? item.pixNum : item.precoNum;
-        return `• *${item.qty}x ${item.nome}* (Cód: ${item.id || "-"})
-  Tamanho: *${item.size}* — R$ ${formatBRL(unitVal * item.qty)}`;
+        return `• *${item.qty}x ${item.nome}* (Cód: ${item.id || "-"})\n  Tamanho: *${item.size}* — R$ ${formatBRL(unitVal * item.qty)}`;
       }).join("\n");
 
-      // Envia para o Google Apps Script gravar na aba "Pedidos" (e também mantém compatibilidade)
       await saveLeadToSheet({
         action: "createOrder",
         tipo: "Pedido Sacola",
@@ -4584,14 +4641,13 @@ Ainda está disponível?`;
         quantidadePecas: totals.totalQty,
         formaPagamento: selectedPaymentMethod,
         parcelas: selectedPaymentMethod === "Cartão de Crédito" ? `${totals.maxInstallments}x` : "À vista",
-        cupom: appliedCartCoupon || "-",
+        cupom: effectiveCouponCode || "-",
         subtotal: `R$ ${formatBRL(totals.subtotalNormal)}`,
         descontoTotal: `R$ ${formatBRL((totals.isPix ? totals.pixSavingsFromItems : 0) + totals.couponDiscountValue)}`,
         valorTotal: `R$ ${formatBRL(totals.finalTotal)}`,
         tipoEntrega: selectedDeliveryMethod,
         endereco: endereco || "-",
         observacao: obs || "-",
-        // Campos legados caso o script antigo também leia
         peca: `[${orderNumber}] ${itemsSummaryPlain}`,
         tamanho: `${totals.totalQty} peça(s) | ${selectedPaymentMethod}`
       });
@@ -4615,8 +4671,8 @@ Ainda está disponível?`;
         `• *Pagamento:* ${paymentDetailLine}`
       ];
 
-      if (appliedCartCoupon) {
-        messageParts.push(`• *Cupom:* ${appliedCartCoupon}`);
+      if (effectiveCouponCode) {
+        messageParts.push(`• *Cupom aplicado:* ${effectiveCouponCode} (-${totals.couponPct}%)`);
       }
 
       messageParts.push(`• *Total do Pedido:* *R$ ${formatBRL(totals.finalTotal)}*`);
@@ -4631,17 +4687,16 @@ Ainda está disponível?`;
 
       const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(messageParts.join("\n"))}`;
 
-      // Limpa a sacola após enviar o pedido
+      // Limpa a sacola e redireciona com segurança (sem perder pedido no iPhone/Safari)
       shoppingCart = [];
       saveCartToStorage();
       updateCartUI();
       closeCartDrawer();
 
-      window.open(waUrl, "_blank");
+      openSafeWhatsappUrl(waUrl, preWin);
     });
 
     updateCartUI();
-
     loadProducts();
   </script>
 </body>
