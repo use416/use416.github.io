@@ -4073,11 +4073,11 @@
           if (check && !check.valid && check.minOrderWarning) {
             cupomNote = `\n• *Cupom informado:* ${cupom} _(sujeito à regra: ${check.reason})_`;
           } else {
-            cupomNote = `\n• *Cupom aplicado:* ${cupom}`;
+            cupomNote = `\n• *Cupom solicitado:* ${cupom} _(sobre o preço cheio; não cumulativo com Pix)_`;
           }
         }
         const pixLine = product.precoPix
-          ? `\n• *Valor no Pix:* R$ ${product.precoPix}${product.pixDescontoPct > 0 ? ` (-${product.pixDescontoPct}% OFF)` : ""}`
+          ? `\n• *Valor promocional no Pix:* R$ ${product.precoPix}${product.pixDescontoPct > 0 ? ` (-${product.pixDescontoPct}% OFF${cupom ? ", não cumulativo c/ cupom" : ""})` : ""}`
           : "";
         const text = `Olá! Meu nome é *${nome}*, vim pelo catálogo da *use4'16* e gostaria de encomendar:
 
@@ -4319,27 +4319,69 @@ Ainda está disponível?`;
 
       const pixSavingsFromItems = Math.max(0, subtotalNormal - subtotalPix);
       const isPix = selectedPaymentMethod === "Pix";
-      const baseBeforeCoupon = isPix ? subtotalPix : subtotalNormal;
 
       const couponValidation = appliedCartCoupon
         ? findValidBagCoupon(appliedCartCoupon, subtotalNormal, totalQty)
         : null;
 
-      const couponPct = (couponValidation && couponValidation.valid) ? couponValidation.pct : 0;
-      const couponDiscountValue = couponPct > 0 ? (baseBeforeCoupon * (couponPct / 100)) : 0;
-      const finalTotal = Math.max(0, baseBeforeCoupon - couponDiscountValue);
+      // Cupom calculado SEMPRE sobre o preço cheio (subtotalNormal), sem acumular com Pix promocional
+      const rawCouponPct = (couponValidation && couponValidation.valid) ? couponValidation.pct : 0;
+      const couponDiscountFull = rawCouponPct > 0 ? (subtotalNormal * (rawCouponPct / 100)) : 0;
+
+      let effectivePixSavings = 0;
+      let couponDiscountValue = 0;
+      let couponPct = 0;
+      let nonCumulativeMode = null; // "pix_wins" | "coupon_wins" | null
+
+      if (isPix) {
+        if (rawCouponPct > 0 && pixSavingsFromItems > 0) {
+          // Ambos existem: aplica apenas o MAIOR desconto (não cumulativo)
+          if (pixSavingsFromItems > couponDiscountFull) {
+            effectivePixSavings = pixSavingsFromItems;
+            couponDiscountValue = 0;
+            couponPct = 0;
+            nonCumulativeMode = "pix_wins";
+          } else {
+            effectivePixSavings = 0;
+            couponDiscountValue = couponDiscountFull;
+            couponPct = rawCouponPct;
+            nonCumulativeMode = "coupon_wins";
+          }
+        } else if (rawCouponPct > 0) {
+          couponDiscountValue = couponDiscountFull;
+          couponPct = rawCouponPct;
+        } else {
+          effectivePixSavings = pixSavingsFromItems;
+        }
+      } else {
+        // Outras formas de pagamento (Cartão, Link, Dinheiro): vale o cupom sobre o preço cheio
+        if (rawCouponPct > 0) {
+          couponDiscountValue = couponDiscountFull;
+          couponPct = rawCouponPct;
+        }
+      }
+
+      const finalTotal = Math.max(0, subtotalNormal - effectivePixSavings - couponDiscountValue);
       const installmentValue = maxInstallments > 1 ? (finalTotal / maxInstallments) : finalTotal;
+      const bestPixTotal = Math.max(0, subtotalNormal - Math.max(pixSavingsFromItems, couponDiscountFull));
+      const usePixItemPrices = isPix && effectivePixSavings > 0;
 
       return {
         totalQty,
         subtotalNormal,
         subtotalPix,
         pixSavingsFromItems,
+        effectivePixSavings,
         isPix,
+        usePixItemPrices,
+        rawCouponPct,
+        couponDiscountFull,
         couponPct,
         couponDiscountValue,
+        nonCumulativeMode,
         couponValidation,
         finalTotal,
+        bestPixTotal,
         maxInstallments,
         installmentValue
       };
@@ -4362,9 +4404,17 @@ Ainda está disponível?`;
 
       fb.style.display = "block";
       if (v.valid) {
-        fb.style.color = "#047857";
-        const regraTxt = v.regra ? ` — ${v.regra}` : "";
-        fb.textContent = `Cupom ativo: ${v.codigo} (-${v.pct}% aplicado)${regraTxt}`;
+        if (totals.nonCumulativeMode === "pix_wins") {
+          fb.style.color = "#047857";
+          fb.textContent = `Desconto Pix (−R$ ${formatBRL(totals.pixSavingsFromItems)}) é maior que o cupom ${v.codigo} (−R$ ${formatBRL(totals.couponDiscountFull)}). Aplicamos o maior desconto (não cumulativo).`;
+        } else if (totals.nonCumulativeMode === "coupon_wins") {
+          fb.style.color = "#047857";
+          fb.textContent = `Cupom ${v.codigo} (−${v.pct}% s/ preço cheio = −R$ ${formatBRL(totals.couponDiscountValue)}) supera o Pix promocional. Maior desconto aplicado!`;
+        } else {
+          fb.style.color = "#047857";
+          const regraTxt = v.regra ? ` — ${v.regra}` : "";
+          fb.textContent = `Cupom ativo: ${v.codigo} (−${v.pct}% sobre o preço cheio)${regraTxt}`;
+        }
       } else if (v.minOrderWarning) {
         fb.style.color = "#B45309";
         fb.textContent = v.reason;
@@ -4444,9 +4494,13 @@ Ainda está disponível?`;
       const pixSub = document.getElementById("pixOptionSub");
       const creditSub = document.getElementById("creditOptionSub");
       if (pixSub) {
-        pixSub.textContent = totals.pixSavingsFromItems > 0
-          ? `Economize R$ ${formatBRL(totals.pixSavingsFromItems)}`
-          : `R$ ${formatBRL(totals.subtotalPix)} à vista`;
+        if (totals.rawCouponPct > 0 && totals.couponDiscountFull >= totals.pixSavingsFromItems) {
+          pixSub.textContent = `R$ ${formatBRL(totals.bestPixTotal)} à vista (c/ cupom)`;
+        } else if (totals.pixSavingsFromItems > 0) {
+          pixSub.textContent = `Economize R$ ${formatBRL(totals.pixSavingsFromItems)} no Pix`;
+        } else {
+          pixSub.textContent = `R$ ${formatBRL(totals.subtotalPix)} à vista`;
+        }
       }
       if (creditSub) {
         creditSub.textContent = totals.maxInstallments > 1
@@ -4458,16 +4512,16 @@ Ainda está disponível?`;
       if (summaryBox) {
         let linesHtml = `
           <div class="summary-line">
-            <span>Subtotal (${totals.totalQty} ${totals.totalQty === 1 ? "peça" : "peças"})</span>
+            <span>Subtotal preço cheio (${totals.totalQty} ${totals.totalQty === 1 ? "peça" : "peças"})</span>
             <span>R$ ${formatBRL(totals.subtotalNormal)}</span>
           </div>
         `;
 
-        if (totals.isPix && totals.pixSavingsFromItems > 0) {
+        if (totals.effectivePixSavings > 0) {
           linesHtml += `
             <div class="summary-line savings">
-              <span>Desconto especial no Pix</span>
-              <span>− R$ ${formatBRL(totals.pixSavingsFromItems)}</span>
+              <span>Desconto promocional no Pix</span>
+              <span>− R$ ${formatBRL(totals.effectivePixSavings)}</span>
             </div>
           `;
         }
@@ -4475,7 +4529,7 @@ Ainda está disponível?`;
         if (totals.couponDiscountValue > 0) {
           linesHtml += `
             <div class="summary-line savings">
-              <span>Cupom (${appliedCartCoupon} • -${totals.couponPct}%)</span>
+              <span>Cupom (${appliedCartCoupon} • -${totals.couponPct}% s/ preço cheio)</span>
               <span>− R$ ${formatBRL(totals.couponDiscountValue)}</span>
             </div>
           `;
@@ -4494,10 +4548,24 @@ Ainda está disponível?`;
               ou em até ${totals.maxInstallments}x de R$ ${formatBRL(totals.installmentValue)} sem juros
             </div>
           `;
-        } else if (!totals.isPix && totals.pixSavingsFromItems > 0) {
+        }
+
+        if (!totals.isPix && totals.bestPixTotal + 0.009 < totals.finalTotal) {
           linesHtml += `
             <div class="summary-installment-note" style="color:#047857;">
-              Pagando no Pix o total cai para R$ ${formatBRL(Math.max(0, totals.subtotalPix - (totals.couponPct > 0 ? totals.subtotalPix * (totals.couponPct / 100) : 0)))}
+              Pagando no Pix o total cai para R$ ${formatBRL(totals.bestPixTotal)} (maior desconto aplicado)
+            </div>
+          `;
+        } else if (totals.nonCumulativeMode === "pix_wins") {
+          linesHtml += `
+            <div class="summary-installment-note" style="color:#047857;">
+              * Desconto Pix maior que o cupom (promoções não cumulativas)
+            </div>
+          `;
+        } else if (totals.nonCumulativeMode === "coupon_wins") {
+          linesHtml += `
+            <div class="summary-installment-note" style="color:#047857;">
+              * Cupom aplicado sobre o preço cheio (não cumulativo com Pix)
             </div>
           `;
         }
@@ -4616,19 +4684,21 @@ Ainda está disponível?`;
       submitBtn.querySelector("span").textContent = "Registrando pedido...";
 
       const totals = computeCartTotals();
-      const effectiveCouponCode = (totals.couponValidation && totals.couponValidation.valid)
+      // Só registra cupom efetivamente utilizado (se o desconto Pix for maior, vale o Pix e não consome o cupom)
+      const effectiveCouponCode = (totals.couponDiscountValue > 0 && totals.couponValidation && totals.couponValidation.valid)
         ? appliedCartCoupon
         : "";
       const orderNumber = "PED-" + String(Date.now()).slice(-6);
 
       const itemsSummaryPlain = shoppingCart.map(item => {
-        const unitVal = totals.isPix ? item.pixNum : item.precoNum;
+        const unitVal = totals.usePixItemPrices ? item.pixNum : item.precoNum;
         return `${item.qty}x ${item.nome} (Cód: ${item.id || "-"} | Tam: ${item.size}) - R$ ${formatBRL(unitVal * item.qty)}`;
       }).join(" ; ");
 
       const itemsWhatsappLines = shoppingCart.map(item => {
-        const unitVal = totals.isPix ? item.pixNum : item.precoNum;
-        return `• *${item.qty}x ${item.nome}* (Cód: ${item.id || "-"})\n  Tamanho: *${item.size}* — R$ ${formatBRL(unitVal * item.qty)}`;
+        const unitVal = totals.usePixItemPrices ? item.pixNum : item.precoNum;
+        const priceTag = (totals.usePixItemPrices && item.hasPixPromo) ? " _(preço Pix)_" : "";
+        return `• *${item.qty}x ${item.nome}* (Cód: ${item.id || "-"})\n  Tamanho: *${item.size}* — R$ ${formatBRL(unitVal * item.qty)}${priceTag}`;
       }).join("\n");
 
       await saveLeadToSheet({
@@ -4643,7 +4713,7 @@ Ainda está disponível?`;
         parcelas: selectedPaymentMethod === "Cartão de Crédito" ? `${totals.maxInstallments}x` : "À vista",
         cupom: effectiveCouponCode || "-",
         subtotal: `R$ ${formatBRL(totals.subtotalNormal)}`,
-        descontoTotal: `R$ ${formatBRL((totals.isPix ? totals.pixSavingsFromItems : 0) + totals.couponDiscountValue)}`,
+        descontoTotal: `R$ ${formatBRL(totals.effectivePixSavings + totals.couponDiscountValue)}`,
         valorTotal: `R$ ${formatBRL(totals.finalTotal)}`,
         tipoEntrega: selectedDeliveryMethod,
         endereco: endereco || "-",
@@ -4658,8 +4728,10 @@ Ainda está disponível?`;
       let paymentDetailLine = `*${selectedPaymentMethod}*`;
       if (selectedPaymentMethod === "Cartão de Crédito" && totals.maxInstallments > 1) {
         paymentDetailLine += ` (até ${totals.maxInstallments}x de R$ ${formatBRL(totals.installmentValue)} s/ juros)`;
-      } else if (selectedPaymentMethod === "Pix" && totals.pixSavingsFromItems > 0) {
-        paymentDetailLine += ` (desconto Pix aplicado)`;
+      } else if (selectedPaymentMethod === "Pix" && totals.effectivePixSavings > 0) {
+        paymentDetailLine += ` (desconto Pix de −R$ ${formatBRL(totals.effectivePixSavings)} aplicado)`;
+      } else if (selectedPaymentMethod === "Pix") {
+        paymentDetailLine += ` (à vista)`;
       }
 
       const messageParts = [
@@ -4668,11 +4740,12 @@ Ainda está disponível?`;
         itemsWhatsappLines,
         ``,
         `• *Quantidade:* ${totals.totalQty} ${totals.totalQty === 1 ? "peça" : "peças"}`,
+        `• *Subtotal (preço cheio):* R$ ${formatBRL(totals.subtotalNormal)}`,
         `• *Pagamento:* ${paymentDetailLine}`
       ];
 
       if (effectiveCouponCode) {
-        messageParts.push(`• *Cupom aplicado:* ${effectiveCouponCode} (-${totals.couponPct}%)`);
+        messageParts.push(`• *Cupom aplicado:* ${effectiveCouponCode} (−${totals.couponPct}% s/ preço cheio = −R$ ${formatBRL(totals.couponDiscountValue)})`);
       }
 
       messageParts.push(`• *Total do Pedido:* *R$ ${formatBRL(totals.finalTotal)}*`);
