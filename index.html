@@ -1022,6 +1022,221 @@
       color: var(--text-muted);
     }
 
+    .curation-right-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    .sort-select {
+      padding: 6px 12px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border-subtle);
+      background: var(--bg-page);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--text-main);
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.16s ease, background-color 0.16s ease;
+    }
+
+    .sort-select:focus,
+    .sort-select:hover {
+      border-color: var(--text-main);
+      background: #FFFFFF;
+    }
+
+    .clear-filters-btn {
+      display: none;
+      align-items: center;
+      gap: 5px;
+      background: var(--kids-soft);
+      color: var(--accent-terracotta);
+      border: 1px solid rgba(224, 109, 83, 0.35);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .clear-filters-btn.visible {
+      display: inline-flex;
+    }
+
+    .clear-filters-btn:hover {
+      background: var(--accent-terracotta);
+      color: #FFFFFF;
+    }
+
+    .size-guide-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #FFFFFF;
+      border: 1.5px dashed var(--border-strong);
+      color: var(--text-main);
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .size-guide-pill-btn:hover {
+      border-color: var(--accent-terracotta);
+      color: var(--accent-terracotta);
+      background: var(--kids-soft);
+    }
+
+    .card-sizes-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .card-sizes-header .sizes-label {
+      margin-bottom: 0;
+    }
+
+    .card-medidas-link {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--accent-terracotta);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-decoration: underline;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-medidas-link:hover {
+      color: var(--text-main);
+    }
+
+    .copy-coupon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 6px auto 4px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--text-main);
+      background: #FFFFFF;
+      color: var(--text-main);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .copy-coupon-btn:hover {
+      background: var(--text-main);
+      color: #FFFFFF;
+    }
+
+    .copy-coupon-btn.copied {
+      border-color: #059669;
+      background: #ECFDF5;
+      color: #047857;
+    }
+
+    .empty-reset-btn {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      background: var(--text-main);
+      color: #FFFFFF;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .empty-reset-btn:hover {
+      background: var(--accent-terracotta);
+    }
+
+    /* Tabela do Modal Guia de Medidas (4 ao 16) */
+    .medidas-modal-box {
+      max-width: 560px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 26px 22px 22px;
+    }
+
+    .medidas-table-wrap {
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: #FFFFFF;
+    }
+
+    .medidas-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    .medidas-table th {
+      background: var(--text-main);
+      color: #FFFFFF;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 9px 8px;
+      white-space: nowrap;
+    }
+
+    .medidas-table td {
+      padding: 8px 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .medidas-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .medidas-table tr:nth-child(even) td {
+      background: var(--bg-page);
+    }
+
+    .medidas-mundo-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
     /* Grade de produtos */
     .catalog-grid {
       max-width: 1120px;
@@ -2828,9 +3043,28 @@
               <button class="size-pill" data-size="14">14</button>
               <button class="size-pill" data-size="16">16</button>
             </div>
+            <button type="button" class="size-guide-pill-btn" id="openMedidasCurationBtn" aria-haspopup="dialog">
+              <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21.3 8.7 8.7 21.3c-1 1-2.5 1-3.4 0l-2.6-2.6c-1-1-1-2.5 0-3.4L15.3 2.7c1-1 2.5-1 3.4 0l2.6 2.6c1 1 1 2.5 0 3.4Z"></path>
+                <path d="m7.5 10.5 2 2"></path>
+                <path d="m10.5 7.5 2 2"></path>
+                <path d="m13.5 4.5 2 2"></path>
+              </svg>
+              <span>Guia de Medidas</span>
+            </button>
           </div>
 
-          <span class="results-count" id="resultsCount">Carregando peças...</span>
+          <div class="curation-right-tools">
+            <button type="button" class="clear-filters-btn" id="clearFiltersBtn">✕ Limpar filtros</button>
+            <select id="sortSelect" class="sort-select" aria-label="Ordenar peças">
+              <option value="padrao">Ordenar: Destaques</option>
+              <option value="novidades">Novidades primeiro</option>
+              <option value="menor-preco">Menor preço</option>
+              <option value="maior-preco">Maior preço</option>
+              <option value="desconto">Maiores descontos</option>
+            </select>
+            <span class="results-count" id="resultsCount">Carregando peças...</span>
+          </div>
         </div>
       </div>
     </section>
@@ -2920,13 +3154,14 @@
         <h4>Atendimento</h4>
         <ul class="footer-list">
           <li>
-            <a href="#" id="footerMedidasLink" target="_blank" rel="noopener">
+            <a href="#tabela-de-medidas" id="footerMedidasLink" aria-haspopup="dialog">
               <svg class="icon-svg" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                <path d="M21.3 8.7 8.7 21.3c-1 1-2.5 1-3.4 0l-2.6-2.6c-1-1-1-2.5 0-3.4L15.3 2.7c1-1 2.5-1 3.4 0l2.6 2.6c1 1 1 2.5 0 3.4Z"></path>
+                <path d="m7.5 10.5 2 2"></path>
+                <path d="m10.5 7.5 2 2"></path>
+                <path d="m13.5 4.5 2 2"></path>
               </svg>
-              <span>Dúvidas sobre Tabela de Medidas</span>
+              <span>Tabela de Medidas (4 ao 16)</span>
             </a>
           </li>
           <li>
@@ -3162,6 +3397,108 @@
     </div>
   </div>
 
+  <!-- Modal 4: Guia Visual de Medidas (4 ao 16) -->
+  <div class="modal-overlay" id="medidasModal" role="dialog" aria-modal="true" aria-labelledby="medidasModalTitle">
+    <div class="modal-box medidas-modal-box">
+      <button type="button" class="modal-close" id="closeMedidasModal" aria-label="Fechar guia de medidas">×</button>
+      <span class="policy-kicker">
+        <svg class="icon-svg" width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21.3 8.7 8.7 21.3c-1 1-2.5 1-3.4 0l-2.6-2.6c-1-1-1-2.5 0-3.4L15.3 2.7c1-1 2.5-1 3.4 0l2.6 2.6c1 1 1 2.5 0 3.4Z"></path>
+          <path d="m7.5 10.5 2 2"></path>
+          <path d="m10.5 7.5 2 2"></path>
+          <path d="m13.5 4.5 2 2"></path>
+        </svg>
+        Escolha Sem Erro
+      </span>
+      <h3 id="medidasModalTitle">Guia de Medidas (4 ao 16)</h3>
+      <p style="margin-bottom: 0;">Referência média corporal para orientar sua escolha nos 3 Mundos da <span class="brand-inline">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></span>:</p>
+
+      <div class="medidas-table-wrap">
+        <table class="medidas-table">
+          <thead>
+            <tr>
+              <th>Tam.</th>
+              <th>Mundo</th>
+              <th>Idade Ref.</th>
+              <th>Estatura</th>
+              <th>Tórax</th>
+              <th>Cintura</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>4</strong></td>
+              <td><span class="medidas-mundo-pill mundo-Kids">Kids</span></td>
+              <td>3 a 4 anos</td>
+              <td>102–108 cm</td>
+              <td>55–57 cm</td>
+              <td>52–54 cm</td>
+            </tr>
+            <tr>
+              <td><strong>6</strong></td>
+              <td><span class="medidas-mundo-pill mundo-Kids">Kids</span></td>
+              <td>5 a 6 anos</td>
+              <td>114–120 cm</td>
+              <td>60–62 cm</td>
+              <td>56–58 cm</td>
+            </tr>
+            <tr>
+              <td><strong>8</strong></td>
+              <td><span class="medidas-mundo-pill mundo-Kids">Kids</span></td>
+              <td>7 a 8 anos</td>
+              <td>126–132 cm</td>
+              <td>65–67 cm</td>
+              <td>59–61 cm</td>
+            </tr>
+            <tr>
+              <td><strong>10</strong></td>
+              <td><span class="medidas-mundo-pill mundo-Pre-Teen">Pré-Teen</span></td>
+              <td>9 a 10 anos</td>
+              <td>136–142 cm</td>
+              <td>70–73 cm</td>
+              <td>62–64 cm</td>
+            </tr>
+            <tr>
+              <td><strong>12</strong></td>
+              <td><span class="medidas-mundo-pill mundo-Pre-Teen">Pré-Teen</span></td>
+              <td>11 a 12 anos</td>
+              <td>146–152 cm</td>
+              <td>75–78 cm</td>
+              <td>65–67 cm</td>
+            </tr>
+            <tr>
+              <td><strong>14</strong></td>
+              <td><span class="medidas-mundo-pill mundo-Teen">Teen</span></td>
+              <td>13 a 14 anos</td>
+              <td>154–160 cm</td>
+              <td>80–84 cm</td>
+              <td>68–71 cm</td>
+            </tr>
+            <tr>
+              <td><strong>16</strong></td>
+              <td><span class="medidas-mundo-pill mundo-Teen">Teen</span></td>
+              <td>15 a 16 anos</td>
+              <td>162–168 cm</td>
+              <td>85–89 cm</td>
+              <td>72–75 cm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="policy-steps-note">
+        <strong>Dica de ouro:</strong> Na dúvida entre dois tamanhos (ou para crianças mais altas), recomendamos escolher <strong>1 numeração acima</strong> para aproveitar a peça por mais tempo. Como trabalhamos com diferentes modelagens (conjuntos, jeans e oversized), enviamos a medida exata em centímetros da peça escolhida pelo WhatsApp!
+      </div>
+
+      <a href="#" id="modalMedidasWaBtn" target="_blank" rel="noopener" class="modal-action-btn policy-wa-cta">
+        <svg class="icon-svg" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        <span>Pedir Medida Exata de uma Peça no WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
   <script>
     const CONFIG = {
       defaultWhatsappNumber: "5582996498298",
@@ -3184,6 +3521,7 @@
     let currentMundo = "Todos";
     let currentSize = "Todos";
     let currentSearch = "";
+    let currentSort = "padrao";
     let activeWhatsappNumber = CONFIG.defaultWhatsappNumber;
     let activeInstagramUser = CONFIG.defaultInstagramUser;
     let activeCupomPrimeiraCompra = CONFIG.defaultCupomPrimeiraCompra;
@@ -3191,6 +3529,7 @@
     let activeSiteTheme = "padrao";
     let activeThemeCustomMessage = "";
     let isMaintenanceMode = false;
+    let activeMaintenanceMessage = "";
     let pendingAction = null;
     let activeCuponsLista = [];
 
@@ -3494,8 +3833,11 @@
         `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16 e preciso de ajuda com os tamanhos.")}`;
       document.getElementById("footerWhatsappBtn").href =
         `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Vim pelo catálogo da use4'16.")}`;
-      document.getElementById("footerMedidasLink").href =
-        `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Gostaria de conferir a tabela de medidas da use4'16.")}`;
+      const medidasWaBtn = document.getElementById("modalMedidasWaBtn");
+      if (medidasWaBtn) {
+        medidasWaBtn.href =
+          `https://wa.me/${wa}?text=${encodeURIComponent("Olá! Vi o Guia de Medidas no catálogo da *use4'16* e gostaria de confirmar as medidas em cm de uma peça específica.")}`;
+      }
       const trocaWaBtn = document.getElementById("modalSolicitarTrocaWa");
       if (trocaWaBtn) {
         trocaWaBtn.href =
@@ -3684,6 +4026,9 @@
             rawManut === "ativa" ||
             rawManut === "sim"
           );
+        }
+        if (typeof g.Mensagem_Manutencao === "string") {
+          activeMaintenanceMessage = g.Mensagem_Manutencao.trim();
         }
         applyMaintenanceUIState();
         applySeasonalTheme();
@@ -3956,16 +4301,121 @@
       }
     }
 
+    function escapeHtmlSafe(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function copyCouponCode(code, btnEl) {
+      const cleanCode = String(code || "").trim().toUpperCase();
+      if (!cleanCode) return;
+
+      const finishCopy = () => {
+        // Também sincroniza o código na sacola para facilitar o uso imediato
+        appliedCartCoupon = cleanCode;
+        localStorage.setItem("use416_cupom_ativo", cleanCode);
+        const cartInput = document.getElementById("cartCouponInput");
+        if (cartInput) cartInput.value = cleanCode;
+        updateCartUI();
+
+        if (btnEl) {
+          const originalHtml = btnEl.getAttribute("data-orig-label") || btnEl.innerHTML;
+          if (!btnEl.getAttribute("data-orig-label")) {
+            btnEl.setAttribute("data-orig-label", originalHtml);
+          }
+          btnEl.classList.add("copied");
+          btnEl.textContent = "✓ Código copiado!";
+          setTimeout(() => {
+            btnEl.classList.remove("copied");
+            btnEl.innerHTML = originalHtml;
+          }, 2200);
+        }
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cleanCode).then(finishCopy).catch(() => {
+          const temp = document.createElement("textarea");
+          temp.value = cleanCode;
+          temp.style.position = "fixed";
+          temp.style.opacity = "0";
+          document.body.appendChild(temp);
+          temp.select();
+          try { document.execCommand("copy"); } catch (e) {}
+          document.body.removeChild(temp);
+          finishCopy();
+        });
+      } else {
+        const temp = document.createElement("textarea");
+        temp.value = cleanCode;
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.appendChild(temp);
+        temp.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        document.body.removeChild(temp);
+        finishCopy();
+      }
+    }
+
+    function openMedidasModal() {
+      updateStoreLinks();
+      const modal = document.getElementById("medidasModal");
+      if (modal) modal.classList.add("open");
+    }
+
+    function syncClearFiltersBtn() {
+      const clearBtn = document.getElementById("clearFiltersBtn");
+      if (!clearBtn) return;
+      const hasActiveFilter = (
+        currentMundo !== "Todos" ||
+        currentSize !== "Todos" ||
+        currentSearch.trim() !== "" ||
+        currentSort !== "padrao"
+      );
+      clearBtn.classList.toggle("visible", hasActiveFilter);
+    }
+
+    function resetAllCatalogFilters() {
+      currentMundo = "Todos";
+      currentSize = "Todos";
+      currentSearch = "";
+      currentSort = "padrao";
+
+      const searchEl = document.getElementById("searchInput");
+      if (searchEl) searchEl.value = "";
+
+      const sortEl = document.getElementById("sortSelect");
+      if (sortEl) sortEl.value = "padrao";
+
+      document.querySelectorAll(".filter-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-filter") === "Todos");
+      });
+      document.querySelectorAll(".size-pill").forEach(p => {
+        p.classList.toggle("active", p.getAttribute("data-size") === "Todos");
+      });
+
+      renderCatalog();
+    }
+
     function renderCatalog() {
       const grid = document.getElementById("catalogGrid");
       const countEl = document.getElementById("resultsCount");
       grid.innerHTML = "";
 
       applyMaintenanceUIState();
+      syncClearFiltersBtn();
 
       if (isMaintenanceMode) {
         if (countEl) countEl.textContent = "Estoque em manutenção";
         const waHref = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent("Olá! Vi que o catálogo da use4'16 está em manutenção e gostaria de atendimento.")}`;
+        const customBodyHtml = activeMaintenanceMessage
+          ? escapeHtmlSafe(activeMaintenanceMessage).replace(/\n/g, "<br>")
+          : `Estamos organizando e atualizando nossas peças do tamanho 4 ao 16 para você! Volte em instantes ou cadastre-se na nossa <strong>Lista VIP</strong> acima para receber um aviso assim que liberarmos as novidades.`;
+
         grid.innerHTML = `
           <div class="maintenance-box" role="status" aria-live="polite">
             <div class="maintenance-icon-wrap" aria-hidden="true">
@@ -3976,7 +4426,7 @@
             </div>
             <span class="maintenance-badge">Atualização de Catálogo</span>
             <h2>Estoque em Manutenção</h2>
-            <p>Estamos organizando e atualizando nossas peças do tamanho 4 ao 16 para você! Volte em instantes ou cadastre-se na nossa <strong>Lista VIP</strong> acima para receber um aviso assim que liberarmos as novidades.</p>
+            <p>${customBodyHtml}</p>
             <div class="maintenance-actions">
               <a href="${waHref}" target="_blank" rel="noopener" class="maintenance-wa-btn">
                 <svg class="icon-svg" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
@@ -4008,9 +4458,29 @@
           return matchMundo && matchSize && matchQuery;
         })
         .sort((a, b) => {
+          // Peças esgotadas ficam sempre no final da vitrine
           const aOut = a.totalEstoque <= 0 ? 1 : 0;
           const bOut = b.totalEstoque <= 0 ? 1 : 0;
-          return aOut - bOut;
+          if (aOut !== bOut) return aOut - bOut;
+
+          if (currentSort === "menor-preco") {
+            return (a.precoNum || 0) - (b.precoNum || 0);
+          }
+          if (currentSort === "maior-preco") {
+            return (b.precoNum || 0) - (a.precoNum || 0);
+          }
+          if (currentSort === "novidades") {
+            const aNov = a.Tag.toLowerCase().includes("novidade") ? 1 : 0;
+            const bNov = b.Tag.toLowerCase().includes("novidade") ? 1 : 0;
+            if (bNov !== aNov) return bNov - aNov;
+            return (parseInt(b.ID, 10) || 0) - (parseInt(a.ID, 10) || 0);
+          }
+          if (currentSort === "desconto") {
+            const aBestDisc = Math.max(a.descontoPct || 0, a.pixDescontoPct || 0);
+            const bBestDisc = Math.max(b.descontoPct || 0, b.pixDescontoPct || 0);
+            if (bBestDisc !== aBestDisc) return bBestDisc - aBestDisc;
+          }
+          return 0;
         });
 
       countEl.textContent = filtered.length === 1
@@ -4018,7 +4488,11 @@
         : `Mostrando ${filtered.length} peças`;
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div class="status-msg">Nenhuma peça encontrada com esse filtro no momento.</div>`;
+        grid.innerHTML = `
+          <div class="status-msg">
+            <div>Nenhuma peça encontrada com esse filtro no momento.</div>
+            <button type="button" class="empty-reset-btn" onclick="resetAllCatalogFilters()">Limpar todos os filtros</button>
+          </div>`;
         return;
       }
 
@@ -4100,7 +4574,10 @@
             <div class="installment-line">
               (ou <strong>${product.parcelasQtd}x de R$ ${product.valorParcela}</strong> no cartão s/ juros)
             </div>
-            <span class="sizes-label">Selecione o tamanho (ou clique no esgotado para aviso):</span>
+            <div class="card-sizes-header">
+              <span class="sizes-label">Selecione o tamanho:</span>
+              <button type="button" class="card-medidas-link" data-open-medidas>Guia de medidas</button>
+            </div>
             <div class="sizes-grid">${sizesHtml}</div>
             <div class="card-actions-group">
               <button type="button" class="add-bag-btn" data-add-bag>
@@ -4218,6 +4695,14 @@
           addToCart(product, selectedSize);
         });
 
+        const cardMedidasBtn = card.querySelector("[data-open-medidas]");
+        if (cardMedidasBtn) {
+          cardMedidasBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openMedidasModal();
+          });
+        }
+
         quickWaBtn.addEventListener("click", () => {
           if (!selectedSize) {
             alert("Por favor, selecione um tamanho antes de continuar!");
@@ -4301,7 +4786,7 @@
         if (!localStorage.getItem("use416_cupom_ativo")) {
           localStorage.setItem("use416_cupom_ativo", activeCupomVip);
         }
-        feedback.innerHTML = `Cadastro confirmado, <strong>${nome}</strong>. Você entrou na Lista VIP <span class="brand-inline">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></span> (Tam. ${tamanho}) e liberou o cupom <span class="vip-coupon-badge">${activeCupomVip}</span> para aplicar no seu pedido.`;
+        feedback.innerHTML = `Cadastro confirmado, <strong>${nome}</strong>. Você entrou na Lista VIP <span class="brand-inline">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></span> (Tam. ${tamanho}) e liberou o cupom <span class="vip-coupon-badge">${activeCupomVip}</span> <button type="button" class="copy-coupon-btn" style="margin:0 0 0 6px; padding:3px 10px; font-size:0.76rem;" onclick="copyCouponCode('${activeCupomVip}', this)">Copiar código</button>`;
       }
     });
 
@@ -4348,7 +4833,8 @@
         resultBox.innerHTML = `
           <span>Cupom liberado, <strong>${nome}</strong>. Use no seu pedido:</span>
           <span class="coupon-code-highlight">${activeCupomPrimeiraCompra}</span>
-          <small>O código já foi salvo e será preenchido automaticamente na sua sacola.</small>
+          <button type="button" class="copy-coupon-btn" onclick="copyCouponCode('${activeCupomPrimeiraCompra}', this)">Copiar código</button>
+          <small style="display:block; margin-top:4px;">O código também já foi salvo automaticamente na sua sacola.</small>
         `;
       }
     });
@@ -4440,6 +4926,13 @@
 • *Valor:* R$ ${product.Preco}${pixLine}${cupomNote}
 
 Ainda está disponível?`;
+        if (cupom) {
+          localStorage.removeItem("use416_cupom_ativo");
+          appliedCartCoupon = "";
+          const cInput = document.getElementById("cartCouponInput");
+          if (cInput) cInput.value = "";
+          updateCartUI();
+        }
         const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(text)}`;
         openSafeWhatsappUrl(waUrl, preWin);
       }
@@ -5114,14 +5607,60 @@ Ainda está disponível?`;
 
       const waUrl = `https://wa.me/${activeWhatsappNumber}?text=${encodeURIComponent(messageParts.join("\n"))}`;
 
-      // Limpa a sacola e redireciona com segurança (sem perder pedido no iPhone/Safari)
+      // Limpa a sacola e o cupom utilizado, redirecionando com segurança (sem bloqueio no iPhone/Safari)
       shoppingCart = [];
+      appliedCartCoupon = "";
+      localStorage.removeItem("use416_cupom_ativo");
+      const couponInputEl = document.getElementById("cartCouponInput");
+      if (couponInputEl) couponInputEl.value = "";
       saveCartToStorage();
       updateCartUI();
       closeCartDrawer();
 
       openSafeWhatsappUrl(waUrl, preWin);
     });
+
+    // Ordenação e botão Limpar Filtros
+    const sortSelectEl = document.getElementById("sortSelect");
+    if (sortSelectEl) {
+      sortSelectEl.addEventListener("change", (e) => {
+        currentSort = e.target.value || "padrao";
+        renderCatalog();
+      });
+    }
+
+    const clearFiltersBtnEl = document.getElementById("clearFiltersBtn");
+    if (clearFiltersBtnEl) {
+      clearFiltersBtnEl.addEventListener("click", resetAllCatalogFilters);
+    }
+
+    // Controle do Modal de Guia de Medidas (4 ao 16)
+    const medidasModal = document.getElementById("medidasModal");
+    const openMedidasCurationBtn = document.getElementById("openMedidasCurationBtn");
+    const footerMedidasLink = document.getElementById("footerMedidasLink");
+    const closeMedidasModalBtn = document.getElementById("closeMedidasModal");
+
+    if (openMedidasCurationBtn) {
+      openMedidasCurationBtn.addEventListener("click", openMedidasModal);
+    }
+    if (footerMedidasLink) {
+      footerMedidasLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        openMedidasModal();
+      });
+    }
+    if (closeMedidasModalBtn && medidasModal) {
+      closeMedidasModalBtn.addEventListener("click", () => {
+        medidasModal.classList.remove("open");
+      });
+    }
+    if (medidasModal) {
+      medidasModal.addEventListener("click", (e) => {
+        if (e.target.id === "medidasModal") {
+          medidasModal.classList.remove("open");
+        }
+      });
+    }
 
     // Controle do Modal de Política de Trocas
     const trocasModal = document.getElementById("trocasModal");
@@ -5151,8 +5690,13 @@ Ainda está disponível?`;
     }
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && trocasModal && trocasModal.classList.contains("open")) {
-        trocasModal.classList.remove("open");
+      if (e.key === "Escape") {
+        if (trocasModal && trocasModal.classList.contains("open")) {
+          trocasModal.classList.remove("open");
+        }
+        if (medidasModal && medidasModal.classList.contains("open")) {
+          medidasModal.classList.remove("open");
+        }
       }
     });
 
