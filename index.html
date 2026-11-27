@@ -1177,8 +1177,8 @@
     }
 
     /* Tabela do Modal Guia de Medidas (4 ao 16) */
-    .medidas-modal-box {
-      max-width: 560px;
+    .modal-box.medidas-modal-box {
+      max-width: 405px;
       max-height: 88vh;
       overflow-y: auto;
       padding: 26px 22px 22px;
@@ -1190,6 +1190,17 @@
       border-radius: 12px;
       border: 1px solid var(--border-subtle);
       background: #FFFFFF;
+    }
+
+    /* Computador: alarga o modal para caber as 6 colunas e oculta a rolagem horizontal */
+    @media (min-width: 640px) {
+      .modal-box.medidas-modal-box {
+        max-width: 620px;
+        padding: 26px 24px 22px;
+      }
+      .medidas-table-wrap {
+        overflow-x: hidden;
+      }
     }
 
     .medidas-table {
