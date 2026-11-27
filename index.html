@@ -1393,19 +1393,27 @@
       transform: scale(1.25);
     }
 
-    .mundo-badge {
+    .mundo-badges-group {
       position: absolute;
       top: 12px;
       left: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .mundo-badge {
       padding: 4px 11px;
       border-radius: 999px;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      z-index: 10;
-      pointer-events: none;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      line-height: 1.1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
 
     .mundo-Kids { background: var(--kids-soft); color: var(--kids-accent); }
@@ -3957,6 +3965,16 @@
           ID: row.ID !== undefined && row.ID !== null ? String(row.ID).trim() : "",
           Nome: String(row.Nome || "Peça sem nome").trim(),
           Mundo: String(row.Mundo || "Kids").trim(),
+          Mundos: String(row.Mundo || "Kids")
+            .split(/[,;/+]+/)
+            .map(m => {
+              const s = m.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+              if (s.includes("pre")) return "Pre-Teen";
+              if (s.includes("teen")) return "Teen";
+              if (s.includes("kid")) return "Kids";
+              return "";
+            })
+            .filter((v, i, arr) => v && arr.indexOf(v) === i),
           Preco: formatPrice(row.Preco),
           precoNum,
           Preco_Antigo: hasOldPrice ? formatPrice(row.Preco_Antigo) : "",
@@ -4461,7 +4479,9 @@
 
       const filtered = allProducts
         .filter(item => {
-          const matchMundo = currentMundo === "Todos" || item.Mundo.toLowerCase() === currentMundo.toLowerCase();
+          const listaMundos = (Array.isArray(item.Mundos) && item.Mundos.length > 0) ? item.Mundos : [item.Mundo];
+          const matchMundo = currentMundo === "Todos" ||
+            listaMundos.some(m => m.toLowerCase() === currentMundo.toLowerCase());
           const matchSize = currentSize === "Todos" || (item.estoque[currentSize] && item.estoque[currentSize] > 0);
           const matchQuery = !query ||
             item.Nome.toLowerCase().includes(query) ||
@@ -4514,9 +4534,13 @@
         const card = document.createElement("div");
         card.className = `product-card ${isAllOut ? 'sold-out-card' : ''}`;
 
-        let mundoLabel = "Kids";
-        if (product.Mundo === "Pre-Teen") mundoLabel = "Pré-Teen";
-        if (product.Mundo === "Teen") mundoLabel = "Teen";
+        const mundosAtivos = (Array.isArray(product.Mundos) && product.Mundos.length > 0)
+          ? product.Mundos
+          : ["Kids"];
+        const mundoBadgesHtml = mundosAtivos.map(m => {
+          const label = m === "Pre-Teen" ? "Pré-Teen" : m;
+          return `<span class="mundo-badge mundo-${m}">${label}</span>`;
+        }).join("");
 
         const sizesHtml = SIZES.map(size => {
           const qty = product.estoque[size] || 0;
@@ -4540,7 +4564,7 @@
         card.innerHTML = `
           <div class="product-image-wrap" title="Clique para ampliar a foto">
             <img src="${product.Fotos[0]}" alt="${product.Nome}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}';" />
-            <span class="mundo-badge mundo-${product.Mundo}">${mundoLabel}</span>
+            <div class="mundo-badges-group">${mundoBadgesHtml}</div>
             ${displayTag ? `<span class="promo-tag ${tagClass}">${displayTag}</span>` : ''}
             <span class="zoom-hint">
               <svg class="icon-svg" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
