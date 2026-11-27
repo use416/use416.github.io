@@ -1192,7 +1192,6 @@
       background: #FFFFFF;
     }
 
-    /* Computador: alarga o modal para caber as 6 colunas e oculta a rolagem horizontal */
     @media (min-width: 640px) {
       .modal-box.medidas-modal-box {
         max-width: 620px;
@@ -1406,13 +1405,14 @@
     }
 
     .mundo-badge {
+      display: inline-block;
       padding: 4px 11px;
       border-radius: 999px;
       font-size: 0.68rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      line-height: 1.1;
+      line-height: 1.15;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
 
@@ -3923,6 +3923,46 @@
       }
     }
 
+    // Identifica automaticamente os Mundos a partir dos tamanhos com estoque > 0:
+    // Tam_4 a Tam_8 = Kids | Tam_10 a Tam_12 = Pre-Teen (Pré-Teen) | Tam_14 a Tam_16 = Teen
+    function detectMundosFromStock(estoqueObj, rawMundoFallback) {
+      const mundos = [];
+      if ((estoqueObj["4"] || 0) > 0 || (estoqueObj["6"] || 0) > 0 || (estoqueObj["8"] || 0) > 0) {
+        mundos.push("Kids");
+      }
+      if ((estoqueObj["10"] || 0) > 0 || (estoqueObj["12"] || 0) > 0) {
+        mundos.push("Pre-Teen");
+      }
+      if ((estoqueObj["14"] || 0) > 0 || (estoqueObj["16"] || 0) > 0) {
+        mundos.push("Teen");
+      }
+
+      // Se a peça estiver 100% esgotada (todos os tamanhos = 0), usa a coluna Mundo como fallback
+      if (mundos.length === 0) {
+        const parsedFallback = String(rawMundoFallback || "")
+          .split(/[,;/+]+/)
+          .map(m => {
+            const s = m.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (s.includes("pre")) return "Pre-Teen";
+            if (s.includes("teen")) return "Teen";
+            if (s.includes("kid")) return "Kids";
+            return "";
+          })
+          .filter((v, i, arr) => v && arr.indexOf(v) === i);
+
+        return parsedFallback.length > 0 ? parsedFallback : ["Kids"];
+      }
+
+      return mundos;
+    }
+
+    function getMundoBySize(size) {
+      const n = parseInt(size, 10);
+      if (n >= 14) return "Teen";
+      if (n >= 10) return "Pre-Teen";
+      return "Kids";
+    }
+
     // Normaliza lista JSON de produtos vinda do Apps Script (sem necessidade de CSV público)
     function normalizeCatalogProducts(rawList) {
       if (!Array.isArray(rawList)) return [];
@@ -3961,20 +4001,13 @@
         const hasPixPromo = pixNum > 0 && precoNum > 0 && pixNum < precoNum;
         const pixDescontoPct = hasPixPromo ? calcDiscountPercent(row.Preco, rawPix) : 0;
 
+        const mundosDetectados = detectMundosFromStock(estoque, row.Mundo);
+
         return {
           ID: row.ID !== undefined && row.ID !== null ? String(row.ID).trim() : "",
           Nome: String(row.Nome || "Peça sem nome").trim(),
-          Mundo: String(row.Mundo || "Kids").trim(),
-          Mundos: String(row.Mundo || "Kids")
-            .split(/[,;/+]+/)
-            .map(m => {
-              const s = m.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-              if (s.includes("pre")) return "Pre-Teen";
-              if (s.includes("teen")) return "Teen";
-              if (s.includes("kid")) return "Kids";
-              return "";
-            })
-            .filter((v, i, arr) => v && arr.indexOf(v) === i),
+          Mundo: mundosDetectados[0],
+          Mundos: mundosDetectados,
           Preco: formatPrice(row.Preco),
           precoNum,
           Preco_Antigo: hasOldPrice ? formatPrice(row.Preco_Antigo) : "",
@@ -5144,7 +5177,7 @@ Ainda está disponível?`;
         shoppingCart.push({
           id: product.ID,
           nome: product.Nome,
-          mundo: product.Mundo,
+          mundo: getMundoBySize(size),
           size: String(size),
           qty: 1,
           maxStock,
