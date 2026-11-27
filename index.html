@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>use4'16 | Moda Infantil e Juvenil (4 ao 16)</title>
+  <meta name="description" content="Moda infantil e juvenil do tamanho 4 ao 16 (Kids, Pré-Teen e Teen) em Maceió/AL. Monte sua sacola e finalize no WhatsApp." />
+  <meta property="og:title" content="use4'16 | Moda Infantil e Juvenil (4 ao 16)" />
+  <meta property="og:description" content="Looks confortáveis e cheios de estilo do 4 ao 16 (Kids, Pré-Teen e Teen). Confira nosso catálogo!" />
+  <meta property="og:image" content="logo-use416.png" />
+  <link rel="apple-touch-icon" href="logo-use416.png" />
   <!-- Favicon SVG com o emblema de etiqueta da use4'16 -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FAF8F5'/%3E%3Cpath d='M21 12H43L49 20V48C49 50.76 46.76 53 44 53H20C17.24 53 15 50.76 15 48V20L21 12Z' fill='%231B2A4A'/%3E%3Crect x='18.5' y='15.5' width='27' height='34' rx='3.5' fill='none' stroke='%23E06D53' stroke-width='1.5' stroke-dasharray='3 2.5'/%3E%3Ccircle cx='32' cy='18.5' r='3.5' fill='%23FAF8F5'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -560,11 +565,61 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(230, 224, 214, 0.9);
-      padding: 16px 20px 14px;
+      padding: 11px 20px 10px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
+    }
+
+    .logo-brand-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      user-select: none;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .logo-brand-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .site-logo-img {
+      height: 62px;
+      width: auto;
+      max-width: min(240px, calc(100vw - 150px));
+      object-fit: contain;
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      header.site-header {
+        padding: 10px 14px 9px;
+      }
+      .site-logo-img {
+        height: 48px;
+        max-width: calc(100vw - 125px);
+      }
+    }
+
+    .footer-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FAF8F5;
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+    }
+
+    .footer-logo-img {
+      height: 42px;
+      width: auto;
+      max-width: 190px;
+      object-fit: contain;
+      display: block;
     }
 
     .logo-lockup {
@@ -2571,25 +2626,36 @@
       <span class="header-bag-label">Sacola</span>
       <span class="bag-count-badge" id="headerBagCount">0</span>
     </button>
-    <div class="logo-lockup" aria-label="use4'16 — Moda Infantil e Juvenil">
-      <div class="logo-main-row">
-        <div class="logo-wordmark">
-          <span class="logo-use">use</span>
-          <span class="logo-nums">4<span class="logo-apos-pin" aria-hidden="true"><span class="logo-apos-ring"></span><span class="logo-apos-glyph">’</span></span>16</span>
+    <a href="#" class="logo-brand-link" aria-label="use4'16 — Moda Infantil e Juvenil" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+      <img
+        src="logo-use416.png"
+        alt="use4'16 — Moda Infantil e Juvenil"
+        class="site-logo-img"
+        width="1044"
+        height="321"
+        decoding="async"
+        fetchpriority="high"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';"
+      />
+      <div class="logo-lockup" style="display:none;" aria-hidden="true">
+        <div class="logo-main-row">
+          <div class="logo-wordmark">
+            <span class="logo-use">use</span>
+            <span class="logo-nums">4<span class="logo-apos-pin"><span class="logo-apos-ring"></span><span class="logo-apos-glyph">’</span></span>16</span>
+          </div>
+          <svg class="logo-hangtag-svg" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="logo-hangtag-body" d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#1B2A4A"/>
+            <path class="logo-hangtag-stitch" d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.35" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
+            <circle class="logo-hangtag-hole" cx="14" cy="11.5" r="2.3" fill="#FAF8F5"/>
+          </svg>
         </div>
-        <!-- Etiqueta azul-marinho com costura pontilhada em terracota -->
-        <svg class="logo-hangtag-svg" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path class="logo-hangtag-body" d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#1B2A4A"/>
-          <path class="logo-hangtag-stitch" d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.35" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
-          <circle class="logo-hangtag-hole" cx="14" cy="11.5" r="2.3" fill="#FAF8F5"/>
-        </svg>
+        <div class="logo-sub-row">
+          <span class="logo-sub-dot"></span>
+          <span>Moda Infantil &amp; Juvenil</span>
+          <span class="logo-sub-dot"></span>
+        </div>
       </div>
-      <div class="logo-sub-row">
-        <span class="logo-sub-dot"></span>
-        <span>Moda Infantil &amp; Juvenil</span>
-        <span class="logo-sub-dot"></span>
-      </div>
-    </div>
+    </a>
   </header>
 
   <!-- Faixa comemorativa controlada pela planilha (coluna Tema_Site) -->
@@ -2691,12 +2757,26 @@
     <div class="footer-container">
       <div class="footer-col">
         <div class="footer-brand-row">
-          <div class="footer-logo">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></div>
-          <svg class="footer-tag-svg" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#FAF8F5"/>
-            <path d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.4" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
-            <circle cx="14" cy="11.5" r="2.3" fill="#1B2A4A"/>
-          </svg>
+          <div class="footer-logo-badge">
+            <img
+              src="logo-use416.png"
+              alt="use4'16 — Moda Infantil e Juvenil"
+              class="footer-logo-img"
+              width="1044"
+              height="321"
+              loading="lazy"
+              decoding="async"
+              onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='inline-flex';"
+            />
+          </div>
+          <div style="display:none; align-items:center; gap:10px;" aria-hidden="true">
+            <div class="footer-logo">use<span class="num-part">4</span><span class="apos">'</span><span class="num-part">16</span></div>
+            <svg class="footer-tag-svg" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 10.5L14 1.5L23 10.5V37.5C23 39.1569 21.6569 40.5 20 40.5H8C6.34315 40.5 5 39.1569 5 37.5V10.5Z" fill="#FAF8F5"/>
+              <path d="M7.5 11.5L14 5L20.5 11.5V36.5C20.5 37.3284 19.8284 38 19 38H9C8.17157 38 7.5 37.3284 7.5 36.5V11.5Z" stroke="#E06D53" stroke-width="1.4" stroke-dasharray="2.4 2.2" stroke-linejoin="round"/>
+              <circle cx="14" cy="11.5" r="2.3" fill="#1B2A4A"/>
+            </svg>
+          </div>
         </div>
         <p class="footer-desc">
           Moda infantil e juvenil do tamanho 4 ao 16, pensada para acompanhar cada fase com estilo, conforto e praticidade.
@@ -3000,7 +3080,7 @@
       defaultInstagramUser: "use4.16",
       defaultCupomPrimeiraCompra: "BEMVINDA416",
       defaultCupomVip: "VIP416",
-      googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbxMapn5DQr0Ph9XkM6YNJDYy4Phfrfctv4s_JQvLu10aGrM-2lAC83cDunooq-p8FO-KQ/exec"
+      googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbyFfidp6vRVMJSag3b3SpemlNU6yEnVoho9HOkvFyLfR61_n_4GVk6z4rGAsPjrPQqM/exec"
     };
 
     const FALLBACK_IMAGE = "data:image/svg+xml;utf8," + encodeURIComponent(
